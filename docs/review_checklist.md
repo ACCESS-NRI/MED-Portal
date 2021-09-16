@@ -20,7 +20,7 @@ Below is an example of the review checklist for the [Yellowbrick JOSS submission
 
 - **Repository:** Is the source code for this software available at the <a target="_blank" href="https://github.com/DistrictDataLabs/yellowbrick">repository url</a>?
 - **License:** Does the repository contain a plain-text LICENSE file with the contents of an [OSI approved](https://opensource.org/licenses/alphabetical) software license?
-- **Contribution and authorship:** Has the submitting author made major contributions to the software? Does the full list of paper authors seem appropriate and complete?
+- **Contribution and authorship:** Has the submitting author made major contributions to the software? Does the full list of model authors seem appropriate and complete?
 
 ### Functionality
 
@@ -37,10 +37,10 @@ Below is an example of the review checklist for the [Yellowbrick JOSS submission
 - **Automated tests:** Are there automated tests or manual steps described so that the functionality of the software can be verified?
 - **Community guidelines:** Are there clear guidelines for third parties wishing to 1) Contribute to the software 2) Report issues or problems with the software 3) Seek support
 
-### Software paper
+### Software model
 
 - **Summary:** Has a clear description of the high-level functionality and purpose of the software for a diverse, non-specialist audience been provided?
-- **A statement of need:** Does the paper have a section titled 'Statement of Need' that clearly states what problems the software is designed to solve and who the target audience is?
+- **A statement of need:** Does the model have a section titled 'Statement of Need' that clearly states what problems the software is designed to solve and who the target audience is?
 - **State of the field:** Do the authors describe how this software compares to other commonly-used packages?
-- **Quality of writing:** Is the paper well written (i.e., it does not require editing for structure, language, or writing quality)?
-- **References:** Is the list of references complete, and is everything cited appropriately that should be cited (e.g., papers, datasets, software)? Do references in the text use the proper [citation syntax]( https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citation_syntax)?
+- **Quality of writing:** Is the model well written (i.e., it does not require editing for structure, language, or writing quality)?
+- **References:** Is the list of references complete, and is everything cited appropriately that should be cited (e.g., models, datasets, software)? Do references in the text use the proper [citation syntax]( https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citation_syntax)?

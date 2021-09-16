@@ -1,6 +1,6 @@
-**Submitting author:** <%= paper.submitting_author.github_username %> (<%= link_to paper.submitting_author.name, paper.submitting_author.orcid_url %>)
-**Repository:** <a href="<%= paper.repository_url %>" target ="_blank"><%= paper.repository_url %></a>
-**Version:** <%= paper.software_version %>
+**Submitting author:** <%= model.submitting_author.github_username %> (<%= link_to model.submitting_author.name, model.submitting_author.orcid_url %>)
+**Repository:** <a href="<%= model.repository_url %>" target ="_blank"><%= model.repository_url %></a>
+**Version:** <%= model.software_version %>
 **Editor:** <%= editor %>
 **Reviewer:** <%= reviewers.join(', ') %>
 **Archive:** Pending
@@ -12,17 +12,17 @@ Due to the challenges of the COVID-19 pandemic, JOSS is currently operating in a
 ## Status
 
 <%- url = Rails.application.settings["url"] %>
-[![status](<%= url %>/papers/<%= paper.sha %>/status.svg)](<%= url %>/papers/<%= paper.sha %>)
+[![status](<%= url %>/models/<%= model.sha %>/status.svg)](<%= url %>/models/<%= model.sha %>)
 
 Status badge code:
 
 ```
-HTML: <a href="<%= url %>/papers/<%= paper.sha %>"><img src="<%= url %>/papers/<%= paper.sha %>/status.svg"></a>
-Markdown: [![status](<%= url %>/papers/<%= paper.sha %>/status.svg)](<%= url %>/papers/<%= paper.sha %>)
+HTML: <a href="<%= url %>/models/<%= model.sha %>"><img src="<%= url %>/models/<%= model.sha %>/status.svg"></a>
+Markdown: [![status](<%= url %>/models/<%= model.sha %>/status.svg)](<%= url %>/models/<%= model.sha %>)
 ```
 **Reviewers and authors**:
 
-Please avoid lengthy details of difficulties in the review thread. Instead, please create a new issue in the <a href="<%= paper.repository_url %>" target="_blank">target repository</a> and link to those issues (especially acceptance-blockers) by leaving comments in the review thread below. (For completists: if the target issue tracker is also on GitHub, linking the review thread in the issue or vice versa will create corresponding breadcrumb trails in the link target.)
+Please avoid lengthy details of difficulties in the review thread. Instead, please create a new issue in the <a href="<%= model.repository_url %>" target="_blank">target repository</a> and link to those issues (especially acceptance-blockers) by leaving comments in the review thread below. (For completists: if the target issue tracker is also on GitHub, linking the review thread in the issue or vice versa will create corresponding breadcrumb trails in the link target.)
 
 ## Reviewer instructions & questions
 
@@ -36,8 +36,8 @@ The reviewer guidelines are available here: https://joss.readthedocs.io/en/lates
 
 <%- reviewers.each do |reviewer| %>
 ## Review checklist for <%= reviewer %>
-<%- if paper.kind.present? %>
-<%= render partial: "content/github/#{paper.kind}_review_checklist", locals: local_assigns %>
+<%- if model.kind.present? %>
+<%= render partial: "content/github/#{model.kind}_review_checklist", locals: local_assigns %>
 <%- else %>
 <%= render partial: "content/github/review_checklist", locals: local_assigns %>
 <%- end %>

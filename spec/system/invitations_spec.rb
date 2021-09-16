@@ -38,13 +38,13 @@ feature "Invitations list" do
     end
 
     scenario "list invitations" do
-      create(:invitation, paper: create(:paper, title: "Test paper"), editor: create(:editor, login: "tester1"))
-      create(:invitation, paper: create(:paper, title: "Science paper"), editor: create(:editor, login: "user3"))
+      create(:invitation, model: create(:model, title: "Test model"), editor: create(:editor, login: "tester1"))
+      create(:invitation, model: create(:model, title: "Science model"), editor: create(:editor, login: "user3"))
       visit invitations_path
 
-      expect(page).to have_content("Test paper")
+      expect(page).to have_content("Test model")
       expect(page).to have_content("tester1")
-      expect(page).to have_content("Science paper")
+      expect(page).to have_content("Science model")
       expect(page).to have_content("user3")
     end
 

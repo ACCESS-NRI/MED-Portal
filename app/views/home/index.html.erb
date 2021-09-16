@@ -4,14 +4,14 @@
       <h1>The <%= Rails.application.settings['name'] %> is <%= setting(:tagline).html_safe %></h1>
       <p class="lead">A Catalog of Research Numerical Models for Earth Sciences.</p>
       <div class="hero-ctas">
-        <%= link_to "Submit a model to #{Rails.application.settings['abbreviation']}".html_safe, new_paper_path, class: "btn" %>
+        <%= link_to "Submit a model to #{Rails.application.settings['abbreviation']}".html_safe, new_model_path, class: "btn" %>
         <%= link_to "🎉 Volunteer to review".html_safe, "/reviewer-signup.html", class: "btn" %>
       </div>
     </div>
 
     <div class="hero-nav col-lg-4 offset-lg-1 align-self-end">
-      <%= link_to papers_path do %>
-      <%= image_tag 'icon_papers.svg' %>
+      <%= link_to models_path do %>
+      <%= image_tag 'icon_models.svg' %>
       Explore Models
       <% end %>
       <%= link_to "https://joss.readthedocs.io/en/latest/" do %>
@@ -29,11 +29,11 @@
 <div class="container">
   <h4>Recently Published Models <span class="badge-count"><%= Paper.visible.count %></span></h4>
 
-  <div class="paper-list" id="all-papers">
-    <%= render partial: "papers/list", locals: { papers: @papers } %>
+  <div class="model-list" id="all-models">
+    <%= render partial: "models/list", locals: { models: @models } %>
   </div>
 
   <div class="my-5 text-center">
-    <%= link_to "View all models".html_safe, published_papers_path, class: "btn", data: { text: "View all papers"} %>
+    <%= link_to "View all models".html_safe, published_models_path, class: "btn", data: { text: "View all models"} %>
   </div>
 </div>

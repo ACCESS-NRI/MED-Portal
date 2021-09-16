@@ -117,9 +117,9 @@ htmlhelp_basename = 'JOSSdoc'
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
+    # The model size ('lettermodel' or 'a4model').
     #
-    # 'papersize': 'letterpaper',
+    # 'modelsize': 'lettermodel',
 
     # The font size ('10pt', '11pt' or '12pt').
     #

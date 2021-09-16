@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe User do
-  it "has many papers" do
-    association = User.reflect_on_association(:papers)
+  it "has many models" do
+    association = User.reflect_on_association(:models)
     expect(association.macro).to eq(:has_many)
   end
 

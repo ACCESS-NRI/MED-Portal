@@ -1,11 +1,11 @@
 <div class="card">
   <div class="card-header">
-  Scope summary <% if @paper.votes.any? %><small>👍 <%= @paper.votes.in_scope.count %> &middot; 👎 <%= @paper.votes.out_of_scope.count %></small><% end %>
+  Scope summary <% if @model.votes.any? %><small>👍 <%= @model.votes.in_scope.count %> &middot; 👎 <%= @model.votes.out_of_scope.count %></small><% end %>
   </div>
   <div class="card-body">
     <p class="card-text">Record your opinion on whether or not this submission is in scope, leaving a comment explaining your decision for the EiCs. If you make a mistake or want to change your vote, simply fill out the form again (this will remove your first vote).</p>
 
-    <%= form_for [@paper, Vote.new] do |f| %>
+    <%= form_for [@model, Vote.new] do |f| %>
       <div class="form-group">
         <div class="row">
           <div class="col">
@@ -41,7 +41,7 @@
             </tr>
           </thead>
           <tbody>
-          <% @paper.votes.each do |vote| %>
+          <% @model.votes.each do |vote| %>
           <tr>
             <td>
               <% if vote.in_scope? %>
@@ -61,7 +61,7 @@
         </table>
 
         <div class="collapse" >
-          <% @paper.votes.each do |vote| %>
+          <% @model.votes.each do |vote| %>
             <% if vote.in_scope? %>
               <small><%= vote.editor.user.name %> (<%= vote.editor.login %>) voted 👍 <%= time_ago_in_words(vote.created_at) %> ago.</small>
             <% else %>
@@ -73,8 +73,8 @@
     <% end %>
   </div>
   <div class="card-footer">
-    <% if @paper.votes.any? %>
-    <small class="text-muted">Last voted on <%= time_ago_in_words(@paper.votes.first.created_at) %> ago by <%= @paper.votes.first.editor.login %> </small>
+    <% if @model.votes.any? %>
+    <small class="text-muted">Last voted on <%= time_ago_in_words(@model.votes.first.created_at) %> ago by <%= @model.votes.first.editor.login %> </small>
     <% else %>
     <small class="text-muted">No votes on scope yet.</small>
     <% end %>

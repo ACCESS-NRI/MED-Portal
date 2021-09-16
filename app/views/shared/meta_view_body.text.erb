@@ -1,6 +1,6 @@
-**Submitting author:** <%= paper.submitting_author.github_username %> (<%= link_to paper.submitting_author.name, paper.submitting_author.orcid_url %>)
-**Repository:** <a href="<%= paper.repository_url %>" target ="_blank"><%= paper.repository_url %></a>
-**Version:** <%= paper.software_version %>
+**Submitting author:** <%= model.submitting_author.github_username %> (<%= link_to model.submitting_author.name, model.submitting_author.orcid_url %>)
+**Repository:** <a href="<%= model.repository_url %>" target ="_blank"><%= model.repository_url %></a>
+**Version:** <%= model.software_version %>
 **Editor:** Pending
 **Reviewer:** Pending
 **Managing EiC:** <%= eic_name %>
@@ -12,27 +12,27 @@ Due to the challenges of the COVID-19 pandemic, JOSS is currently operating in a
 ## Status
 
 <%- url = Rails.application.settings["url"] %>
-[![status](<%= url %>/papers/<%= paper.sha %>/status.svg)](<%= url %>/papers/<%= paper.sha %>)
+[![status](<%= url %>/models/<%= model.sha %>/status.svg)](<%= url %>/models/<%= model.sha %>)
 
 Status badge code:
 
 ```
-HTML: <a href="<%= url %>/papers/<%= paper.sha %>"><img src="<%= url %>/papers/<%= paper.sha %>/status.svg"></a>
-Markdown: [![status](<%= url %>/papers/<%= paper.sha %>/status.svg)](<%= url %>/papers/<%= paper.sha %>)
+HTML: <a href="<%= url %>/models/<%= model.sha %>"><img src="<%= url %>/models/<%= model.sha %>/status.svg"></a>
+Markdown: [![status](<%= url %>/models/<%= model.sha %>/status.svg)](<%= url %>/models/<%= model.sha %>)
 ```
 
 **Author instructions**
 
 <%- abbreviation, reviewers = Rails.application.settings.values_at("abbreviation", "reviewers") %>
 <% if suggested_editor == "Pending" %>
-Thanks for submitting your paper to <%= abbreviation %> <%= paper.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your paper.
+Thanks for submitting your model to <%= abbreviation %> <%= model.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your model.
 <% else %>
-Thanks for submitting your paper to <%= abbreviation %> <%= paper.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your paper.
+Thanks for submitting your model to <%= abbreviation %> <%= model.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your model.
 
 The author's suggestion for the handling editor is <%= suggested_editor %>.
 <% end %>
 
-<%= paper.submitting_author.github_username %> if you have any suggestions for potential reviewers then please mention them here in this thread (without tagging them with an @). In addition, [this list of people](<%= reviewers %>) have already agreed to review for <%= abbreviation %> and may be suitable for this submission (please start at the bottom of the list).
+<%= model.submitting_author.github_username %> if you have any suggestions for potential reviewers then please mention them here in this thread (without tagging them with an @). In addition, [this list of people](<%= reviewers %>) have already agreed to review for <%= abbreviation %> and may be suitable for this submission (please start at the bottom of the list).
 
 **Editor instructions**
 

@@ -3,8 +3,8 @@
     Editorial information
   </div>
   <div class="card-body">
-    <h5 class="card-title">Submission type: <%= paper_kind(@paper) %></h5>
-    <p class="card-text"><em>Notes to editor:</em> <%= @paper.body %></p>
+    <h5 class="card-title">Submission type: <%= model_kind(@model) %></h5>
+    <p class="card-text"><em>Notes to editor:</em> <%= @model.body %></p>
   </div>
 </div>
 <br />
@@ -16,23 +16,23 @@
   <div class="card-body">
     <dl class="row card-text">
       <dt class="col-sm-3">Email address</dt>
-      <dd class="col-sm-9"><%= mail_to paper.submitting_author.email if paper.submitting_author.email? %></dd>
+      <dd class="col-sm-9"><%= mail_to model.submitting_author.email if model.submitting_author.email? %></dd>
 
       <dt class="col-sm-3">Suggested editor</dt>
-      <dd class="col-sm-9"><% if paper.suggested_editor.blank? %>
+      <dd class="col-sm-9"><% if model.suggested_editor.blank? %>
         No editor suggested.
       <% else %>
-        <%= paper.suggested_editor %>
+        <%= model.suggested_editor %>
       <% end %></dd>
 
       <dt class="col-sm-3">GitHub username</dt>
-      <dd class="col-sm-9"><%= github_link(paper.submitting_author.github_username) %></dd>
+      <dd class="col-sm-9"><%= github_link(model.submitting_author.github_username) %></dd>
 
-      <dt class="col-sm-3">Published papers</dt>
-      <dd class="col-sm-9"><%= paper_count_for(paper.submitting_author) %></dd>
+      <dt class="col-sm-3">Published models</dt>
+      <dd class="col-sm-9"><%= model_count_for(model.submitting_author) %></dd>
 
       <dt class="col-sm-3"><%= setting(:abbreviation) %> reviews</dt>
-      <dd class="col-sm-9"><%= reviewer_page_link("Search reviews &raquo;".html_safe, paper.submitting_author.github_username) %></dd>
+      <dd class="col-sm-9"><%= reviewer_page_link("Search reviews &raquo;".html_safe, model.submitting_author.github_username) %></dd>
     </dl>
   </div>
 </div>

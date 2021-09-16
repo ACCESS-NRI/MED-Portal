@@ -1,21 +1,21 @@
 class Notifications < ApplicationMailer
   EDITOR_EMAILS = [Rails.application.settings["editor_email"]]
 
-  def submission_email(paper)
-    @url  = "#{Rails.application.settings["url"]}/papers/#{paper.sha}"
-    @paper = paper
-    mail(to: EDITOR_EMAILS, subject: "New submission: #{paper.title}")
+  def submission_email(model)
+    @url  = "#{Rails.application.settings["url"]}/models/#{model.sha}"
+    @model = model
+    mail(to: EDITOR_EMAILS, subject: "New submission: #{model.title}")
   end
 
-  def editor_invite_email(paper, editor)
-    @paper = paper
-    mail(to: editor.email, subject: "JOSS editorial invite: #{paper.title}")
+  def editor_invite_email(model, editor)
+    @model = model
+    mail(to: editor.email, subject: "JOSS editorial invite: #{model.title}")
   end
 
-  def author_submission_email(paper)
-    @url  = "#{Rails.application.settings["url"]}/papers/#{paper.sha}"
-    @paper = paper
-    mail(to: paper.submitting_author.email, subject: "Thanks for your submission: #{paper.title}")
+  def author_submission_email(model)
+    @url  = "#{Rails.application.settings["url"]}/models/#{model.sha}"
+    @model = model
+    mail(to: model.submitting_author.email, subject: "Thanks for your submission: #{model.title}")
   end
 
   def editor_weekly_email(editor, pending_issues, assigned_issues, recently_closed_issues)

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :paper do
+  factory :model do
     title             { 'arfon / fidgit' }
     body              { 'An ungodly union of GitHub and Figshare http://fidgit.arfon.org' }
     repository_url    { 'http://github.com/arfon/fidgit' }
@@ -12,56 +12,56 @@ FactoryBot.define do
     created_at  { Time.now }
     updated_at  { Time.now }
 
-    factory :paper_with_sha do
+    factory :model_with_sha do
       sha { '48d24b0158528e85ac7706aecd8cddc4' }
     end
 
-    paper_metadata = { 'paper' => { 'languages' => ['Ruby', 'Rust'],
+    model_metadata = { 'model' => { 'languages' => ['Ruby', 'Rust'],
                                     'editor' => '@arfon',
                                     'title' => 'arfon / fidgit',
                                     'reviewers' => ['@jim', '@jane'],
                                     'authors' => [{'given_name' =>  'Mickey', 'last_name' => 'Mouse', 'orcid' => '0000-0002-7736-0000'},
                                                   {'given_name' => 'Walt', 'middle_name' => 'Elias', 'last_name' => 'Disney', 'orcid' => '0000-0002-7736-000X'}]}}
-    factory :accepted_paper do
-      metadata { paper_metadata }
+    factory :accepted_model do
+      metadata { model_metadata }
       state { 'accepted' }
       accepted_at { Time.now }
       review_issue_id { 0 }
       doi { '10.21105/joss.00000' }
     end
 
-    factory :submitted_paper do
+    factory :submitted_model do
       state { 'submitted' }
     end
 
-    factory :resubmission_paper do
+    factory :resubmission_model do
       submission_kind   { 'resubmission' }
     end
 
-    factory :rejected_paper do
+    factory :rejected_model do
       state { 'rejected' }
     end
 
-    factory :retracted_paper do
-      metadata { paper_metadata }
+    factory :retracted_model do
+      metadata { model_metadata }
       state { 'retracted' }
       accepted_at { Time.now }
       review_issue_id { 0 }
       doi { '10.21105/joss.00000' }
     end
 
-    factory :submitted_paper_with_sha do
+    factory :submitted_model_with_sha do
       sha { '48d24b0158528e85ac7706aecd8cddc4' }
       state { 'submitted' }
     end
 
-    factory :review_pending_paper do
+    factory :review_pending_model do
       sha { '48d24b0158528e85ac7706aecd8cddc4' }
       state { 'review_pending' }
       meta_review_issue_id { 100 }
     end
 
-    factory :under_review_paper do
+    factory :under_review_model do
       sha { '48d24b0158528e85ac7706aecd8cddc4' }
       state { 'under_review' }
       meta_review_issue_id { 100 }

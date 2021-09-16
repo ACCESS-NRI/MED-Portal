@@ -6,8 +6,8 @@ describe Paper do
   end
 
   it "should know how to validate a Git repository address" do
-    paper = build(:paper, :repository_url => 'https://example.com')
-    expect { paper.save! }.to raise_error(ActiveRecord::RecordInvalid)
+    model = build(:model, :repository_url => 'https://example.com')
+    expect { model.save! }.to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it "belongs to the submitting author" do
@@ -21,101 +21,101 @@ describe Paper do
   end
 
   it "should know how to parameterize itself properly" do
-    paper = create(:paper)
+    model = create(:model)
 
-    expect(paper.sha).to eq(paper.to_param)
+    expect(model.sha).to eq(model.to_param)
   end
 
   it "should return it's submitting_author" do
     user = create(:user)
-    paper = create(:paper, user_id: user.id)
+    model = create(:model, user_id: user.id)
 
-    expect(paper.submitting_author).to eq(user)
+    expect(model.submitting_author).to eq(user)
   end
 
   # Scopes
 
   it "should return recent" do
-    old_paper = create(:paper, created_at: 2.weeks.ago)
-    new_paper = create(:paper)
+    old_model = create(:model, created_at: 2.weeks.ago)
+    new_model = create(:model)
 
-    expect(Paper.recent).to eq([new_paper])
+    expect(Paper.recent).to eq([new_model])
   end
 
-  it "should return only visible papers" do
-    hidden_paper = create(:paper, state: "submitted")
-    visible_paper_1 = create(:accepted_paper)
-    visible_paper_2 = create(:paper, state: "superceded")
+  it "should return only visible models" do
+    hidden_model = create(:model, state: "submitted")
+    visible_model_1 = create(:accepted_model)
+    visible_model_2 = create(:model, state: "superceded")
 
-    expect(Paper.visible).to contain_exactly(visible_paper_1, visible_paper_2)
-    assert hidden_paper.invisible?
+    expect(Paper.visible).to contain_exactly(visible_model_1, visible_model_2)
+    assert hidden_model.invisible?
   end
 
-  it "should exclude withdrawn and rejected papers" do
-    rejected_paper = create(:paper, state: "rejected")
-    withdrawn_paper = create(:paper, state: "withdrawn")
-    paper = create(:accepted_paper)
+  it "should exclude withdrawn and rejected models" do
+    rejected_model = create(:model, state: "rejected")
+    withdrawn_model = create(:model, state: "withdrawn")
+    model = create(:accepted_model)
 
-    expect(Paper.everything).to contain_exactly(paper)
-    expect(Paper.invisible).to contain_exactly(rejected_paper, withdrawn_paper)
+    expect(Paper.everything).to contain_exactly(model)
+    expect(Paper.invisible).to contain_exactly(rejected_model, withdrawn_model)
   end
 
   # GitHub stuff
   it "should know how to return a pretty repo name with owner" do
-    paper = create(:paper, repository_url: "https://github.com/arfon/joss-reviews")
+    model = create(:model, repository_url: "https://github.com/arfon/joss-reviews")
 
-    expect(paper.pretty_repository_name).to eq("arfon / joss-reviews")
+    expect(model.pretty_repository_name).to eq("arfon / joss-reviews")
   end
 
   it 'should know how to return a pretty DOI' do
-    paper = create(:paper, archive_doi: 'https://doi.org/10.6084/m9.figshare.828487')
+    model = create(:model, archive_doi: 'https://doi.org/10.6084/m9.figshare.828487')
 
-    expect(paper.pretty_doi).to eq("10.6084/m9.figshare.828487")
+    expect(model.pretty_doi).to eq("10.6084/m9.figshare.828487")
   end
 
   it 'should know how to return a DOI with a full URL' do
-    paper = create(:paper, archive_doi: '10.6084/m9.figshare.828487')
+    model = create(:model, archive_doi: '10.6084/m9.figshare.828487')
 
-    expect(paper.doi_with_url).to eq('https://doi.org/10.6084/m9.figshare.828487')
+    expect(model.doi_with_url).to eq('https://doi.org/10.6084/m9.figshare.828487')
   end
 
   it "should bail creating a full DOI URL if if can't figure out what to do" do
-    paper = create(:paper, archive_doi: "http://foobar.com")
+    model = create(:model, archive_doi: "http://foobar.com")
 
-    expect(paper.doi_with_url).to eq("http://foobar.com")
+    expect(model.doi_with_url).to eq("http://foobar.com")
   end
 
   it "should know how to generate its review url" do
-    paper = create(:paper, review_issue_id: 999)
+    model = create(:model, review_issue_id: 999)
 
-    expect(paper.review_url).to eq("https://github.com/#{Rails.application.settings["reviews"]}/issues/999")
+    expect(model.review_url).to eq("https://github.com/#{Rails.application.settings["reviews"]}/issues/999")
   end
 
   describe "#set_editor" do
-    it "should update paper's editor" do
-      paper = create(:paper)
+    it "should update model's editor" do
+      model = create(:model)
       editor = create(:editor)
 
-      paper.set_editor editor
-      expect(paper.editor).to eq(editor)
+      model.set_editor editor
+      expect(model.editor).to eq(editor)
     end
 
     it "should mark editor's pending invitation as accepted" do
-      paper = create(:paper)
+      model = create(:model)
       editor = create(:editor)
-      invitation = create(:invitation, :pending, paper: paper, editor: editor)
+      invitation = create(:invitation, :pending, model: model, editor: editor)
 
-      paper.set_editor editor
+      model.set_editor editor
       expect(invitation.reload).to be_accepted
     end
 
     it "should expire other editor's pending invitations" do
-      paper = create(:paper)
+      model = create(:model)
       editor = create(:editor)
-      invitation_1 = create(:invitation, :pending, paper: paper)
-      invitation_2 = create(:invitation, :pending, paper: paper)
+      invitation_1 = create(:invitation, :pending, model: model)
+      invitation_2 = create(:invitation, :pending, model: model)
 
-      paper.set_editor editor
+      model.set_editor editor
       expect(invitation_1.reload).to be_expired
       expect(invitation_2.reload).to be_expired
     end
@@ -123,109 +123,109 @@ describe Paper do
 
   describe "#invite_editor" do
     it "should return false if editor does not exist" do
-      expect(create(:paper).invite_editor("invalid")).to be false
+      expect(create(:model).invite_editor("invalid")).to be false
     end
 
     it "should email an invitation to the editor" do
-      paper = create(:paper)
+      model = create(:model)
       editor = create(:editor)
 
-      expect { paper.invite_editor(editor.login) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { model.invite_editor(editor.login) }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
 
     it "should create a pending invitation for the invited editor" do
-      paper = create(:paper)
+      model = create(:model)
       editor = create(:editor)
 
-      expect(Invitation.exists?(paper: paper, editor:editor)).to be_falsy
-      expect { paper.invite_editor(editor.login)}.to change { Invitation.count }.by(1)
-      expect(Invitation.pending.exists?(paper: paper, editor:editor)).to be_truthy
+      expect(Invitation.exists?(model: model, editor:editor)).to be_falsy
+      expect { model.invite_editor(editor.login)}.to change { Invitation.count }.by(1)
+      expect(Invitation.pending.exists?(model: model, editor:editor)).to be_truthy
     end
   end
 
   context "when accepted" do
     it "should know how to generate a PDF URL for Google Scholar" do
-      paper = create(:accepted_paper)
+      model = create(:accepted_model)
 
-      expect(paper.seo_url).to eq('http://joss.theoj.org/papers/10.21105/joss.00000')
-      expect(paper.seo_pdf_url).to eq('http://joss.theoj.org/papers/10.21105/joss.00000.pdf')
+      expect(model.seo_url).to eq('http://joss.theoj.org/models/10.21105/joss.00000')
+      expect(model.seo_pdf_url).to eq('http://joss.theoj.org/models/10.21105/joss.00000.pdf')
     end
   end
 
   context "when not yet accepted" do
     it "should know how to generate a PDF URL for Google Scholar" do
-      paper = create(:under_review_paper)
+      model = create(:under_review_model)
 
-      expect(paper.seo_url).to eq('http://joss.theoj.org/papers/48d24b0158528e85ac7706aecd8cddc4')
-      expect(paper.seo_pdf_url).to eq('http://joss.theoj.org/papers/48d24b0158528e85ac7706aecd8cddc4.pdf')
+      expect(model.seo_url).to eq('http://joss.theoj.org/models/48d24b0158528e85ac7706aecd8cddc4')
+      expect(model.seo_pdf_url).to eq('http://joss.theoj.org/models/48d24b0158528e85ac7706aecd8cddc4.pdf')
     end
   end
 
   context "when rejected" do
-    it "should change the paper state" do
-      paper = create(:paper, state: "submitted")
-      paper.reject!
+    it "should change the model state" do
+      model = create(:model, state: "submitted")
+      model.reject!
 
-      expect(paper.state).to eq('rejected')
+      expect(model.state).to eq('rejected')
     end
   end
 
   context "when starting review" do
-    it "should initially change the paper state to review_pending" do
+    it "should initially change the model state to review_pending" do
       editor = create(:editor, login: "arfon")
       user = create(:user, editor: editor)
       submitting_author = create(:user)
 
-      paper = create(:submitted_paper_with_sha, submitting_author: submitting_author)
+      model = create(:submitted_model_with_sha, submitting_author: submitting_author)
       fake_issue = Object.new
       allow(fake_issue).to receive(:number).and_return(1)
       allow(GITHUB).to receive(:create_issue).and_return(fake_issue)
 
-      paper.start_meta_review!('arfon', editor)
-      expect(paper.state).to eq('review_pending')
-      expect(paper.reload.editor).to be(nil)
-      expect(paper.reload.eic).to eq(editor)
+      model.start_meta_review!('arfon', editor)
+      expect(model.state).to eq('review_pending')
+      expect(model.reload.editor).to be(nil)
+      expect(model.reload.eic).to eq(editor)
     end
 
-    it "should then allow for the paper to be moved into the under_review state" do
+    it "should then allow for the model to be moved into the under_review state" do
       editor = create(:editor, login: "arfoneditor")
       user = create(:user, editor: editor)
       submitting_author = create(:user)
-      paper = create(:review_pending_paper, submitting_author: submitting_author)
+      model = create(:review_pending_model, submitting_author: submitting_author)
       fake_issue = Object.new
       allow(fake_issue).to receive(:number).and_return(1)
       allow(GITHUB).to receive(:create_issue).and_return(fake_issue)
 
-      paper.start_review('arfoneditor', 'bobthereviewer')
-      expect(paper.state).to eq('under_review')
-      expect(paper.editor).to eq(editor)
+      model.start_review('arfoneditor', 'bobthereviewer')
+      expect(model.state).to eq('under_review')
+      expect(model.editor).to eq(editor)
     end
   end
 
   it "should email the editor AND submitting author when submitted" do
-    paper = build(:paper)
+    model = build(:model)
 
-    expect {paper.save}.to change { ActionMailer::Base.deliveries.count }.by(2)
+    expect {model.save}.to change { ActionMailer::Base.deliveries.count }.by(2)
   end
 
   it "should be able to be withdrawn at any time" do
-    paper = create(:accepted_paper)
-    assert Paper.visible.include?(paper)
+    model = create(:accepted_model)
+    assert Paper.visible.include?(model)
 
-    paper.withdraw!
-    refute Paper.visible.include?(paper)
+    model.withdraw!
+    refute Paper.visible.include?(model)
   end
 
   describe "#review_body with a single author" do
     let(:author) { create(:user) }
-    let(:paper) do
-      instance = build(:paper_with_sha, user_id: author.id, kind: kind)
+    let(:model) do
+      instance = build(:model_with_sha, user_id: author.id, kind: kind)
       instance.save(validate: false)
       instance
     end
-    subject { paper.review_body("editor_name", "reviewer_name") }
+    subject { model.review_body("editor_name", "reviewer_name") }
 
-    context "with a paper type" do
+    context "with a model type" do
       let(:kind) { "something_else" }
 
       it "renders the type-specific checklist" do
@@ -238,7 +238,7 @@ describe Paper do
       end
     end
 
-    context "with no paper type" do
+    context "with no model type" do
       let(:kind) { nil }
       it { is_expected.to match /Reviewer:/ }
       it { is_expected.to match /JOSS conflict of interest/ }
@@ -250,40 +250,40 @@ describe Paper do
 
   describe "#review_body with multiple reviewers" do
     let(:author) { create(:user) }
-    let(:paper) do
-      instance = build(:paper, user_id: author.id, kind: kind)
+    let(:model) do
+      instance = build(:model, user_id: author.id, kind: kind)
       instance.save(validate: false)
       instance
     end
-    subject { paper.review_body("editor_name", "mickey,mouse") }
+    subject { model.review_body("editor_name", "mickey,mouse") }
 
-    context "with no paper type" do
+    context "with no model type" do
       let(:kind) { nil }
       it { is_expected.to match /Reviewer:/ }
       it { is_expected.to match /Review checklist for @mickey/ }
       it { is_expected.to match /Review checklist for @mouse/ }
-      it { is_expected.to match /\/papers\/#{paper.sha}/ }
-      it { is_expected.to match /#{paper.repository_url}/ }
+      it { is_expected.to match /\/models\/#{model.sha}/ }
+      it { is_expected.to match /#{model.repository_url}/ }
     end
   end
 
   describe "#meta_review_body" do
     let(:author) { create(:user) }
 
-    let(:paper) do
-      instance = build(:paper_with_sha, user_id: author.id)
+    let(:model) do
+      instance = build(:model_with_sha, user_id: author.id)
       instance.save(validate: false)
       instance
     end
 
-    subject { paper.meta_review_body(editor, 'Important Editor') }
+    subject { model.meta_review_body(editor, 'Important Editor') }
 
     context "with an editor" do
       let(:editor) { "@joss_editor" }
 
       it "renders text" do
-        is_expected.to match /#{paper.submitting_author.github_username}/
-        is_expected.to match /#{paper.submitting_author.name}/
+        is_expected.to match /#{model.submitting_author.github_username}/
+        is_expected.to match /#{model.submitting_author.name}/
         is_expected.to match /#{Rails.application.settings['reviewers']}/
         is_expected.to match /Important Editor/
       end
@@ -295,8 +295,8 @@ describe Paper do
       let(:editor) { "" }
 
       it "renders text" do
-        is_expected.to match /#{paper.submitting_author.github_username}/
-        is_expected.to match /#{paper.submitting_author.name}/
+        is_expected.to match /#{model.submitting_author.github_username}/
+        is_expected.to match /#{model.submitting_author.name}/
         is_expected.to match /#{Rails.application.settings['reviewers']}/
       end
 

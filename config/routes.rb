@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :invitations, only: [:index] do
     put 'expire', on: :member
   end
-  resources :papers do
+  resources :models do
     resources :votes, only: [:create]
     resources :notes, only: [:create, :destroy]
 
@@ -17,10 +17,10 @@ Rails.application.routes.draw do
 
     collection do
       get 'recent'
-      get 'published', to: 'papers#popular'
+      get 'published', to: 'models#popular'
       get 'active'
-      get 'filter', to: 'papers#filter'
-      get 'search', to: 'papers#search'
+      get 'filter', to: 'models#filter'
+      get 'search', to: 'models#search'
     end
   end
 
@@ -39,19 +39,19 @@ Rails.application.routes.draw do
 
   get '/aeic/', to: "aeic_dashboard#index", as: "aeic_dashboard"
   get '/editors/lookup/:login', to: "editors#lookup"
-  get '/papers/lookup/:id', to: "papers#lookup"
-  get '/papers/in/:language', to: "papers#filter", as: 'papers_by_language'
-  get '/papers/by/:author', to: "papers#filter", as: 'papers_by_author'
-  get '/papers/edited_by/:editor', to: "papers#filter", as: 'papers_by_editor'
-  get '/papers/reviewed_by/:reviewer', to: "papers#filter", as: 'papers_by_reviewer'
-  get '/papers/tagged/:tag', to: "papers#filter", as: 'papers_by_tag'
-  get '/papers/issue/:issue', to: "papers#filter", as: 'papers_by_issue'
-  get '/papers/volume/:volume', to: "papers#filter", as: 'papers_by_volume'
-  get '/papers/year/:year', to: "papers#filter", as: 'papers_by_year'
-  get '/papers/:id/status.svg', to: "papers#status", format: "svg", as: 'status_badge'
-  get '/papers/:doi/status.svg', to: "papers#status", format: "svg", constraints: { doi: /10.21105\/joss\.\d{5}/}
-  get '/papers/:doi', to: "papers#show", constraints: { doi: /10.21105\/joss\.\d{5}/}
-  get '/papers/:doi.:format', to: "papers#show", constraints: { doi: /10.21105\/joss\.\d{5}/}
+  get '/models/lookup/:id', to: "models#lookup"
+  get '/models/in/:language', to: "models#filter", as: 'models_by_language'
+  get '/models/by/:author', to: "models#filter", as: 'models_by_author'
+  get '/models/edited_by/:editor', to: "models#filter", as: 'models_by_editor'
+  get '/models/reviewed_by/:reviewer', to: "models#filter", as: 'models_by_reviewer'
+  get '/models/tagged/:tag', to: "models#filter", as: 'models_by_tag'
+  get '/models/issue/:issue', to: "models#filter", as: 'models_by_issue'
+  get '/models/volume/:volume', to: "models#filter", as: 'models_by_volume'
+  get '/models/year/:year', to: "models#filter", as: 'models_by_year'
+  get '/models/:id/status.svg', to: "models#status", format: "svg", as: 'status_badge'
+  get '/models/:doi/status.svg', to: "models#status", format: "svg", constraints: { doi: /10.21105\/joss\.\d{5}/}
+  get '/models/:doi', to: "models#show", constraints: { doi: /10.21105\/joss\.\d{5}/}
+  get '/models/:doi.:format', to: "models#show", constraints: { doi: /10.21105\/joss\.\d{5}/}
 
   get '/editor_profile', to: 'editors#profile', as: 'editor_profile'
   patch '/update_editor_profile', to: 'editors#update_profile', as: 'update_editor_profile'
@@ -73,13 +73,13 @@ Rails.application.routes.draw do
   get '/blog' => redirect("http://blog.joss.theoj.org"), as: :blog
 
   # API methods
-  post '/papers/api_editor_invite', to: 'dispatch#api_editor_invite'
-  post '/papers/api_start_review', to: 'dispatch#api_start_review'
-  post '/papers/api_deposit', to: 'dispatch#api_deposit'
-  post '/papers/api_assign_editor', to: 'dispatch#api_assign_editor'
-  post '/papers/api_assign_reviewers', to: 'dispatch#api_assign_reviewers'
-  post '/papers/api_reject', to: 'dispatch#api_reject'
-  post '/papers/api_withdraw', to: 'dispatch#api_withdraw'
+  post '/models/api_editor_invite', to: 'dispatch#api_editor_invite'
+  post '/models/api_start_review', to: 'dispatch#api_start_review'
+  post '/models/api_deposit', to: 'dispatch#api_deposit'
+  post '/models/api_assign_editor', to: 'dispatch#api_assign_editor'
+  post '/models/api_assign_reviewers', to: 'dispatch#api_assign_reviewers'
+  post '/models/api_reject', to: 'dispatch#api_reject'
+  post '/models/api_withdraw', to: 'dispatch#api_withdraw'
   post '/dispatch', to: 'dispatch#github_receiver', format: 'json'
 
   root to: 'home#index'

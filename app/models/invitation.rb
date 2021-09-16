@@ -1,6 +1,6 @@
 class Invitation < ApplicationRecord
   belongs_to :editor
-  belongs_to :paper
+  belongs_to :model
 
   validates :state, presence: true, inclusion: { in: ["pending", "accepted", "expired"] }
 
@@ -28,8 +28,8 @@ class Invitation < ApplicationRecord
     self.update_attribute(:state, "expired")
   end
 
-  def self.resolve_pending(paper, editor)
-    pending_invitations = pending.where(paper: paper)
+  def self.resolve_pending(model, editor)
+    pending_invitations = pending.where(model: model)
 
     pending_invitations.each do |invitation|
       if invitation.editor_id == editor.id

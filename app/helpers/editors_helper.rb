@@ -28,20 +28,20 @@ module EditorsHelper
 
   def in_progress_for_editor(editor)
     paused_count = @paused_by_editor[editor.id].to_i
-    total_paper_count = @assignment_by_editor[editor.id].to_i
+    total_model_count = @assignment_by_editor[editor.id].to_i
 
     if paused_count > 0
-      return "#{total_paper_count - paused_count} <span class='small font-italic'>(+ #{paused_count})</span>".html_safe
+      return "#{total_model_count - paused_count} <span class='small font-italic'>(+ #{paused_count})</span>".html_safe
     else
-      return "#{total_paper_count}"
+      return "#{total_model_count}"
     end
   end
 
   def in_progress_no_paused_for_editor(editor)
     paused_count = @paused_by_editor[editor.id].to_i
-    total_paper_count = @assignment_by_editor[editor.id].to_i
+    total_model_count = @assignment_by_editor[editor.id].to_i
 
-    return total_paper_count - paused_count
+    return total_model_count - paused_count
   end
 
   def availability_class(editor)
@@ -58,9 +58,9 @@ module EditorsHelper
 
   def in_progress_no_paused_for_editor(editor)
     paused_count = @paused_by_editor[editor.id].to_i
-    total_paper_count = @assignment_by_editor[editor.id].to_i
+    total_model_count = @assignment_by_editor[editor.id].to_i
 
-    return total_paper_count - paused_count
+    return total_model_count - paused_count
   end
 
   def open_invites_for_editor(editor)
@@ -69,7 +69,7 @@ module EditorsHelper
     output = []
     @pending_invitations.each do |invite|
       if invite.editor_id == editor.id
-        output << link_to(invite.paper.meta_review_issue_id, invite.paper.meta_review_url)
+        output << link_to(invite.model.meta_review_issue_id, invite.model.meta_review_url)
       end
     end
 

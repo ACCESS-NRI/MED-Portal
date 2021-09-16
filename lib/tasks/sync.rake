@@ -18,13 +18,13 @@ namespace :sync do
   end
 
   desc "Papers cleanup"
-  task cleanup_paper_branches: :environment do
+  task cleanup_model_branches: :environment do
     reviews_repo = Rails.application.settings["reviews"]
-    papers_repo = Rails.application.settings["papers_repo"]
+    models_repo = Rails.application.settings["models_repo"]
     # Only check for issues in the last 3 days
     target_time = (Time.now - 3.days).strftime('%Y-%m-%dT%H:%M:%S%z')
     closed_issues = GITHUB.list_issues(reviews_repo, state: 'closed', since: target_time)
-    branch_names = GITHUB.branches(papers_repo).collect {|b| b.name}
+    branch_names = GITHUB.branches(models_repo).collect {|b| b.name}
 
     closed_issues.each do |issue|
       id = "%05d" % issue.number
@@ -32,7 +32,7 @@ namespace :sync do
 
       if branch_names.include?(wouldbe_branch_name)
         puts "Deleting #{wouldbe_branch_name}"
-        GITHUB.delete_branch(papers_repo, wouldbe_branch_name)
+        GITHUB.delete_branch(models_repo, wouldbe_branch_name)
       end
     end
   end

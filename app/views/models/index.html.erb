@@ -2,9 +2,9 @@
     <div class="hero-small">
       <div class="hero-title">
       <% if @filtering %>
-        <%= image_tag "icon_papers.svg", height: "32px" %><h1><%= Rails.application.settings['abbreviation'] %> Models: <%= @term %></h1>
+        <%= image_tag "icon_models.svg", height: "32px" %><h1><%= Rails.application.settings['abbreviation'] %> Models: <%= @term %></h1>
       <% else %>
-        <%= image_tag "icon_papers.svg", height: "32px" %><h1><%= Rails.application.settings['abbreviation'] %> Models</h1>
+        <%= image_tag "icon_models.svg", height: "32px" %><h1><%= Rails.application.settings['abbreviation'] %> Models</h1>
       <% end %>
       </div>
     </div>
@@ -14,21 +14,21 @@
 
     <div class="btn-group" role="group" aria-label="Paper Status">
 
-      <%= link_to papers_path, class: "tabnav-tab #{selected_class('index')}" do %>
+      <%= link_to models_path, class: "tabnav-tab #{selected_class('index')}" do %>
       All Models
       <div class="count-badge"><%= raw Paper.everything.count %></div>
       <% end %>
-      <%= link_to published_papers_path, class: "tabnav-tab #{selected_class('popular')}" do %>
+      <%= link_to published_models_path, class: "tabnav-tab #{selected_class('popular')}" do %>
       Published Models
       <div class="count-badge"><%= raw Paper.visible.count %></div>
       <% end %>
-      <%= link_to active_papers_path, class: "tabnav-tab #{selected_class('active')}" do %>
+      <%= link_to active_models_path, class: "tabnav-tab #{selected_class('active')}" do %>
       Active Models
       <div class="count-badge"><%= raw Paper.in_progress.count %></div>
       <% end %>
     </div>
 
-    <%= form_for("", url: search_papers_path, method: 'get', html: { class: "form-inline my-2 my-lg-0 float-right"}) do |f| %>
+    <%= form_for("", url: search_models_path, method: 'get', html: { class: "form-inline my-2 my-lg-0 float-right"}) do |f| %>
     <div class="input-group mb-3">
       <%- placeholder_text = params[:q].nil? ? "Search by title, tag, author, or language":params[:q]%>
       <%= f.text_field :q, placeholder:placeholder_text , class: "form-control", size: "35" %>
@@ -40,11 +40,11 @@
     </div>
     <% end %>
 
-  <div id ="primary-content row" class="paper-list">
-    <%= render partial: "list", locals: { papers: @papers } %>
+  <div id ="primary-content row" class="model-list">
+    <%= render partial: "list", locals: { models: @models } %>
   </div>
   <div class="row">
-    <!-- :class not applying here? --> <div class="pagination_helper"><%= page_entries_info(@papers).capitalize.html_safe %></div>
-    <%= will_paginate @papers, inner_window: 3, outer_window: 0, page_links: false %>
+    <!-- :class not applying here? --> <div class="pagination_helper"><%= page_entries_info(@models).capitalize.html_safe %></div>
+    <%= will_paginate @models, inner_window: 3, outer_window: 0, page_links: false %>
   </div>
 </div>

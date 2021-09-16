@@ -28,19 +28,19 @@ describe EditorsHelper do
   end
 
   describe "in_progress_for_editor" do
-    it "returns assigned papers" do
+    it "returns assigned models" do
       @paused_by_editor = { @editor.id => 0 }
       expect(in_progress_for_editor(@editor)).to eq("4")
     end
 
-    it "returns assigned + paused papers if present" do
+    it "returns assigned + paused models if present" do
       expect(in_progress_for_editor(@editor)).to include("3")
       expect(in_progress_for_editor(@editor)).to include("(+ 1)")
     end
   end
 
   describe "in_progress_no_paused_for_editor" do
-    it "returns count of assigned not paused papers" do
+    it "returns count of assigned not paused models" do
       expect(in_progress_no_paused_for_editor(@editor)).to eq(3)
 
       expect(in_progress_no_paused_for_editor(create(:editor))).to eq(0)

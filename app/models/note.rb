@@ -1,5 +1,5 @@
 class Note < ApplicationRecord
-  belongs_to :paper
+  belongs_to :model
   belongs_to :editor
 
   validates :comment, presence: true

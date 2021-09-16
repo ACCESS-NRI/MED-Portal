@@ -24,9 +24,9 @@
   }
 }
 
-.paper-show {
+.model-show {
 
-  .paper-title {
+  .model-title {
     display: flex;
     margin-bottom: 4em;
 
@@ -41,7 +41,7 @@
       }
     }
 
-    .paper-meta {
+    .model-meta {
       margin-left: 1.5em;
 
       @media screen and (max-width: 500px) {
@@ -51,17 +51,17 @@
   }
 }
 
-#joss-paper {
+#joss-model {
   @media screen and (max-width: 500px) {
     display: none;
   }
 }
 
-.paper-status {
+.model-status {
   text-align: center;
 }
 
-.paper-sidebar {
+.model-sidebar {
   font-size: 14px;
 
   .btn-group-vertical {
@@ -74,7 +74,7 @@
     padding-bottom: 0.25em;
   }
 
-  .paper-badges {
+  .model-badges {
     margin-bottom: 2em;
   }
 

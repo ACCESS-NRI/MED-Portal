@@ -65,7 +65,7 @@ class ReviewIssue
   end
 
   attr_accessor :title, :body, :comments, :labels, :state, :open, :number, :created_at,
-                :closed_at, :comment_count, :last_comment, :paper
+                :closed_at, :comment_count, :last_comment, :model
 
   def initialize(raw_issue, state)
     @title = raw_issue['title']
@@ -74,7 +74,7 @@ class ReviewIssue
     @created_at = raw_issue['created_at']
     @closed_at = raw_issue['closed_at']
     @state = state
-    @paper = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', raw_issue['number'], raw_issue['number']).first
+    @model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', raw_issue['number'], raw_issue['number']).first
   end
 
   # Is this a 'PRE REVIEW' issue?

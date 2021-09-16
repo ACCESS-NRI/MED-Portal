@@ -4,7 +4,7 @@
       <div class="welcome">Welcome, <%= current_user.editor.full_name %></div>
       <div class="hero-small dashboard">
         <div class="hero-title">
-          <%= image_tag "icon_papers.svg", height: "32px" %>
+          <%= image_tag "icon_models.svg", height: "32px" %>
           <h1>Editor dashboard <%= " - @#{@editor.login}" if @editor != current_user.editor%></h1>
         </div>
       </div>
@@ -18,7 +18,7 @@
 
         <div class="row">
           <div class="stat col">
-            <div class="count"><%= @editor.papers.visible.since(1.month.ago).count %></div>
+            <div class="count"><%= @editor.models.visible.since(1.month.ago).count %></div>
             <div class="message">Papers last month</div>
           </div>
           <div class="stat col">
@@ -54,29 +54,29 @@
       </tr>
     </thead>
     <tbody>
-      <% @papers.each do |paper| %>
+      <% @models.each do |model| %>
       <tr>
-        <td class="state"><%= paper.state.titleize %></td>
-        <td><%= link_to paper.title, paper_url(paper), title: paper.title, class: "d-inline-block text-truncate", style: "max-width: 450px;" %><div class="time">Submitted <%= time_ago_in_words(paper.created_at) %> ago <%= pretty_labels_for(paper) %></div></td>
+        <td class="state"><%= model.state.titleize %></td>
+        <td><%= link_to model.title, model_url(model), title: model.title, class: "d-inline-block text-truncate", style: "max-width: 450px;" %><div class="time">Submitted <%= time_ago_in_words(model.created_at) %> ago <%= pretty_labels_for(model) %></div></td>
         <% unless params[:editor]%>
-        <td class="text-center"><%= vote_summary(paper).html_safe %></td>
-        <td class="text-center"><%= open_invites_for_paper(paper) %></td>   
+        <td class="text-center"><%= vote_summary(model).html_safe %></td>
+        <td class="text-center"><%= open_invites_for_model(model) %></td>   
         <% end %>
-        <td class="text-center"><%= review_issue_links(paper) %></td>
+        <td class="text-center"><%= review_issue_links(model) %></td>
         <td class="text-center mobile-hide">
-          <%- paper.reviewers.each do |reviewer| %>
+          <%- model.reviewers.each do |reviewer| %>
             <%= link_to image_tag(avatar(reviewer), size: "24x24", class: "avatar", title: reviewer), github_user_link(reviewer).html_safe %>
           <%- end %>
         </td>
-        <td class="mobile-hide"><%= comment_activity(paper) %></td>
-        <td class="mobile-hide text-center state" style="padding-right: 1em;"><%= paper.pretty_percentage %> %</td>
+        <td class="mobile-hide"><%= comment_activity(model) %></td>
+        <td class="mobile-hide text-center state" style="padding-right: 1em;"><%= model.pretty_percentage %> %</td>
       </tr>
       <% end %>
     </tbody>
   </table>
 
   <div class="row">
-    <!-- :class not applying here? --> <div class="pagination_helper"><%= page_entries_info(@papers).capitalize.html_safe %></div>
-    <%= will_paginate @papers, inner_window: 3, outer_window: 0, page_links: false %>
+    <!-- :class not applying here? --> <div class="pagination_helper"><%= page_entries_info(@models).capitalize.html_safe %></div>
+    <%= will_paginate @models, inner_window: 3, outer_window: 0, page_links: false %>
   </div>
 </div>

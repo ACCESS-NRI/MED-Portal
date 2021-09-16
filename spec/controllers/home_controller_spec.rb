@@ -56,7 +56,7 @@ describe HomeController, type: :controller do
       user = create(:user, email: nil, github_username: nil)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
       params = {email: "albert@gmail.com", github_username: "@jimmy"}
-      request.env["HTTP_REFERER"] = papers_path
+      request.env["HTTP_REFERER"] = models_path
 
       post :update_profile, params: {user: params}
       expect(response).to be_redirect # as it's updated the email
@@ -68,7 +68,7 @@ describe HomeController, type: :controller do
       user = create(:user, email: nil, github_username: nil)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
       params = {email: "albert@gmail.com", github_username: "jimmy_no_at"}
-      request.env["HTTP_REFERER"] = papers_path
+      request.env["HTTP_REFERER"] = models_path
 
       post :update_profile, params: {user: params}
       expect(response).to be_redirect # as it's updated the email

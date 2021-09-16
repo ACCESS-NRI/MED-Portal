@@ -126,7 +126,7 @@ First, there are three files which provide settings for your Rails application i
 These each contain site-specific variables that should be modified if you are building off of the Open Journals framework.
 
 Next, you'll need to modify the `repository.yml` file.
-This file lists the GitHub repository where you expect papers to be published,
+This file lists the GitHub repository where you expect models to be published,
 as well as the editor team ID.
 For your GitHub organization, make sure you have created and populated a team called `editors`.
 Then, you can check its ID number as detailed in [this guide](https://fabian-kostadinov.github.io/2015/01/16/how-to-find-a-github-team-id).
@@ -203,7 +203,7 @@ which should be set to execute every hour.
 ```eval_rst
 .. warn:
     Cloudinary `does not allow free accounts to serve PDFs <https://cloudinary.com/blog/uploading_managing_and_delivering_pdfs#delivering_pdf_files>`_ by default.
-    This will prevent your application from offering a paper preview service, as in https://whedon.theoj.org
+    This will prevent your application from offering a model preview service, as in https://whedon.theoj.org
     To have this restriction lifted, you will need to `contact Cloudinary customer support <https://support.cloudinary.com/hc/en-us/requests/new>`_ directly.
 ```
 

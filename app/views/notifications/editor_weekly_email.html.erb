@@ -2,7 +2,7 @@
 <p>http://joss.theoj.org/dashboard/<%= @editor %></p>
 
 <% if @assigned_issues.any? %>
-<h4>Here are the papers you are currently editing:</h4>
+<h4>Here are the models you are currently editing:</h4>
 
   <% @assigned_issues.each do |issue| %>
 <ul>
@@ -14,11 +14,11 @@
 </ul>
   <% end %>
 <% else %>
-<p>You don't seem to be editing any papers. Please consider volunteering to edit one of the pending papers above.</p>
+<p>You don't seem to be editing any models. Please consider volunteering to edit one of the pending models above.</p>
 <% end %>
 
 <% if @closed_issues.any? %>
-<h4>Published papers this week</h4>
+<h4>Published models this week</h4>
 
   <% @closed_issues.each do |issue| %>
   <ul>
@@ -31,8 +31,8 @@
 <% end %>
 
 <% if @pending_issues.any? %>
-<h4>Here are the papers currently without an editor</h4>
-<p><em>Please consider volunteering to edit one (or more) of these papers</em></p>
+<h4>Here are the models currently without an editor</h4>
+<p><em>Please consider volunteering to edit one (or more) of these models</em></p>
 
   <% @pending_issues.each do |issue| %>
 <ul>

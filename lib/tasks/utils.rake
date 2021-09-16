@@ -19,14 +19,14 @@ namespace :utils do
     ARFON_WEEKS_2020 = []
     KEVIN_WEEKS_2020 = [5]
 
-    papers_before_2019 = Paper.where('created_at < ?', '2019-01-01')
+    models_before_2019 = Paper.where('created_at < ?', '2019-01-01')
 
-    papers_before_2019.each do |paper|
+    models_before_2019.each do |model|
       eic = Editor.find_by_login('arfon')
-      paper.set_meta_eic(eic)
+      model.set_meta_eic(eic)
     end
 
-    papers_2019 = Paper.where('created_at BETWEEN ? AND ?', '2019-01-01', '2019-12-31')
+    models_2019 = Paper.where('created_at BETWEEN ? AND ?', '2019-01-01', '2019-12-31')
 
     def whos_week_2019(week)
       return Editor.find_by_login('kyleniemeyer') if KYLE_WEEKS_2019.include?(week)
@@ -39,12 +39,12 @@ namespace :utils do
       raise "Can't find editor for #{week}"
     end
 
-    papers_2019.each do |paper|
-      week = Date.parse(paper.created_at.to_s).cweek
-      paper.set_meta_eic(whos_week_2019(week))
+    models_2019.each do |model|
+      week = Date.parse(model.created_at.to_s).cweek
+      model.set_meta_eic(whos_week_2019(week))
     end
 
-    papers_2020 = Paper.where('created_at BETWEEN ? AND ?', '2020-01-01', '2020-12-31')
+    models_2020 = Paper.where('created_at BETWEEN ? AND ?', '2020-01-01', '2020-12-31')
 
     def whos_week_2020(week)
       return Editor.find_by_login('kyleniemeyer') if KYLE_WEEKS_2020.include?(week)
@@ -57,21 +57,21 @@ namespace :utils do
       raise
     end
 
-    papers_2020.each do |paper|
-      week = Date.parse(paper.created_at.to_s).cweek
-      paper.set_meta_eic(whos_week_2020(week))
+    models_2020.each do |model|
+      week = Date.parse(model.created_at.to_s).cweek
+      model.set_meta_eic(whos_week_2020(week))
     end
   end
 
   desc "Populate activities"
   task update_activities: :environment do
-    Paper.all.each do |paper|
-      if activities = paper.activities
+    Paper.all.each do |model|
+      if activities = model.activities
         # Find the most recent comment
 
-        puts "working with #{paper.id}"
+        puts "working with #{model.id}"
         if activities['issues'].nil?
-          puts "No activity for #{paper.id}"
+          puts "No activity for #{model.id}"
         else
           comments = activities['issues']['comments']
           last_comment = comments.sort_by {|c| c['commented_at']}.last['commented_at']
@@ -79,13 +79,13 @@ namespace :utils do
 
         if activities['last_edits'].nil?
           if last_comment.nil?
-            paper.last_activity = paper.created_at
-            puts "Setting last activity to #{paper.created_at} for #{paper.id} (LAST RESORT)"
+            model.last_activity = model.created_at
+            puts "Setting last activity to #{model.created_at} for #{model.id} (LAST RESORT)"
 
           else
-            puts "No edits for #{paper.id}"
-            paper.last_activity = last_comment
-            puts "Setting last activity to #{last_comment} for #{paper.id}"
+            puts "No edits for #{model.id}"
+            model.last_activity = last_comment
+            puts "Setting last activity to #{last_comment} for #{model.id}"
           end
         else
           edits = activities['issues']['last_edits']
@@ -95,19 +95,19 @@ namespace :utils do
           puts last_comment
           date = last_comment > last_edit ? last_comment : last_edit
 
-          paper.last_activity = date
-          puts "Setting last activity to #{date} for #{paper.id}"
+          model.last_activity = date
+          puts "Setting last activity to #{date} for #{model.id}"
         end
 
-        paper.save
-      else # no paper activities
-        paper.last_activity = paper.created_at
-        paper.save
+        model.save
+      else # no model activities
+        model.last_activity = model.created_at
+        model.save
       end
     end
   end
 
-  def utils_initialize_activities(paper)
+  def utils_initialize_activities(model)
     activities = {
       'issues' => {
         'commenters' => {
@@ -118,18 +118,18 @@ namespace :utils do
       }
     }
 
-    paper.activities = activities
-    paper.save
+    model.activities = activities
+    model.save
   end
 
   # Parse the incoming payload and do something with it...
-  def utils_parse_payload!(paper, comment, pre_review)
+  def utils_parse_payload!(model, comment, pre_review)
     sender = comment.user.login
     comment_body = comment.body
     commented_at = comment.created_at
     comment_url = comment.html_url
 
-    issues = paper.activities['issues']
+    issues = model.activities['issues']
 
     if pre_review
       kind = 'pre-review'
@@ -155,17 +155,17 @@ namespace :utils do
     # Only keep the last 5 comments
     issues['comments'] = issues['comments'].take(5)
 
-    # Finally save the paper
-    paper.save
+    # Finally save the model
+    model.save
   end
 
   desc "Populate editors and reviewers"
   task populate_editors_and_reviewers: :environment do
     reviews_repo = Rails.application.settings["reviews"]
-    Paper.everything.each do |paper|
-      puts "Paper: #{paper.id}"
-      if paper.review_issue_id
-        issue = GITHUB.issue(reviews_repo, paper.review_issue_id)
+    Paper.everything.each do |model|
+      puts "Paper: #{model.id}"
+      if model.review_issue_id
+        issue = GITHUB.issue(reviews_repo, model.review_issue_id)
 
         editor_handle = issue.body.match(/\*\*Editor:\*\*\s*.@(\S*)/)[1]
         reviewers = issue.body.match(/Reviewers?:\*\*\s*(.+?)\r?\n/)[1].split(", ") - ["Pending"]
@@ -176,20 +176,20 @@ namespace :utils do
           editor = Editor.find_by_login(editor_handle)
         end
 
-        if paper.editor && (paper.editor.login != editor.login)
-          puts "WARNING: Changing editor from #{paper.editor.login} to #{editor.login}"
+        if model.editor && (model.editor.login != editor.login)
+          puts "WARNING: Changing editor from #{model.editor.login} to #{editor.login}"
         end
 
-        if paper.reviewers != reviewers.each(&:strip!)
-          puts "WARNING: Changing reviewers from #{paper.reviewers} to #{reviewers.each(&:strip!)}"
+        if model.reviewers != reviewers.each(&:strip!)
+          puts "WARNING: Changing reviewers from #{model.reviewers} to #{reviewers.each(&:strip!)}"
         end
 
-        paper.set_editor(editor)
-        paper.set_reviewers(reviewers.join(','))
+        model.set_editor(editor)
+        model.set_reviewers(reviewers.join(','))
 
-        puts "Paper: #{paper.id}, Editor: #{editor.login}, Reviewers: #{reviewers}"
+        puts "Paper: #{model.id}, Editor: #{editor.login}, Reviewers: #{reviewers}"
       else
-        puts "No review_issue_id for #{paper.id}"
+        puts "No review_issue_id for #{model.id}"
       end
     end
   end
@@ -198,57 +198,57 @@ namespace :utils do
   task populate_activities: :environment do
     reviews_repo = Rails.application.settings["reviews"]
 
-    puts "Starting with in progress papers"
-    Paper.in_progress.each do |paper|
-      puts "Working with #{paper.meta_review_issue_id} "
-      next unless paper.meta_review_issue_id
+    puts "Starting with in progress models"
+    Paper.in_progress.each do |model|
+      puts "Working with #{model.meta_review_issue_id} "
+      next unless model.meta_review_issue_id
 
-      pre_review_comments = GITHUB.issue_comments(reviews_repo, paper.meta_review_issue_id)
-      utils_initialize_activities(paper)
+      pre_review_comments = GITHUB.issue_comments(reviews_repo, model.meta_review_issue_id)
+      utils_initialize_activities(model)
 
       pre_review_comments.each do |comment|
-        utils_parse_payload!(paper, comment, pre_review=true)
+        utils_parse_payload!(model, comment, pre_review=true)
       end
 
-      next if paper.review_issue_id.nil?
+      next if model.review_issue_id.nil?
 
-      review_comments = GITHUB.issue_comments(reviews_repo, paper.review_issue_id)
+      review_comments = GITHUB.issue_comments(reviews_repo, model.review_issue_id)
       review_comments.each do |comment|
-        utils_parse_payload!(paper, comment, pre_review=false)
+        utils_parse_payload!(model, comment, pre_review=false)
       end
     end
 
-    puts "Next doing accepted papers"
-    Paper.visible.each do |paper|
-      puts "Working with #{paper.id}"
+    puts "Next doing accepted models"
+    Paper.visible.each do |model|
+      puts "Working with #{model.id}"
 
-      utils_initialize_activities(paper)
+      utils_initialize_activities(model)
 
-      if paper.meta_review_issue_id
+      if model.meta_review_issue_id
         # Initialize the activities hash
 
-        pre_review_comments = GITHUB.issue_comments(reviews_repo, paper.meta_review_issue_id)
+        pre_review_comments = GITHUB.issue_comments(reviews_repo, model.meta_review_issue_id)
 
         pre_review_comments.each do |comment|
-          utils_parse_payload!(paper, comment, pre_review=true)
+          utils_parse_payload!(model, comment, pre_review=true)
         end
       end
 
       # Skip if there's no review issue
-      next if paper.review_issue_id.nil?
+      next if model.review_issue_id.nil?
 
-      review_comments = GITHUB.issue_comments(reviews_repo, paper.review_issue_id)
+      review_comments = GITHUB.issue_comments(reviews_repo, model.review_issue_id)
       review_comments.each do |comment|
-        utils_parse_payload!(paper, comment, pre_review=false)
+        utils_parse_payload!(model, comment, pre_review=false)
       end
     end
   end
 
   desc "Clear activities"
   task clear_activities: :environment do
-    Paper.all.each do |paper|
-      paper.activities = nil
-      paper.save
+    Paper.all.each do |model|
+      model.activities = nil
+      model.save
     end
   end
 
@@ -266,7 +266,7 @@ namespace :utils do
     end
   end
 
-  desc "Add editor_ids to papers"
+  desc "Add editor_ids to models"
   task add_editor_ids: :environment do
     reviews_repo = Rails.application.settings["reviews"]
     open_review_issues = ReviewIssue.download_review_issues(reviews_repo)
@@ -279,7 +279,7 @@ namespace :utils do
       # production). The second two are test submissions.
 
       next if [67, 626].include? review.number
-      paper = dat(review.number)
+      model = dat(review.number)
 
       editor = review.editor.gsub('@', '')
 
@@ -293,9 +293,9 @@ namespace :utils do
           editor = Editor.where('login = ?', editor).first
         end
 
-        if paper
-          paper.update_attribute(:editor_id, editor.id)
-          paper.update_attribute(:reviewers, review.reviewers)
+        if model
+          model.update_attribute(:editor_id, editor.id)
+          model.update_attribute(:reviewers, review.reviewers)
         end
       end
     end

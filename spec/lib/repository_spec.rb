@@ -3,7 +3,7 @@ RSpec.describe Repository do
     YAML.load <<-YAML.strip_heredoc
       a_user/a_repository:
         editor_team_id: 1234
-        papers: a_user/another_repository
+        models: a_user/another_repository
     YAML
   end
 
@@ -17,9 +17,9 @@ RSpec.describe Repository do
     end
   end
 
-  describe ".papers" do
-    it "returns the configured papers repository" do
-      expect(Repository.papers).to eq("a_user/another_repository")
+  describe ".models" do
+    it "returns the configured models repository" do
+      expect(Repository.models).to eq("a_user/another_repository")
     end
   end
 

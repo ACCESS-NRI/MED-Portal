@@ -26,10 +26,10 @@ class DispatchController < ApplicationController
 
   def api_assign_editor
     if params[:secret] == ENV['WHEDON_SECRET']
-      paper = Paper.find_by_meta_review_issue_id(params[:id])
+      model = Paper.find_by_meta_review_issue_id(params[:id])
       editor = Editor.find_by_login(params[:editor])
-      return head :unprocessable_entity unless paper && editor
-      paper.set_editor(editor)
+      return head :unprocessable_entity unless model && editor
+      model.set_editor(editor)
     else
       head :forbidden
     end
@@ -37,9 +37,9 @@ class DispatchController < ApplicationController
 
   def api_editor_invite
     if params[:secret] == ENV['WHEDON_SECRET']
-      paper = Paper.find_by_meta_review_issue_id(params[:id])
-      return head :unprocessable_entity unless paper
-      if paper.invite_editor(params[:editor])
+      model = Paper.find_by_meta_review_issue_id(params[:id])
+      return head :unprocessable_entity unless model
+      if model.invite_editor(params[:editor])
         head :no_content
       else
         head :unprocessable_entity
@@ -51,9 +51,9 @@ class DispatchController < ApplicationController
 
   def api_assign_reviewers
     if params[:secret] == ENV['WHEDON_SECRET']
-      paper = Paper.find_by_meta_review_issue_id(params[:id])
-      return head :unprocessable_entity unless paper
-      paper.set_reviewers(params[:reviewers])
+      model = Paper.find_by_meta_review_issue_id(params[:id])
+      return head :unprocessable_entity unless model
+      model.set_reviewers(params[:reviewers])
     else
       head :forbidden
     end
@@ -61,9 +61,9 @@ class DispatchController < ApplicationController
 
   def api_reject
     if params[:secret] == ENV['WHEDON_SECRET']
-      paper = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
-      return head :unprocessable_entity unless paper
-      if paper.reject!
+      model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
+      return head :unprocessable_entity unless model
+      if model.reject!
         head :no_content
       else
         head :unprocessable_entity
@@ -75,9 +75,9 @@ class DispatchController < ApplicationController
 
   def api_withdraw
     if params[:secret] == ENV['WHEDON_SECRET']
-      paper = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
-      return head :unprocessable_entity unless paper
-      if paper.withdraw!
+      model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
+      return head :unprocessable_entity unless model
+      if model.withdraw!
         head :no_content
       else
         head :unprocessable_entity
@@ -89,9 +89,9 @@ class DispatchController < ApplicationController
 
   def api_start_review
     if params[:secret] == ENV['WHEDON_SECRET']
-      @paper = Paper.find_by_meta_review_issue_id(params[:id])
-      if @paper.start_review!(params[:editor], params[:reviewers])
-        render json: @paper.to_json, status: '201'
+      @model = Paper.find_by_meta_review_issue_id(params[:id])
+      if @model.start_review!(params[:editor], params[:reviewers])
+        render json: @model.to_json, status: '201'
       else
         head :unprocessable_entity
       end
@@ -102,7 +102,7 @@ class DispatchController < ApplicationController
 
   def api_deposit
     if params[:secret] == ENV['WHEDON_SECRET']
-      @paper = Paper.find_by_review_issue_id(params[:id])
+      @model = Paper.find_by_review_issue_id(params[:id])
 
       if params[:metadata]
         metadata = JSON.parse(Base64.decode64(params[:metadata]))
@@ -110,7 +110,7 @@ class DispatchController < ApplicationController
         metadata = nil
       end
 
-      @paper.update(
+      @model.update(
         doi: params[:doi],
         archive_doi: params[:archive_doi],
         accepted_at: Time.now,
@@ -120,8 +120,8 @@ class DispatchController < ApplicationController
         metadata: metadata
       )
 
-      if @paper.accept!
-        render json: @paper.to_json, status: '201'
+      if @model.accept!
+        render json: @model.to_json, status: '201'
       else
         head :unprocessable_entity
       end

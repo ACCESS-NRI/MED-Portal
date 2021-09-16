@@ -2,7 +2,7 @@
     <div class="welcome">Welcome, <%= current_user.editor.full_name %></div>
     <div class="hero-small dashboard">
       <div class="hero-title">
-        <%= image_tag "icon_papers.svg", height: "32px" %><h1>Editor statistics</h1>
+        <%= image_tag "icon_models.svg", height: "32px" %><h1>Editor statistics</h1>
       </div>
     </div>
 </div>
@@ -28,12 +28,12 @@
       <tr class='<%= availability_class(editor) %>'>
         <td sorttable_customkey=<%= editor.login.downcase %>><%= image_tag(avatar(editor.login), size: "24x24", class: "avatar", title: editor.login) %> <%= link_to editor.login, "/dashboard/#{editor.login}" %><% if editor.retired? %> <em>(emeritus)</em><% end %></td>
         <td sorttable_customkey=<%= in_progress_no_paused_for_editor(editor) %>><%= in_progress_for_editor(editor) %></td>
-        <td class="text-center"><%= sprintf("%.1f", @papers_last_3_months[editor.id].to_i / 3.0) %></td>
-        <td class="text-center"><%= @papers_last_week[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_last_month[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_last_3_months[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_last_year[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_all_time[editor.id].to_i %></td>
+        <td class="text-center"><%= sprintf("%.1f", @models_last_3_months[editor.id].to_i / 3.0) %></td>
+        <td class="text-center"><%= @models_last_week[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_last_month[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_last_3_months[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_last_year[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_all_time[editor.id].to_i %></td>
       </tr>
       <% end %>
     </tbody>
@@ -42,12 +42,12 @@
       <tr class="<%= cycle('odd', 'even') -%>">
         <td><%= image_tag(avatar(editor.login), size: "24x24", class: "avatar", title: editor.login) %> <%= link_to editor.login, "/dashboard/#{editor.login}" %><% if editor.retired? %> <em>(emeritus)</em><% end %></td>
         <td><%= in_progress_for_editor(editor) %></td>
-        <td class="text-center"><%= sprintf("%.1f", @papers_last_3_months[editor.id].to_i / 3.0) %></td>
-        <td class="text-center"><%= @papers_last_week[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_last_month[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_last_3_months[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_last_year[editor.id].to_i %></td>
-        <td class="text-center"><%= @papers_all_time[editor.id].to_i %></td>
+        <td class="text-center"><%= sprintf("%.1f", @models_last_3_months[editor.id].to_i / 3.0) %></td>
+        <td class="text-center"><%= @models_last_week[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_last_month[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_last_3_months[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_last_year[editor.id].to_i %></td>
+        <td class="text-center"><%= @models_all_time[editor.id].to_i %></td>
       </tr>
       <% end %>
       <tr style="font-weight: bolder;">
@@ -66,21 +66,21 @@
 
 <div class="container">
   <div class="generic-content-item">
-    <h3>Published papers per month</h3>
+    <h3>Published models per month</h3>
 
     <%= column_chart [
-      { name: "Accepted papers by month", data: @accepted_papers }
+      { name: "Accepted models by month", data: @accepted_models }
     ], height: "500px", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 60, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 60, stepSize: 5}}]}} %>
 
   </div>
 
   <div class="generic-content-item" style="padding-bottom: 80px;">
-    <h3 class="float-left">Accepted papers per month by editor</h3>
+    <h3 class="float-left">Accepted models per month by editor</h3>
     <p class="float-right" style="font-weight: bolder; padding-left: 40px;">Select editor: <%= select_tag 'editors', options_from_collection_for_select(Editor.all, "login", "login", params[:editor].blank? ? current_user.editor.login : params[:editor]),
       onchange: "top.location.href='/dashboard?editor=' + this.options[this.selectedIndex].value + '#editor';" %></p>
 
       <%= column_chart [
-      { name: "Papers edited by #{@editor.login} by month", data: @editor_papers }
+      { name: "Papers edited by #{@editor.login} by month", data: @editor_models }
     ], height: "500px", colors: ["#8FBC8F"], id: "editor", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}]}} %>
   </div>
 
@@ -90,7 +90,7 @@
     <div class="float-right" style="font-weight: bolder; padding-left: 40px;">Search for reviewer (hit enter to search): <%= form_for("/dashboard", html: { method: 'GET', style: "display: inline !important;" }) do |f| %><%= text_field_tag 'reviewer', @reviewer  %><% end %> </div>
 
     <%= column_chart [
-      { name: "Papers reviewed by #{@reviewer} by month", data: @reviewer_papers }
+      { name: "Papers reviewed by #{@reviewer} by month", data: @reviewer_models }
     ], height: "500px", colors: ["#FFA500"], id: "reviewers", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}]}} %>
   </div>
 </div>

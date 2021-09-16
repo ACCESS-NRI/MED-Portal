@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title><%= Rails.application.settings['name'] %>: <%= @paper.title %></title>
+  <title><%= Rails.application.settings['name'] %>: <%= @model.title %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/manifest.json">
-  <link rel="home" type="application/atom+xml" title="Papers" href="/papers.atom">
+  <link rel="home" type="application/atom+xml" title="Papers" href="/models.atom">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
@@ -36,36 +36,36 @@
 
   <!-- facebook open graph tags -->
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="<%= @paper.seo_url %>" />
+  <meta property="og:url" content="<%= @model.seo_url %>" />
   <meta property="og:site_name" content="<%= Rails.application.settings['name'] %>" />
-  <meta property="og:title" content="<%= @paper.title %>" />
-  <meta property="og:description" content="<%= @paper.citation_string %>" />
+  <meta property="og:title" content="<%= @model.title %>" />
+  <meta property="og:description" content="<%= @model.citation_string %>" />
   <meta property="og:image" content="<%= Rails.application.settings['logo_url'] %>" />
 
   <!-- twitter card tags additive with the og: tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" value="<%= @paper.title %>" />
+  <meta name="twitter:title" value="<%= @model.title %>" />
   <meta name="twitter:site" content="<%= Rails.application.settings['twitter'] %>">
-  <meta name="twitter:description" value="<%= @paper.citation_string %>" />
+  <meta name="twitter:description" value="<%= @model.citation_string %>" />
   <meta name="twitter:image" content="<%= Rails.application.settings['logo_url'] %>" />
-  <meta name="twitter:url" value="<%= @paper.seo_url %>" />
+  <meta name="twitter:url" value="<%= @model.seo_url %>" />
   <meta name="twitter:label1" value="ISSN" />
   <meta name="twitter:data1" value="<%= Rails.application.settings['issn'] %>" />
 
   <!-- Google Scholar Tags -->
 
-  <% if @paper.doi? %>
-  <meta name="citation_title" content="<%= @paper.scholar_title %>">
-  <%= scholar_author_tags(@paper.scholar_authors) %>
-  <meta name="citation_publication_date" content="<%= @paper.accepted_at.strftime('%Y/%m/%d') %>">
+  <% if @model.doi? %>
+  <meta name="citation_title" content="<%= @model.scholar_title %>">
+  <%= scholar_author_tags(@model.scholar_authors) %>
+  <meta name="citation_publication_date" content="<%= @model.accepted_at.strftime('%Y/%m/%d') %>">
   <meta name="citation_journal_title" content="<%= Rails.application.settings['name'] %>">
-  <meta name="citation_doi" content="<%= @paper.doi %>">
+  <meta name="citation_doi" content="<%= @model.doi %>">
   <meta name="citation_issn" content="<%= Rails.application.settings['issn'] %>">
-  <meta name="citation_volume" content="<%= @paper.volume %>">
-  <meta name="citation_issue" content="<%= @paper.issue %>">
-  <meta name="citation_firstpage" content="<%= @paper.page %>">
-  <meta name="citation_abstract_html_url" content="<%= @paper.seo_url %>">
-  <meta name="citation_pdf_url" content="<%= @paper.seo_pdf_url %>">
+  <meta name="citation_volume" content="<%= @model.volume %>">
+  <meta name="citation_issue" content="<%= @model.issue %>">
+  <meta name="citation_firstpage" content="<%= @model.page %>">
+  <meta name="citation_abstract_html_url" content="<%= @model.seo_url %>">
+  <meta name="citation_pdf_url" content="<%= @model.seo_pdf_url %>">
   <% end %>
 
   <script>
@@ -89,10 +89,10 @@
     <%= render partial: "shared/profile" if show_profile_banner? %>
   </div>
 
-  <% if @paper.doi? %>
-    <%= render partial: "papers/show_published" %>
+  <% if @model.doi? %>
+    <%= render partial: "models/show_published" %>
   <% else %>
-    <%= render partial: "papers/show_unpublished" %>
+    <%= render partial: "models/show_unpublished" %>
   <% end %>
 
   <div class="container-fluid">

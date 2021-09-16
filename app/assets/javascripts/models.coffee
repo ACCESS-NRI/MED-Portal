@@ -13,12 +13,12 @@ authorCheck = ->
     $("#author-submit").prop('disabled', true)
 
 setPaperSize = ->
-  if($("#joss-paper").length > 0)
-    paper_container = $('#joss-paper-pdf-container')
-    paper = $('#joss-paper')
-    width = paper_container.width()
+  if($("#joss-model").length > 0)
+    model_container = $('#joss-model-pdf-container')
+    model = $('#joss-model')
+    width = model_container.width()
     height = width * 1.41421
-    paper.css('height', height)
+    model.css('height', height)
 
 $(document).on 'change', '.pre-check', authorCheck
 
@@ -26,9 +26,9 @@ $(window).resize ->
   setPaperSize()
 
 $ ->
-  $("#joss-paper").on 'load', setPaperSize()
+  $("#joss-model").on 'load', setPaperSize()
 
-  $("form#new_paper").submit ->
+  $("form#new_model").submit ->
     e.preventDefault()
 
   if (typeof Clipboard != 'undefined')

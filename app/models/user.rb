@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many :papers
+  has_many :models
   has_one :editor
 
   before_create :set_sha
@@ -30,8 +30,8 @@ class User < ApplicationRecord
     end
   end
 
-  def is_owner_of?(paper)
-    paper.submitting_author == self
+  def is_owner_of?(model)
+    model.submitting_author == self
   end
 
   def orcid_url

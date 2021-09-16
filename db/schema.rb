@@ -37,24 +37,24 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
 
   create_table "invitations", force: :cascade do |t|
     t.bigint "editor_id"
-    t.bigint "paper_id"
+    t.bigint "model_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "state", default: "pending"
     t.index ["created_at"], name: "index_invitations_on_created_at"
     t.index ["editor_id"], name: "index_invitations_on_editor_id"
-    t.index ["paper_id"], name: "index_invitations_on_paper_id"
+    t.index ["model_id"], name: "index_invitations_on_model_id"
     t.index ["state"], name: "index_invitations_on_state"
   end
 
   create_table "notes", force: :cascade do |t|
     t.integer "editor_id"
-    t.integer "paper_id"
+    t.integer "model_id"
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["editor_id"], name: "index_notes_on_editor_id"
-    t.index ["paper_id"], name: "index_notes_on_paper_id"
+    t.index ["model_id"], name: "index_notes_on_model_id"
   end
 
   create_table "onboarding_invitations", force: :cascade do |t|
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
     t.index ["token"], name: "index_onboarding_invitations_on_token"
   end
 
-  create_table "papers", force: :cascade do |t|
+  create_table "models", force: :cascade do |t|
     t.string "title"
     t.string "state"
     t.string "repository_url"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
     t.integer "review_issue_id"
     t.string "software_version"
     t.string "doi"
-    t.text "paper_body"
+    t.text "model_body"
     t.integer "meta_review_issue_id"
     t.string "suggested_editor"
     t.string "kind"
@@ -103,14 +103,14 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
     t.integer "eic_id"
     t.string "submission_kind"
     t.float "percent_complete", default: 0.0
-    t.index ["editor_id"], name: "index_papers_on_editor_id"
-    t.index ["eic_id"], name: "index_papers_on_eic_id"
-    t.index ["labels"], name: "index_papers_on_labels", using: :gin
-    t.index ["last_activity"], name: "index_papers_on_last_activity"
-    t.index ["percent_complete"], name: "index_papers_on_percent_complete"
-    t.index ["reviewers"], name: "index_papers_on_reviewers", using: :gin
-    t.index ["sha"], name: "index_papers_on_sha"
-    t.index ["user_id"], name: "index_papers_on_user_id"
+    t.index ["editor_id"], name: "index_models_on_editor_id"
+    t.index ["eic_id"], name: "index_models_on_eic_id"
+    t.index ["labels"], name: "index_models_on_labels", using: :gin
+    t.index ["last_activity"], name: "index_models_on_last_activity"
+    t.index ["percent_complete"], name: "index_models_on_percent_complete"
+    t.index ["reviewers"], name: "index_models_on_reviewers", using: :gin
+    t.index ["sha"], name: "index_models_on_sha"
+    t.index ["user_id"], name: "index_models_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -133,15 +133,15 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
 
   create_table "votes", force: :cascade do |t|
     t.integer "editor_id"
-    t.integer "paper_id"
+    t.integer "model_id"
     t.string "kind"
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["editor_id", "paper_id"], name: "index_votes_on_editor_id_and_paper_id", unique: true
+    t.index ["editor_id", "model_id"], name: "index_votes_on_editor_id_and_model_id", unique: true
     t.index ["editor_id"], name: "index_votes_on_editor_id"
     t.index ["kind"], name: "index_votes_on_kind"
-    t.index ["paper_id"], name: "index_votes_on_paper_id"
+    t.index ["model_id"], name: "index_votes_on_model_id"
   end
 
 end

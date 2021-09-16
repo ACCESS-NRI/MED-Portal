@@ -11,12 +11,12 @@ twitter: "@underworldcode"
 google_analytics: "00-0000-00"
 github: "underworld-community/uwc"
 reviews: "underworld-community/uwc-reviews"
-papers_repo: "underworld-community/uwc-models"
-papers_html_url: "https://www.underworld-community.org/uwc-models"
+models_repo: "underworld-community/uwc-models"
+models_html_url: "https://www.underworld-community.org/uwc-models"
 product: "model" # the *thing* being submitted for review
 reviewers: "https://bit.ly/uwc-reviewers"
 submission_enquiry: |-
   **Project repository URL:** INSERT YOUR REPOSITORY LINK HERE
 
   Briefly describe your model, its research application and any questions you have about the UWC submission criteria.
-paper_types: []
+model_types: []

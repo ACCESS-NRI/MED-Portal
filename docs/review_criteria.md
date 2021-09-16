@@ -1,9 +1,9 @@
 Review criteria
 ===============
 
-## The JOSS paper
+## The JOSS model
 
-As outlined in the [submission guidelines provided to authors](submitting.html#what-should-my-paper-contain), the JOSS paper (the compiled PDF associated with this submission) should only include:
+As outlined in the [submission guidelines provided to authors](submitting.html#what-should-my-model-contain), the JOSS model (the compiled PDF associated with this submission) should only include:
 
 - A list of the authors of the software and their affiliations.
 - A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience.
@@ -13,7 +13,7 @@ As outlined in the [submission guidelines provided to authors](submitting.html#w
 - A list of key references including a link to the software archive.
 
 ```eval_rst
-.. important:: Note the paper *should not* include software documentation such as API (Application Programming Interface) functionality, as this should be outlined in the software documentation.
+.. important:: Note the model *should not* include software documentation such as API (Application Programming Interface) functionality, as this should be outlined in the software documentation.
 ```
 
 ## Review items
@@ -37,10 +37,10 @@ Reviewers should verify that the software represents substantial scholarly effor
 - Number of commits.
 - Number of authors.
 - Lines of code (LOC): These statistics are usually reported by Whedon in the `pre-review` issue thread.
-- Whether the software has already been cited in academic papers.
+- Whether the software has already been cited in academic models.
 - Whether the software is sufficiently useful that it is _likely to be cited_ by other researchers working in this domain.
 
-These guidelines are not meant to be strictly prescriptive. Recently released software may not have been around long enough to gather citations in academic literature. While some authors contribute openly and accrue a long and rich commit history before submitting, others may upload their software to GitHub shortly before submitting their JOSS paper.  Reviewers should rely on their expert understanding of their domain to judge whether the software is of broad interest (_likely to be cited by other researchers_) or more narrowly focused around the needs of an individual researcher or lab.
+These guidelines are not meant to be strictly prescriptive. Recently released software may not have been around long enough to gather citations in academic literature. While some authors contribute openly and accrue a long and rich commit history before submitting, others may upload their software to GitHub shortly before submitting their JOSS model.  Reviewers should rely on their expert understanding of their domain to judge whether the software is of broad interest (_likely to be cited by other researchers_) or more narrowly focused around the needs of an individual researcher or lab.
 
 ```eval_rst
 .. note:: The decision on scholarly effort is ultimately one made by JOSS editors. Reviewers are asked to flag submissions of questionable scope during the review process so that the editor can bring this to the attention of the JOSS editorial team.
@@ -102,7 +102,7 @@ Authors are strongly encouraged to include an automated test suite covering the 
 
 ### Authorship
 
-As part of the review process, you are asked to check whether the submitting author has made a 'substantial contribution' to the submitted software (as determined by the commit history) and to check that 'the full list of paper authors seems appropriate and complete?'
+As part of the review process, you are asked to check whether the submitting author has made a 'substantial contribution' to the submitted software (as determined by the commit history) and to check that 'the full list of model authors seems appropriate and complete?'
 
 As discussed in the [submission guidelines for authors](submitting.html#authorship), authorship is a complex topic with different practices in different communities.  Ultimately, the authors themselves are responsible for deciding which contributions are sufficient for co-authorship, although JOSS policy is that purely financial contributions are not considered sufficient. Your job as a reviewer is to check that the list of authors appears reasonable, and if it's not obviously complete/correct, to raise this as a question during the review.
 

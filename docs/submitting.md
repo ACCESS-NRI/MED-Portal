@@ -1,7 +1,7 @@
-Submitting a paper to JOSS
+Submitting a model to JOSS
 ==========================
 
-If you've already developed a fully featured research code, released it under an [OSI-approved license](https://opensource.org/licenses), and written good documentation and tests, then we expect that it should take perhaps an hour or two to prepare and submit your paper to JOSS.
+If you've already developed a fully featured research code, released it under an [OSI-approved license](https://opensource.org/licenses), and written good documentation and tests, then we expect that it should take perhaps an hour or two to prepare and submit your model to JOSS.
 But please read these instructions carefully for a streamlined submission.
 
 ## Submission requirements
@@ -9,8 +9,8 @@ But please read these instructions carefully for a streamlined submission.
 - The software must be open source as per the [OSI definition](https://opensource.org/osd).
 - The software must have an **obvious** research application.
 - You must be a major contributor to the software you are submitting, and have a GitHub account to participate in the review process.
-- Your paper must not focus on new research results accomplished with the software.
-- Your paper (`paper.md` and BibTeX files, plus any figures) must be hosted in a Git-based repository together with your software (although they may be in a short-lived branch which is never merged with the default).
+- Your model must not focus on new research results accomplished with the software.
+- Your model (`model.md` and BibTeX files, plus any figures) must be hosted in a Git-based repository together with your software (although they may be in a short-lived branch which is never merged with the default).
 
 In addition, the software associated with your submission must:
 
@@ -33,7 +33,7 @@ As a rule of thumb, JOSS' minimum allowable contribution should represent **not 
 - Number of commits.
 - Number of authors.
 - Total lines of code (LOC). Submissions under 1000 LOC will usually be flagged, those under 300 LOC will be desk rejected.
-- Whether the software has already been cited in academic papers.
+- Whether the software has already been cited in academic models.
 - Whether the software is sufficiently useful that it is _likely to be cited_ by your peer group.
 
 In addition, JOSS requires that software should be feature-complete (i.e. no half-baked solutions) and designed for maintainable extension (not one-off modifications of existing tools). "Minor utility" packages, including "thin" API clients, and single-function packages are not acceptable.
@@ -57,24 +57,24 @@ While we are happy to review submissions in standalone repositories, we also rev
 
 Authors wishing to make a pre-submission enquiry should [open an issue](https://github.com/openjournals/joss/issues/new?title=Pre-submission%20enquiry) on the JOSS repository.
 
-## Typical paper submission flow
+## Typical model submission flow
 
 Before you submit, you should:
 
 - Make your software available in an open repository (GitHub, Bitbucket, etc.) and include an [OSI approved open source license](https://opensource.org/licenses).
 - Make sure that the software complies with the [JOSS review criteria](review_criteria.html). In particular, your software should be full-featured, well-documented, and contain procedures (such as automated tests) for checking correctness.
-- Write a short paper in Markdown format using `paper.md` as file name, including a title, summary, author names, affiliations, and key references. See our [example paper](#example-paper-and-bibliography) to follow the correct format.
+- Write a short model in Markdown format using `model.md` as file name, including a title, summary, author names, affiliations, and key references. See our [example model](#example-model-and-bibliography) to follow the correct format.
 - (Optional) create a metadata file describing your software and include it in your repository. We provide [a script](https://gist.github.com/arfon/478b2ed49e11f984d6fb) that automates the generation of this metadata.
 
-## What should my paper contain?
+## What should my model contain?
 
 ```eval_rst
-.. important:: Begin your paper with a summary of the high-level functionality of your software for a non-specialist reader. Avoid jargon in this section.
+.. important:: Begin your model with a summary of the high-level functionality of your software for a non-specialist reader. Avoid jargon in this section.
 ```
 
-JOSS welcomes submissions from broadly diverse research areas. For this reason, we require that authors include in the paper some sentences that explain the software functionality and domain of use to a non-specialist reader. We also require that authors explain the research applications of the software. The paper should be between 250-1000 words. Authors submitting papers significantly longer than 1000 words may be asked to reduce the length of their paper.
+JOSS welcomes submissions from broadly diverse research areas. For this reason, we require that authors include in the model some sentences that explain the software functionality and domain of use to a non-specialist reader. We also require that authors explain the research applications of the software. The model should be between 250-1000 words. Authors submitting models significantly longer than 1000 words may be asked to reduce the length of their model.
 
-Your paper should include:
+Your model should include:
 
 - A list of the authors of the software and their affiliations, using the correct format (see the example below).
 - A summary describing the high-level functionality and purpose of the software for a diverse, *non-specialist audience*.
@@ -83,15 +83,15 @@ Your paper should include:
 - Mention (if applicable) a representative set of past or ongoing research projects using the software and recent scholarly publications enabled by it.
 - Acknowledgement of any financial support.
 
-As this short list shows, JOSS papers are only expected to contain a limited set of metadata (see example below), a Statement of Need, Summary, Acknowledgements, and References sections. You can look at an [example accepted paper](http://bit.ly/2x22gxT). Given this format, a "full length" paper is not permitted, and software documentation such as API (Application Programming Interface) functionality should not be in the paper and instead should be outlined in the software documentation.
+As this short list shows, JOSS models are only expected to contain a limited set of metadata (see example below), a Statement of Need, Summary, Acknowledgements, and References sections. You can look at an [example accepted model](http://bit.ly/2x22gxT). Given this format, a "full length" model is not permitted, and software documentation such as API (Application Programming Interface) functionality should not be in the model and instead should be outlined in the software documentation.
 
 ```eval_rst
-.. important:: Your paper will be reviewed by two or more reviewers in a public GitHub issue. Take a look at the `review checklist <review_checklist.html>`_ and  `review criteria <review_criteria.html>`_ to better understand how your submission will be reviewed.
+.. important:: Your model will be reviewed by two or more reviewers in a public GitHub issue. Take a look at the `review checklist <review_checklist.html>`_ and  `review criteria <review_criteria.html>`_ to better understand how your submission will be reviewed.
 ```
 
-## Example paper and bibliography
+## Example model and bibliography
 
-This example `paper.md` is adapted from _Gala: A Python package for galactic dynamics_ by Adrian M. Price-Whelan [http://doi.org/10.21105/joss.00388](http://doi.org/10.21105/joss.00388):
+This example `model.md` is adapted from _Gala: A Python package for galactic dynamics_ by Adrian M. Price-Whelan [http://doi.org/10.21105/joss.00388](http://doi.org/10.21105/joss.00388):
 
 ```
 ---
@@ -118,7 +118,7 @@ affiliations:
  - name: Independent Researcher
    index: 3
 date: 13 August 2017
-bibliography: paper.bib
+bibliography: model.bib
 
 # Optional fields if submitting to a AAS journal too, see this blog post:
 # https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
@@ -179,7 +179,7 @@ and refer to \autoref{eq:fourier} from text.
 
 # Citations
 
-Citations to entries in paper.bib should be in
+Citations to entries in model.bib should be in
 [rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
 format.
 
@@ -209,7 +209,7 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 ```
 
-Example `paper.bib` file:
+Example `model.bib` file:
 
 ```
 @article{Pearson:2017,
@@ -273,13 +273,13 @@ Example `paper.bib` file:
 }
 ```
 
-Note that the paper ends with a References heading, and the references are built automatically from the content in the `.bib` file. You should enter in-text citations in the paper body following correct [Markdown citation syntax](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citation_syntax).  Also note that the references include full names of venues, e.g., journals and conferences, not abbreviations only understood in the context of a specific discipline.
+Note that the model ends with a References heading, and the references are built automatically from the content in the `.bib` file. You should enter in-text citations in the model body following correct [Markdown citation syntax](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citation_syntax).  Also note that the references include full names of venues, e.g., journals and conferences, not abbreviations only understood in the context of a specific discipline.
 
-## Checking that your paper compiles
+## Checking that your model compiles
 
-JOSS uses Pandoc to compile papers from their Markdown form into a PDF. There are a few different ways you can test that your paper is going to compile properly for JOSS:
+JOSS uses Pandoc to compile models from their Markdown form into a PDF. There are a few different ways you can test that your model is going to compile properly for JOSS:
 
-### JOSS paper preview service
+### JOSS model preview service
 
 Visit [https://whedon.theoj.org](https://whedon.theoj.org) and enter your repository address (and custom branch if you're using one). Note that your repository must be world-readable (i.e., it cannot require a login to access).
 
@@ -287,27 +287,27 @@ Visit [https://whedon.theoj.org](https://whedon.theoj.org) and enter your reposi
 
 ### GitHub Action
 
-If you're using GitHub for your repository, you can use the [Open Journals GitHub Action](https://github.com/marketplace/actions/open-journals-pdf-generator) to automatically compile your paper each time you update your repository.
+If you're using GitHub for your repository, you can use the [Open Journals GitHub Action](https://github.com/marketplace/actions/open-journals-pdf-generator) to automatically compile your model each time you update your repository.
 
-The PDF is available via the Actions tab in your project and click on the latest workflow run. The zip archive file (including the `paper.pdf`) is listed in the run's Artifacts section.
+The PDF is available via the Actions tab in your project and click on the latest workflow run. The zip archive file (including the `model.pdf`) is listed in the run's Artifacts section.
 
 ### Docker
 
-If you have Docker installed on your local machine, you can use the same Docker Image to compile a draft of your paper locally. In the example below, the `paper.md` file is in the `paper` directory. Upon successful execution of the command, the `paper.pdf` file will be created in the same location as the `paper.md` file:
+If you have Docker installed on your local machine, you can use the same Docker Image to compile a draft of your model locally. In the example below, the `model.md` file is in the `model` directory. Upon successful execution of the command, the `model.pdf` file will be created in the same location as the `model.md` file:
 
 ```text
 docker run --rm \
-    --volume $PWD/paper:/data \
+    --volume $PWD/model:/data \
     --user $(id -u):$(id -g) \
     --env JOURNAL=joss \
-    openjournals/paperdraft
+    openjournals/modeldraft
 ```
 
-## Submitting your paper
+## Submitting your model
 
 Submission is as simple as:
 
-- Filling in the [short submission form](http://joss.theoj.org/papers/new)
+- Filling in the [short submission form](http://joss.theoj.org/models/new)
 - Waiting for the managing editor to start a pre-review issue over in the JOSS reviews repository: https://github.com/openjournals/joss-reviews
 
 ## No submission fees
@@ -316,7 +316,7 @@ There are no fees for submitting or publishing in JOSS. You can read more about 
 
 ## Preprint Policy
 
-Authors are welcome to submit their papers to a preprint server ([arXiv](https://arxiv.org/), [bioRxiv](https://www.biorxiv.org/), [SocArXiv](https://socopen.org/), [PsyArXiv](https://psyarxiv.com/) etc.) at any point before, during, or after the submission and review process.
+Authors are welcome to submit their models to a preprint server ([arXiv](https://arxiv.org/), [bioRxiv](https://www.biorxiv.org/), [SocArXiv](https://socopen.org/), [PsyArXiv](https://psyarxiv.com/) etc.) at any point before, during, or after the submission and review process.
 
 Submission to a preprint server is _not_ considered a previous publication.
 
@@ -336,7 +336,7 @@ After submission:
 - The handling editor will assign two or more JOSS reviewers, and the review will be carried out in the [JOSS reviews repository](https://github.com/openjournals/joss-reviews).
 - Authors will respond to reviewer-raised issues (if any are raised) on the submission repository's issue tracker. Reviewer and editor contributions, like any other contributions, should be acknowledged in the repository.
 - Upon successful completion of the review, authors will make a tagged release of the software, and deposit a copy of the repository with a data-archiving service such as [Zenodo](https://zenodo.org/) or [figshare](https://figshare.com/), get a DOI for the archive, and update the review issue thread with the version number and DOI.
-- After we assign a DOI for your accepted JOSS paper, its metadata is deposited with CrossRef and listed on the JOSS website.
+- After we assign a DOI for your accepted JOSS model, its metadata is deposited with CrossRef and listed on the JOSS website.
 - The review issue will be closed, and an automatic tweet from [@JOSS_TheOJ](https://twitter.com/JOSS_TheOJ) will announce it!
 
 If you want to learn more details about the review process, take a look at the [reviewer guidelines](reviewer_guidelines.html).
@@ -345,6 +345,6 @@ If you want to learn more details about the review process, take a look at the [
 
 Please write admin@theoj.org with confidential matters such as retraction requests, report of misconduct, and retroactive author name changes.
 
-In case of a name change, the DOI will be unchanged and the paper will be updated without publishing a correction notice or notifying co-authors.
+In case of a name change, the DOI will be unchanged and the model will be updated without publishing a correction notice or notifying co-authors.
 
 JOSS will also update CrossRef metadata.

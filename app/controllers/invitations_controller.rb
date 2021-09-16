@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
   before_action :require_admin_user
 
   def index
-    @invitations = Invitation.includes(:editor, :paper).
+    @invitations = Invitation.includes(:editor, :model).
                               order(created_at: :desc).
                               paginate(page: params[:page], per_page: 25)
   end

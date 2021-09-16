@@ -1,5 +1,5 @@
 class Vote < ApplicationRecord
-  belongs_to :paper
+  belongs_to :model
   belongs_to :editor
 
   validates :comment, presence: true
@@ -27,8 +27,8 @@ class Vote < ApplicationRecord
     kind == "comment"
   end
 
-  def self.has_vote_for?(paper, editor)
-    find_by_paper_id_and_editor_id(paper, editor)
+  def self.has_vote_for?(model, editor)
+    find_by_model_id_and_editor_id(model, editor)
   end
 
   validates :kind, inclusion: { in: VOTE_KINDS }, allow_nil: false

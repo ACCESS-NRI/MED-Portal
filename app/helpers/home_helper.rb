@@ -1,9 +1,9 @@
 module HomeHelper
-  def pretty_labels_for(paper)
-    return nil unless paper.labels.any?
+  def pretty_labels_for(model)
+    return nil unless model.labels.any?
 
     capture do
-      paper.labels.each do |label, colour|
+      model.labels.each do |label, colour|
         if label == "paused"
           concat content_tag(:span, label, style: "padding: 3px; margin-right: 3px; border-radius: 2px; background-color: ##{colour}; color: white;")
         elsif label == "recommend-accept"
@@ -22,42 +22,42 @@ module HomeHelper
     'tabnav-tab'
   end
 
-  def vote_summary(paper)
-    if paper.labels.keys.include?("query-scope")
+  def vote_summary(model)
+    if model.labels.keys.include?("query-scope")
       capture do
-        concat(content_tag(:small, "👍(#{paper.votes.in_scope.count}) / 👎 (#{paper.votes.out_of_scope.count})"))
+        concat(content_tag(:small, "👍(#{model.votes.in_scope.count}) / 👎 (#{model.votes.out_of_scope.count})"))
       end
     else
       'OK'
     end
   end
 
-  def review_issue_links(paper)
+  def review_issue_links(model)
     capture do
-      if paper.meta_review_issue_id
-        concat(link_to paper.meta_review_issue_id, paper.meta_review_url)
+      if model.meta_review_issue_id
+        concat(link_to model.meta_review_issue_id, model.meta_review_url)
       else
         concat("–")
       end
 
       concat(" / ")
 
-      if paper.review_issue_id
-        concat(link_to paper.review_issue_id, paper.review_url)
+      if model.review_issue_id
+        concat(link_to model.review_issue_id, model.review_url)
       else
         concat("–")
       end
     end
   end
 
-  def checklist_activity(paper)
-    return "No activity" if paper.activities.empty?
-    return "No activity" if paper.activities['issues']['commenters'].empty?
+  def checklist_activity(model)
+    return "No activity" if model.activities.empty?
+    return "No activity" if model.activities['issues']['commenters'].empty?
 
     capture do
-      if !paper.activities['issues']['comments'].empty?
-        if paper.activities['issues']['last_edits'] && paper.activities['issues']['last_edits'].keys.any?
-          non_whedon_activities = paper.activities['issues']['last_edits'].select {|user, time| user != "whedon"}
+      if !model.activities['issues']['comments'].empty?
+        if model.activities['issues']['last_edits'] && model.activities['issues']['last_edits'].keys.any?
+          non_whedon_activities = model.activities['issues']['last_edits'].select {|user, time| user != "whedon"}
           return "No activity" if non_whedon_activities.empty?
           user, time = non_whedon_activities.first
           concat(content_tag(:span, image_tag(avatar(user), size: "24x24", class: "avatar", title: user), class: "activity-avatar"))
@@ -95,11 +95,11 @@ module HomeHelper
     end
   end
 
-  def comment_activity(paper)
-    return "No activity" if paper.activities.empty?
-    return "No activity" if paper.activities['issues']['commenters'].empty?
+  def comment_activity(model)
+    return "No activity" if model.activities.empty?
+    return "No activity" if model.activities['issues']['commenters'].empty?
     capture do
-      comment = paper.activities['issues']['comments'].first
+      comment = model.activities['issues']['comments'].first
       concat(content_tag(:span, image_tag(avatar(comment['author']), size: "24x24", class: "avatar", title: comment['author']), class: "activity-avatar"))
       concat(content_tag(:span, style: "") do
         concat(content_tag(:span, "#{time_ago_in_words(comment['commented_at'])} ago".html_safe, class: "time"))
@@ -108,19 +108,19 @@ module HomeHelper
     end
   end
 
-  def card_activity(paper)
-    return "No activity" if paper.activities.empty?
-    return "No activity" if paper.activities['issues']['commenters'].empty?
+  def card_activity(model)
+    return "No activity" if model.activities.empty?
+    return "No activity" if model.activities['issues']['commenters'].empty?
     capture do
-      if !paper.activities['issues']['comments'].empty?
-        if paper.activities['issues']['last_edits'] && paper.activities['issues']['last_edits'].keys.any?
+      if !model.activities['issues']['comments'].empty?
+        if model.activities['issues']['last_edits'] && model.activities['issues']['last_edits'].keys.any?
           concat content_tag(:strong, "Recent activity", style: "padding-bottom: 5px;")
-          paper.activities['issues']['last_edits'].each do |user,time|
+          model.activities['issues']['last_edits'].each do |user,time|
             concat(content_tag(:p, "Checklist edit by #{user}, #{time_ago_in_words(time)} ago", style: "padding: 0px; margin: 0px 0px 10px 0px;"))
           end
         end
         concat content_tag(:strong, "Recent comments", style: "padding-bottom: 5px;")
-        paper.activities['issues']['comments'].each do |comment|
+        model.activities['issues']['comments'].each do |comment|
           concat(content_tag(:p, truncate(comment['comment'], length: 120), style: "padding: 0px; margin-bottom: 0px;"))
           concat(content_tag(:p, "#{time_ago_in_words(comment['commented_at']).capitalize} ago (@#{comment['author']}). #{comment_link(comment)}".html_safe, style: "padding: 0px; margin: 0px 0px 10px 0px; font-style: italic;"))
         end
@@ -128,9 +128,9 @@ module HomeHelper
     end
   end
 
-  def last_comment_for(paper)
-    return "No recent comments" unless paper.activities['issues']
-    comments = paper.activities['issues']['comments']
+  def last_comment_for(model)
+    return "No recent comments" unless model.activities['issues']
+    comments = model.activities['issues']['comments']
     last_comment = comments.sort_by {|c| c['commented_at']}.last
 
     if last_comment
@@ -140,7 +140,7 @@ module HomeHelper
     end
   end
 
-  def commenters_for(paper)
+  def commenters_for(model)
 
   end
 
@@ -164,13 +164,13 @@ module HomeHelper
     link_to("@#{username}", github_user_link(username))
   end
 
-  def activites_shortcut_for(paper)
-    activities = paper.activities['issues']
+  def activites_shortcut_for(model)
+    activities = model.activities['issues']
     comments = activities['pre-review']['comments'] + activities['review']['comments']
     "Last comment by @arfon 3 hours ago (expand)"
   end
 
-  def linked_reviewers(paper)
-    paper.reviewers.map { |reviewer| github_user(reviewer.gsub('@', '')) }.join(', ').html_safe
+  def linked_reviewers(model)
+    model.reviewers.map { |reviewer| github_user(reviewer.gsub('@', '')) }.join(', ').html_safe
   end
 end

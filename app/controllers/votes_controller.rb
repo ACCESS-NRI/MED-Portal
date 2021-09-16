@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action :find_paper
+  before_action :find_model
   before_action :require_editor
 
   def create
@@ -16,18 +16,18 @@ class VotesController < ApplicationController
 
     params = vote_params.merge!(editor_id: current_user.editor.id, kind: kind)
 
-    @vote = @paper.votes.build(params)
+    @vote = @model.votes.build(params)
 
-    if previous_vote = Vote.find_by_paper_id_and_editor_id(@paper, current_user.editor)
+    if previous_vote = Vote.find_by_model_id_and_editor_id(@model, current_user.editor)
       previous_vote.destroy!
     end
 
     if @vote.save
       flash[:notice] = "Vote recorded"
-      redirect_to paper_path(@paper)
+      redirect_to model_path(@model)
     else
       flash[:error] = "Comment can't be empty"
-      redirect_to paper_path(@paper)
+      redirect_to model_path(@model)
     end
   end
 
@@ -37,7 +37,7 @@ class VotesController < ApplicationController
     params.require(:vote).permit(:user_id, :comment)
   end
 
-  def find_paper
-    @paper = Paper.find_by_sha(params[:paper_id])
+  def find_model
+    @model = Paper.find_by_sha(params[:model_id])
   end
 end

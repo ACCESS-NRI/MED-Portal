@@ -7,7 +7,7 @@
       <%= render partial: "profiles_menu" %>
 
       <div class="generic-content-item">
-        <p>Please make sure you've added an <strong>email address and GitHub username</strong> to your profile before submitting. We'll use this to communicate the status of your paper and you won't be able to submit a paper without giving us this information. We promise not to spam you. </p>
+        <p>Please make sure you've added an <strong>email address and GitHub username</strong> to your profile before submitting. We'll use this to communicate the status of your model and you won't be able to submit a model without giving us this information. We promise not to spam you. </p>
         <%= form_tag("/update_profile", id: "profile-form") do %>
         <div class="form-group">
           <label for="email">Email address</label>
@@ -26,31 +26,31 @@
     </div>
   </div>
 
-  <div id ="row" class="paper-list">
-    <% if current_user.papers.any? %>
-      <h2>Your papers</h2>
-      <% current_user.papers.each do |paper| %>
-      <div class="paper-card">
+  <div id ="row" class="model-list">
+    <% if current_user.models.any? %>
+      <h2>Your models</h2>
+      <% current_user.models.each do |model| %>
+      <div class="model-card">
         <div class="row">
           <div class="col-lg-9">
-            <%= pretty_status_badge(paper) %> <%= time_words(paper) %>
-            <h2 class="paper-title"><%= link_to paper.title, paper_path(paper) %>
+            <%= pretty_status_badge(model) %> <%= time_words(model) %>
+            <h2 class="model-title"><%= link_to model.title, model_path(model) %>
               <!-- <span class="badge-lang">Python</span>-->
             </h2>
-            <%# formatted_body(paper, 400) %>
+            <%# formatted_body(model, 400) %>
           </div>
-          <div class="col-lg-3 paper-meta">
+          <div class="col-lg-3 model-meta">
             <div class="submitted_by">
-              <%= link_to submittor_github(paper), target: "_blank" do %>
-              <%= image_tag submittor_avatar(paper), size: "24x24" %>
-              <%= paper.submitting_author.pretty_github_username %>
+              <%= link_to submittor_github(model), target: "_blank" do %>
+              <%= image_tag submittor_avatar(model), size: "24x24" %>
+              <%= model.submitting_author.pretty_github_username %>
               <% end %>
             </div>
             <div class="doi">
-              <% if paper.pretty_doi == "DOI pending" %>
-              <%= image_tag 'doi.svg' %><%= link_to "Pending", paper_path(paper) %>
+              <% if model.pretty_doi == "DOI pending" %>
+              <%= image_tag 'doi.svg' %><%= link_to "Pending", model_path(model) %>
               <% else %>
-              <%= image_tag 'doi.svg' %><%= link_to paper.doi, paper_path(paper) %>
+              <%= image_tag 'doi.svg' %><%= link_to model.doi, model_path(model) %>
               <% end %>
             </div>
           </div>

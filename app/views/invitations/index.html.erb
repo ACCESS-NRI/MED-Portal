@@ -4,7 +4,7 @@
     <div class="welcome">Editors in Chief Dashboard</div>
     <div class="hero-small dashboard">
       <div class="hero-title">
-        <%= image_tag "icon_papers.svg", height: "32px" %><h1>Invitations</h1>
+        <%= image_tag "icon_models.svg", height: "32px" %><h1>Invitations</h1>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
             (<%= link_to "@#{invitation.editor.login}", github_user_link(invitation.editor.login), title: "GitHub profile", target: "_blank" %>)
           </td>
           <td>
-            <%= link_to truncate(invitation.paper.title, length: 80), invitation.paper.meta_review_url, title: invitation.paper.title %>
+            <%= link_to truncate(invitation.model.title, length: 80), invitation.model.meta_review_url, title: invitation.model.title %>
           </td>
           <td><%= invitation_status(invitation) %></td>
           <td sorttable_customkey=<%= invitation.created_at %>>Invited <%= time_ago_in_words(invitation.created_at) %> ago</td>

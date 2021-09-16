@@ -8,8 +8,8 @@ module Repository
     config.keys.first
   end
 
-  def self.papers
-    config[nwo]["papers"]
+  def self.models
+    config[nwo]["models"]
   end
 
   def self.editors

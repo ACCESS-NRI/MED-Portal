@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :invitation do
-    paper { create(:paper) }
+    model { create(:model) }
     editor { create(:editor) }
 
     trait :pending do

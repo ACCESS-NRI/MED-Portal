@@ -637,11 +637,11 @@ $btn-primary-border: darken($btn-primary-bg, 5%) !default;
     }
 }
 
-.paper-list {
+.model-list {
     margin-top: 1.5em;
     font-size: 14px;
 
-    .paper-card {
+    .model-card {
         background: #fff;
         border-radius: .25em;
         padding: 1.5em 2em;
@@ -654,7 +654,7 @@ $btn-primary-border: darken($btn-primary-bg, 5%) !default;
 
     }
 
-    .paper-meta {
+    .model-meta {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -725,7 +725,7 @@ $btn-primary-border: darken($btn-primary-bg, 5%) !default;
     background-color: #FFB500 !important;
 }
 
-.action-btn, .paper-btn, .btn.paper-submit {
+.action-btn, .model-btn, .btn.model-submit {
     background-color: #2E294E;
     color: #fff;
     font-weight: bold;

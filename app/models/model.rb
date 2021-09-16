@@ -124,7 +124,7 @@ class Paper < ApplicationRecord
   validates_presence_of :repository_url, message: "Repository address can't be blank"
   validates_presence_of :software_version, message: "Version can't be blank"
   validates_presence_of :body, message: "Description can't be blank"
-  validates :kind, inclusion: { in: Rails.application.settings["paper_types"] }, allow_nil: true
+  validates :kind, inclusion: { in: Rails.application.settings["model_types"] }, allow_nil: true
   validates :submission_kind, inclusion: { in: SUBMISSION_KINDS }, allow_nil: false
   validate :check_repository_address, on: :create
 
@@ -136,7 +136,7 @@ class Paper < ApplicationRecord
     Notifications.author_submission_email(self).deliver_now
   end
 
-  # Only index papers that are visible
+  # Only index models that are visible
   def should_index?
     !invisible?
   end
@@ -178,33 +178,33 @@ class Paper < ApplicationRecord
 
   def scholar_title
     return nil unless published?
-    metadata['paper']['title']
+    metadata['model']['title']
   end
 
   def scholar_authors
     return nil unless published?
-    metadata['paper']['authors'].collect {|a| "#{a['given_name']} #{a['middle_name']} #{a['last_name']}".squish}.join(', ')
+    metadata['model']['authors'].collect {|a| "#{a['given_name']} #{a['middle_name']} #{a['last_name']}".squish}.join(', ')
   end
 
   def bibtex_authors
     return nil unless published?
-    metadata['paper']['authors'].collect {|a| "#{a['given_name']} #{a['middle_name']} #{a['last_name']}".squish}.join(' and ')
+    metadata['model']['authors'].collect {|a| "#{a['given_name']} #{a['middle_name']} #{a['last_name']}".squish}.join(' and ')
   end
 
   def bibtex_key
     return nil unless published?
-    "#{metadata['paper']['authors'].first['last_name']}#{year}"
+    "#{metadata['model']['authors'].first['last_name']}#{year}"
   end
 
   def language_tags
     return [] unless published?
-    metadata['paper']['languages'] - IGNORED_LANGUAGES
+    metadata['model']['languages'] - IGNORED_LANGUAGES
   end
 
   def author_tags
     return [] unless published?
-    if metadata['paper']['tags']
-      return metadata['paper']['tags'] - language_tags
+    if metadata['model']['tags']
+      return metadata['model']['tags'] - language_tags
     else
       return []
     end
@@ -212,37 +212,37 @@ class Paper < ApplicationRecord
 
   def metadata_reviewers
     return [] unless published?
-    metadata['paper']['reviewers']
+    metadata['model']['reviewers']
   end
 
   def metadata_editor
     return nil unless published?
-    metadata['paper']['editor']
+    metadata['model']['editor']
   end
 
   def metadata_authors
     return nil unless published?
-    metadata['paper']['authors']
+    metadata['model']['authors']
   end
 
   def issue
     return nil unless published?
-    metadata['paper']['issue']
+    metadata['model']['issue']
   end
 
   def volume
     return nil unless published?
-    metadata['paper']['volume']
+    metadata['model']['volume']
   end
 
   def year
     return nil unless published?
-    metadata['paper']['year']
+    metadata['model']['year']
   end
 
   def page
     return nil unless published?
-    metadata['paper']['page']
+    metadata['model']['page']
   end
 
   def to_param
@@ -300,16 +300,16 @@ class Paper < ApplicationRecord
     "#{setting(:abbreviation).downcase}.#{id}"
   end
 
-  # This URL returns the 'DOI optimized' representation of a URL for a paper
-  # e.g. https://joss.theoj.org/papers/10.21105/joss.01632 rather than something
-  # with the SHA e.g. https://joss.theoj.org/papers/5e290cb57b61f83de4460fd0eca22726
-  # This URL format only works for accepted papers so falls back to the SHA
+  # This URL returns the 'DOI optimized' representation of a URL for a model
+  # e.g. https://joss.theoj.org/models/10.21105/joss.01632 rather than something
+  # with the SHA e.g. https://joss.theoj.org/models/5e290cb57b61f83de4460fd0eca22726
+  # This URL format only works for accepted models so falls back to the SHA
   # version if no DOI is set.
   def seo_url
     if accepted?
-      "#{Rails.application.settings["url"]}/papers/10.21105/#{joss_id}"
+      "#{Rails.application.settings["url"]}/models/10.21105/#{joss_id}"
     else
-      "#{Rails.application.settings["url"]}/papers/#{to_param}"
+      "#{Rails.application.settings["url"]}/models/#{to_param}"
     end
   end
 
@@ -320,11 +320,11 @@ class Paper < ApplicationRecord
     "#{seo_url}.pdf"
   end
 
-  # Where to find the PDF for this paper
+  # Where to find the PDF for this model
   def pdf_url
     doi_to_file = doi.gsub('/', '.')
 
-    "#{Rails.application.settings["papers_html_url"]}/#{joss_id}/#{doi_to_file}.pdf"
+    "#{Rails.application.settings["models_html_url"]}/#{joss_id}/#{doi_to_file}.pdf"
   end
 
   # 'reviewers' should be a string (and may be comma-separated)
@@ -333,7 +333,7 @@ class Paper < ApplicationRecord
     ApplicationController.render(
       template: 'shared/review_body',
       formats: :text,
-      locals: { paper: self, editor: "@#{editor}", reviewers: reviewers }
+      locals: { model: self, editor: "@#{editor}", reviewers: reviewers }
     )
   end
 
@@ -362,13 +362,13 @@ class Paper < ApplicationRecord
     set_reviewers(reviewers)
   end
 
-  # Update the paper with the reviewer GitHub handles
+  # Update the model with the reviewer GitHub handles
   def set_reviewers(reviewers)
     reviewers = reviewers.split(',').each(&:strip!).each {|r| r.prepend('@') unless r.start_with?('@') }
     self.update_attribute(:reviewers, reviewers)
   end
 
-  # Updated the paper with the editor_id
+  # Updated the model with the editor_id
   def set_editor(editor)
     self.update_attribute(:editor_id, editor.id)
     Invitation.resolve_pending(self, editor)
@@ -381,9 +381,9 @@ class Paper < ApplicationRecord
 
   def meta_review_body(editor, eic_name)
     if editor.strip.empty?
-      locals = { paper: self, suggested_editor: "Pending", eic_name: eic_name }
+      locals = { model: self, suggested_editor: "Pending", eic_name: eic_name }
     else
-      locals = { paper: self, suggested_editor: "#{editor}", eic_name: eic_name }
+      locals = { model: self, suggested_editor: "#{editor}", eic_name: eic_name }
     end
     ApplicationController.render(
       template: 'shared/meta_view_body',
@@ -473,7 +473,7 @@ class Paper < ApplicationRecord
   end
 
   def status_badge_url
-    "#{Rails.application.settings["url"]}/papers/10.21105/#{joss_id}/status.svg"
+    "#{Rails.application.settings["url"]}/models/10.21105/#{joss_id}/status.svg"
   end
 
   def markdown_code

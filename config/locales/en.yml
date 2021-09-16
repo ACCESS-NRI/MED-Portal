@@ -35,8 +35,8 @@ en:
     next_label: "Next &#8594;"
   activerecord:
     models:
-      paper:
-        zero: paper
-        one: paper
-        few: papers
-        other: papers
+      model:
+        zero: model
+        one: model
+        few: models
+        other: models
