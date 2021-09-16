@@ -19,14 +19,14 @@ namespace :utils do
     ARFON_WEEKS_2020 = []
     KEVIN_WEEKS_2020 = [5]
 
-    models_before_2019 = Paper.where('created_at < ?', '2019-01-01')
+    models_before_2019 = Model.where('created_at < ?', '2019-01-01')
 
     models_before_2019.each do |model|
       eic = Editor.find_by_login('arfon')
       model.set_meta_eic(eic)
     end
 
-    models_2019 = Paper.where('created_at BETWEEN ? AND ?', '2019-01-01', '2019-12-31')
+    models_2019 = Model.where('created_at BETWEEN ? AND ?', '2019-01-01', '2019-12-31')
 
     def whos_week_2019(week)
       return Editor.find_by_login('kyleniemeyer') if KYLE_WEEKS_2019.include?(week)
@@ -44,7 +44,7 @@ namespace :utils do
       model.set_meta_eic(whos_week_2019(week))
     end
 
-    models_2020 = Paper.where('created_at BETWEEN ? AND ?', '2020-01-01', '2020-12-31')
+    models_2020 = Model.where('created_at BETWEEN ? AND ?', '2020-01-01', '2020-12-31')
 
     def whos_week_2020(week)
       return Editor.find_by_login('kyleniemeyer') if KYLE_WEEKS_2020.include?(week)
@@ -65,7 +65,7 @@ namespace :utils do
 
   desc "Populate activities"
   task update_activities: :environment do
-    Paper.all.each do |model|
+    Model.all.each do |model|
       if activities = model.activities
         # Find the most recent comment
 
@@ -162,8 +162,8 @@ namespace :utils do
   desc "Populate editors and reviewers"
   task populate_editors_and_reviewers: :environment do
     reviews_repo = Rails.application.settings["reviews"]
-    Paper.everything.each do |model|
-      puts "Paper: #{model.id}"
+    Model.everything.each do |model|
+      puts "Model: #{model.id}"
       if model.review_issue_id
         issue = GITHUB.issue(reviews_repo, model.review_issue_id)
 
@@ -187,7 +187,7 @@ namespace :utils do
         model.set_editor(editor)
         model.set_reviewers(reviewers.join(','))
 
-        puts "Paper: #{model.id}, Editor: #{editor.login}, Reviewers: #{reviewers}"
+        puts "Model: #{model.id}, Editor: #{editor.login}, Reviewers: #{reviewers}"
       else
         puts "No review_issue_id for #{model.id}"
       end
@@ -199,7 +199,7 @@ namespace :utils do
     reviews_repo = Rails.application.settings["reviews"]
 
     puts "Starting with in progress models"
-    Paper.in_progress.each do |model|
+    Model.in_progress.each do |model|
       puts "Working with #{model.meta_review_issue_id} "
       next unless model.meta_review_issue_id
 
@@ -219,7 +219,7 @@ namespace :utils do
     end
 
     puts "Next doing accepted models"
-    Paper.visible.each do |model|
+    Model.visible.each do |model|
       puts "Working with #{model.id}"
 
       utils_initialize_activities(model)
@@ -246,7 +246,7 @@ namespace :utils do
 
   desc "Clear activities"
   task clear_activities: :environment do
-    Paper.all.each do |model|
+    Model.all.each do |model|
       model.activities = nil
       model.save
     end

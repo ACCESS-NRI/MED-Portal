@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Vote do
   before(:each) do
-    Paper.destroy_all
+    Model.destroy_all
     Vote.destroy_all
   end
 

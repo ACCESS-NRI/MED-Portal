@@ -52,13 +52,13 @@
       <% end %>
       <tr style="font-weight: bolder;">
         <td>Totals</td>
-        <td><%= Paper.in_progress.count %></td>
+        <td><%= Model.in_progress.count %></td>
         <td class="text-center">–––</td>
-        <td class="text-center"><%= Paper.visible.since(1.week.ago).count %></td>
-        <td class="text-center"><%= Paper.visible.since(1.month.ago).count %></td>
-        <td class="text-center"><%= Paper.visible.since(3.months.ago).count %></td>
-        <td class="text-center"><%= Paper.visible.since(1.year.ago).count %></td>
-        <td class="text-center"><%= Paper.visible.since(100.year.ago).count %></td>
+        <td class="text-center"><%= Model.visible.since(1.week.ago).count %></td>
+        <td class="text-center"><%= Model.visible.since(1.month.ago).count %></td>
+        <td class="text-center"><%= Model.visible.since(3.months.ago).count %></td>
+        <td class="text-center"><%= Model.visible.since(1.year.ago).count %></td>
+        <td class="text-center"><%= Model.visible.since(100.year.ago).count %></td>
       </tr>
     </tfoot>
   </table>
@@ -80,17 +80,17 @@
       onchange: "top.location.href='/dashboard?editor=' + this.options[this.selectedIndex].value + '#editor';" %></p>
 
       <%= column_chart [
-      { name: "Papers edited by #{@editor.login} by month", data: @editor_models }
+      { name: "Models edited by #{@editor.login} by month", data: @editor_models }
     ], height: "500px", colors: ["#8FBC8F"], id: "editor", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}]}} %>
   </div>
 
   <div class="generic-content-item" style="padding-bottom: 120px;">
-    <h3 class="float-left">Papers reviewed per month by <%= @reviewer %></h3>
+    <h3 class="float-left">Models reviewed per month by <%= @reviewer %></h3>
 
     <div class="float-right" style="font-weight: bolder; padding-left: 40px;">Search for reviewer (hit enter to search): <%= form_for("/dashboard", html: { method: 'GET', style: "display: inline !important;" }) do |f| %><%= text_field_tag 'reviewer', @reviewer  %><% end %> </div>
 
     <%= column_chart [
-      { name: "Papers reviewed by #{@reviewer} by month", data: @reviewer_models }
+      { name: "Models reviewed by #{@reviewer} by month", data: @reviewer_models }
     ], height: "500px", colors: ["#FFA500"], id: "reviewers", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}]}} %>
   </div>
 </div>

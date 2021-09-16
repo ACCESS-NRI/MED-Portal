@@ -27,7 +27,7 @@
 </div>
 
 <div class="container">
-  <h4>Recently Published Models <span class="badge-count"><%= Paper.visible.count %></span></h4>
+  <h4>Recently Published Models <span class="badge-count"><%= Model.visible.count %></span></h4>
 
   <div class="model-list" id="all-models">
     <%= render partial: "models/list", locals: { models: @models } %>

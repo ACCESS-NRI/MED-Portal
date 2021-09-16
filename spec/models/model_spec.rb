@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe Paper do
+describe Model do
   before(:each) do
-    Paper.destroy_all
+    Model.destroy_all
   end
 
   it "should know how to validate a Git repository address" do
@@ -11,12 +11,12 @@ describe Paper do
   end
 
   it "belongs to the submitting author" do
-    association = Paper.reflect_on_association(:submitting_author)
+    association = Model.reflect_on_association(:submitting_author)
     expect(association.macro).to eq(:belongs_to)
   end
 
   it "has many invitations" do
-    association = Paper.reflect_on_association(:invitations)
+    association = Model.reflect_on_association(:invitations)
     expect(association.macro).to eq(:has_many)
   end
 
@@ -39,7 +39,7 @@ describe Paper do
     old_model = create(:model, created_at: 2.weeks.ago)
     new_model = create(:model)
 
-    expect(Paper.recent).to eq([new_model])
+    expect(Model.recent).to eq([new_model])
   end
 
   it "should return only visible models" do
@@ -47,7 +47,7 @@ describe Paper do
     visible_model_1 = create(:accepted_model)
     visible_model_2 = create(:model, state: "superceded")
 
-    expect(Paper.visible).to contain_exactly(visible_model_1, visible_model_2)
+    expect(Model.visible).to contain_exactly(visible_model_1, visible_model_2)
     assert hidden_model.invisible?
   end
 
@@ -56,8 +56,8 @@ describe Paper do
     withdrawn_model = create(:model, state: "withdrawn")
     model = create(:accepted_model)
 
-    expect(Paper.everything).to contain_exactly(model)
-    expect(Paper.invisible).to contain_exactly(rejected_model, withdrawn_model)
+    expect(Model.everything).to contain_exactly(model)
+    expect(Model.invisible).to contain_exactly(rejected_model, withdrawn_model)
   end
 
   # GitHub stuff
@@ -210,10 +210,10 @@ describe Paper do
 
   it "should be able to be withdrawn at any time" do
     model = create(:accepted_model)
-    assert Paper.visible.include?(model)
+    assert Model.visible.include?(model)
 
     model.withdraw!
-    refute Paper.visible.include?(model)
+    refute Model.visible.include?(model)
   end
 
   describe "#review_body with a single author" do

@@ -32,6 +32,6 @@ class NotesController < ApplicationController
   end
 
   def find_model
-    @model = Paper.find_by_sha(params[:model_id])
+    @model = Model.find_by_sha(params[:model_id])
   end
 end

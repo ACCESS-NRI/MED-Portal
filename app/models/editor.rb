@@ -38,7 +38,7 @@ class Editor < ApplicationRecord
 
   def self.global_three_month_average
     editor_ids = Editor.active.where("created_at <= ?", 3.months.ago).collect {|e| e.id}
-    model_count = Paper.visible.since(3.months.ago).where(editor_id: editor_ids).count
+    model_count = Model.visible.since(3.months.ago).where(editor_id: editor_ids).count
 
     return sprintf("%.1f", model_count / (3.0 * editor_ids.size))
   end

@@ -1,6 +1,6 @@
 require 'open3'
 
-class Paper < ApplicationRecord
+class Model < ApplicationRecord
   searchkick index_name: "joss-production"
 
   include SettingsHelper
@@ -159,7 +159,7 @@ class Paper < ApplicationRecord
 
   def self.featured
     # TODO: Make this a thing
-    Paper.first
+    Model.first
   end
 
   def self.popular
@@ -374,7 +374,7 @@ class Paper < ApplicationRecord
     Invitation.resolve_pending(self, editor)
   end
 
-  # Update the Paper review_issue_id field
+  # Update the Model review_issue_id field
   def set_review_issue(issue_number)
     self.update_attribute(:review_issue_id, issue_number)
   end
@@ -405,7 +405,7 @@ class Paper < ApplicationRecord
     set_meta_eic(eic)
   end
 
-  # Update the Paper meta_review_issue_id field
+  # Update the Model meta_review_issue_id field
   def set_meta_review_issue(issue_number)
     self.update_attribute(:meta_review_issue_id, issue_number)
   end

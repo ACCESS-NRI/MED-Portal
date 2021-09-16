@@ -1,20 +1,20 @@
 <div class="container">
-  <div class="btn-group" role="group" aria-label="Paper Status">
+  <div class="btn-group" role="group" aria-label="Model Status">
     <%= link_to "/dashboard/#{current_user.editor.login}", class: current_class?("/dashboard/#{current_user.editor.login}") do %>
     Your models
     <div class="count-badge"><%= raw current_user.editor.models.in_progress.count %></div>
     <% end %>
     <%= link_to "/dashboard/incoming", class: current_class?("/dashboard/incoming") do %>
-    Papers with no editor
-    <div class="count-badge"><%= raw Paper.unscoped.in_progress.where(editor: nil).count %></div>
+    Models with no editor
+    <div class="count-badge"><%= raw Model.unscoped.in_progress.where(editor: nil).count %></div>
     <% end %>
     <%= link_to "/dashboard/in_progress", class: current_class?("/dashboard/in_progress") do %>
     In progress models
-    <div class="count-badge"><%= raw Paper.unscoped.in_progress.count %></div>
+    <div class="count-badge"><%= raw Model.unscoped.in_progress.count %></div>
     <% end %>
     <%= link_to "/dashboard/all", class: current_class?("/dashboard/all") do %>
     All models
-    <div class="count-badge"><%= raw Paper.unscoped.all.count %></div>
+    <div class="count-badge"><%= raw Model.unscoped.all.count %></div>
     <% end %>
     <%= link_to "/dashboard", class: current_class?("/dashboard") do %>
     <%= Rails.application.settings['abbreviation'] %> Statistics

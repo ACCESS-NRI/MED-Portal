@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class PapersController < ApplicationController
+class ModelsController < ApplicationController
   include SettingsHelper
 
   before_action :require_user, only: %w(new create update withdraw)
@@ -8,7 +8,7 @@ class PapersController < ApplicationController
   before_action :require_admin_user, only: %w(start_meta_review archive reject)
 
   def recent
-    @models = Paper.visible.paginate(
+    @models = Model.visible.paginate(
                 page: params[:page],
                 per_page: 10
               )
@@ -23,7 +23,7 @@ class PapersController < ApplicationController
   end
 
   def index
-    @models = Paper.public_everything.paginate(
+    @models = Model.public_everything.paginate(
                 page: params[:page],
                 per_page: 10
               )
@@ -39,12 +39,12 @@ class PapersController < ApplicationController
 
   def popular
     if params[:since]
-      @models = Paper.unscoped.visible.since(params[:since]).order(accepted_at: :desc).paginate(
+      @models = Model.unscoped.visible.since(params[:since]).order(accepted_at: :desc).paginate(
                   page: params[:page],
                   per_page: 10
                 )
     else
-      @models = Paper.unscoped.visible.order(accepted_at: :desc).paginate(
+      @models = Model.unscoped.visible.order(accepted_at: :desc).paginate(
                   page: params[:page],
                   per_page: 10
                 )
@@ -61,7 +61,7 @@ class PapersController < ApplicationController
   end
 
   def active
-    @models = Paper.public_in_progress.paginate(
+    @models = Model.public_in_progress.paginate(
                 page: params[:page],
                 per_page: 10
               )
@@ -76,11 +76,11 @@ class PapersController < ApplicationController
   end
 
   def search
-    @models = Paper.none.page(1)
+    @models = Model.none.page(1)
     @term = "results for empty search"
 
     if params['q']
-      @models = Paper.search(params['q'], fields: [:authors, :title, :tags, :languages],
+      @models = Model.search(params['q'], fields: [:authors, :title, :tags, :languages],
                   page: params[:page],
                   per_page: 10)
 
@@ -97,59 +97,59 @@ class PapersController < ApplicationController
   end
 
   def filter
-    @models = Paper.none.page(1)
+    @models = Model.none.page(1)
     @term = "Empty search term"
     if params['language']
-      @models = Paper.search(params['language'], fields: [languages: :exact], order: { accepted_at: :desc },
+      @models = Model.search(params['language'], fields: [languages: :exact], order: { accepted_at: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "in #{params['language']}"
 
     elsif params['author']
-      @models = Paper.search(params['author'], fields: [:authors], misspellings: false, order: { accepted_at: :desc },
+      @models = Model.search(params['author'], fields: [:authors], misspellings: false, order: { accepted_at: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "by #{params['author']}"
 
     elsif params['editor']
-      @models = Paper.search(params['editor'], fields: [:editor], misspellings: false, order: { accepted_at: :desc },
+      @models = Model.search(params['editor'], fields: [:editor], misspellings: false, order: { accepted_at: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "edited by #{params['editor']}"
 
     elsif params['reviewer']
-      @models = Paper.search(params['reviewer'], fields: [:reviewers], misspellings: false, order: { accepted_at: :desc },
+      @models = Model.search(params['reviewer'], fields: [:reviewers], misspellings: false, order: { accepted_at: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "reviewed by #{params['reviewer']}"
 
     elsif params['tag']
-      @models = Paper.search(params['tag'], fields: [:tags, :title], order: { accepted_at: :desc },
+      @models = Model.search(params['tag'], fields: [:tags, :title], order: { accepted_at: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "#{params['tag']}"
 
     elsif params['issue']
-      @models = Paper.search(params['issue'], fields: [{issue: :exact}], order: { page: :desc },
+      @models = Model.search(params['issue'], fields: [{issue: :exact}], order: { page: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "in issue #{params['issue']}"
 
     elsif params['volume']
-      @models = Paper.search(params['volume'], fields: [{volume: :exact}], order: { page: :desc },
+      @models = Model.search(params['volume'], fields: [{volume: :exact}], order: { page: :desc },
                   page: params[:page],
                   per_page: 10
                 )
       @term = "in volume #{params['volume']}"
 
     elsif params['year']
-      @models = Paper.search(params['year'], fields: [{year: :exact}], order: { page: :desc },
+      @models = Model.search(params['year'], fields: [{year: :exact}], order: { page: :desc },
                   page: params[:page],
                   per_page: 10
                 )
@@ -166,7 +166,7 @@ class PapersController < ApplicationController
   end
 
   def start_review
-    @model = Paper.find_by_sha(params[:id])
+    @model = Model.find_by_sha(params[:id])
 
     if @model.start_review!(params[:reviewer], params[:editor])
       flash[:notice] = "Review started"
@@ -178,7 +178,7 @@ class PapersController < ApplicationController
   end
 
   def start_meta_review
-    @model = Paper.find_by_sha(params[:id])
+    @model = Model.find_by_sha(params[:id])
 
     if @model.start_meta_review!(params[:editor], current_user.editor)
       flash[:notice] = "Review started"
@@ -190,42 +190,42 @@ class PapersController < ApplicationController
   end
 
   def reject
-    @model = Paper.find_by_sha(params[:id])
+    @model = Model.find_by_sha(params[:id])
 
     if @model.reject!
-      flash[:notice] = "Paper rejected"
+      flash[:notice] = "Model rejected"
       redirect_to model_path(@model)
     else
-      flash[:error] = "Paper could not be rejected"
+      flash[:error] = "Model could not be rejected"
       redirect_to model_path(@model)
     end
   end
 
   def withdraw
-    @model = Paper.find_by_sha(params[:id])
+    @model = Model.find_by_sha(params[:id])
 
     unless current_user.is_owner_of?(@model) || current_user.admin?
       redirect_to model_path(@model) and return
     end
 
     if @model.withdraw!
-      flash[:notice] = "Paper withdrawn"
+      flash[:notice] = "Model withdrawn"
       redirect_to model_path(@model)
     else
-      flash[:error] = "Paper could not be withdrawn"
+      flash[:error] = "Model could not be withdrawn"
       redirect_to model_path(@model)
     end
   end
 
   def new
-    @model = Paper.new
+    @model = Model.new
   end
 
   def show
     if params[:doi] && valid_doi?
-      @model = Paper.find_by_doi!(params[:doi])
+      @model = Model.find_by_doi!(params[:doi])
     else
-      @model = Paper.includes(notes: :editor).find_by_sha!(params[:id])
+      @model = Model.includes(notes: :editor).find_by_sha!(params[:id])
       # By default we want people to use the URLs with the DOI in the path if
       # the model is accepted.
       if @model.accepted?
@@ -255,7 +255,7 @@ class PapersController < ApplicationController
   end
 
   def lookup
-    model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first!
+    model = Model.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first!
     accepted_at = model.accepted_at ? model.accepted_at.strftime('%d %B %Y') : nil
     response = {  submitted: model.created_at.strftime('%d %B %Y'),
                   accepted: accepted_at }
@@ -271,7 +271,7 @@ class PapersController < ApplicationController
   end
 
   def create
-    @model = Paper.new(model_params)
+    @model = Model.new(model_params)
 
     @model.submitting_author = current_user
 
@@ -284,9 +284,9 @@ class PapersController < ApplicationController
 
   def status
     if params[:doi] && valid_doi?
-      @model = Paper.find_by_doi(params[:doi])
+      @model = Model.find_by_doi(params[:doi])
     else
-      @model = Paper.find_by_sha(params[:id])
+      @model = Model.find_by_sha(params[:id])
     end
 
     # TODO: Remove these SVGs from the controller

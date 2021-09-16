@@ -12,7 +12,7 @@ authorCheck = ->
     $("#author-submit").addClass('disabled')
     $("#author-submit").prop('disabled', true)
 
-setPaperSize = ->
+setModelSize = ->
   if($("#joss-model").length > 0)
     model_container = $('#joss-model-pdf-container')
     model = $('#joss-model')
@@ -23,10 +23,10 @@ setPaperSize = ->
 $(document).on 'change', '.pre-check', authorCheck
 
 $(window).resize ->
-  setPaperSize()
+  setModelSize()
 
 $ ->
-  $("#joss-model").on 'load', setPaperSize()
+  $("#joss-model").on 'load', setModelSize()
 
   $("form#new_model").submit ->
     e.preventDefault()

@@ -17,7 +17,7 @@ namespace :sync do
     end
   end
 
-  desc "Papers cleanup"
+  desc "Models cleanup"
   task cleanup_model_branches: :environment do
     reviews_repo = Rails.application.settings["reviews"]
     models_repo = Rails.application.settings["models_repo"]

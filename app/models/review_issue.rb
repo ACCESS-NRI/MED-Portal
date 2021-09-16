@@ -74,7 +74,7 @@ class ReviewIssue
     @created_at = raw_issue['created_at']
     @closed_at = raw_issue['closed_at']
     @state = state
-    @model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', raw_issue['number'], raw_issue['number']).first
+    @model = Model.where('review_issue_id = ? OR meta_review_issue_id = ?', raw_issue['number'], raw_issue['number']).first
   end
 
   # Is this a 'PRE REVIEW' issue?

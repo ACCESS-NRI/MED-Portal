@@ -16,7 +16,7 @@
   <div id="submitting" class="generic-content-item">
     <h2>Accepted and ready to publish</h2>
     <% if @recommend_accept.any? %>
-      <p>Papers labeled as <strong>recommend-accept</strong> but still open:</p>
+      <p>Models labeled as <strong>recommend-accept</strong> but still open:</p>
       <ul>
       <% @recommend_accept.each do |accepted_issue| %>
         <li><%= link_to "##{accepted_issue.number}", accepted_issue.html_url, :target => "_blank" %> <%= accepted_issue.title %> </li>

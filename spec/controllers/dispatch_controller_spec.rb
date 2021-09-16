@@ -89,7 +89,7 @@ describe DispatchController, type: :controller do
   describe "POST #github_receiver for REVIEW when a model doesn't have a suggested_editor set", type: :request do
     before do
       build(:model, meta_review_issue_id: 78, suggested_editor: nil, review_issue_id: 79, labels: [{ "foo" => "efefef" }]).save(validate: false)
-      @model = Paper.find_by_meta_review_issue_id(78)
+      @model = Model.find_by_meta_review_issue_id(78)
 
       post '/dispatch', params: whedon_review_labeled, headers: headers(:issues, whedon_review_labeled)
       @model.reload

@@ -7,8 +7,8 @@ class EditorsController < ApplicationController
   def index
     @active_editors = Editor.active.order('last_name ASC')
     @emeritus_editors = Editor.emeritus.order('last_name ASC')
-    @assignment_by_editor = Paper.unscoped.in_progress.group(:editor_id).count
-    @paused_by_editor = Paper.unscoped.in_progress.where("labels->>'paused' ILIKE '%'").group(:editor_id).count
+    @assignment_by_editor = Model.unscoped.in_progress.group(:editor_id).count
+    @paused_by_editor = Model.unscoped.in_progress.where("labels->>'paused' ILIKE '%'").group(:editor_id).count
     @pending_invitations_by_editor = Invitation.pending.group(:editor_id).count
     @pending_invitations = Invitation.includes(:model).pending
   end

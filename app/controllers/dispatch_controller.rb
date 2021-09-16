@@ -26,7 +26,7 @@ class DispatchController < ApplicationController
 
   def api_assign_editor
     if params[:secret] == ENV['WHEDON_SECRET']
-      model = Paper.find_by_meta_review_issue_id(params[:id])
+      model = Model.find_by_meta_review_issue_id(params[:id])
       editor = Editor.find_by_login(params[:editor])
       return head :unprocessable_entity unless model && editor
       model.set_editor(editor)
@@ -37,7 +37,7 @@ class DispatchController < ApplicationController
 
   def api_editor_invite
     if params[:secret] == ENV['WHEDON_SECRET']
-      model = Paper.find_by_meta_review_issue_id(params[:id])
+      model = Model.find_by_meta_review_issue_id(params[:id])
       return head :unprocessable_entity unless model
       if model.invite_editor(params[:editor])
         head :no_content
@@ -51,7 +51,7 @@ class DispatchController < ApplicationController
 
   def api_assign_reviewers
     if params[:secret] == ENV['WHEDON_SECRET']
-      model = Paper.find_by_meta_review_issue_id(params[:id])
+      model = Model.find_by_meta_review_issue_id(params[:id])
       return head :unprocessable_entity unless model
       model.set_reviewers(params[:reviewers])
     else
@@ -61,7 +61,7 @@ class DispatchController < ApplicationController
 
   def api_reject
     if params[:secret] == ENV['WHEDON_SECRET']
-      model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
+      model = Model.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
       return head :unprocessable_entity unless model
       if model.reject!
         head :no_content
@@ -75,7 +75,7 @@ class DispatchController < ApplicationController
 
   def api_withdraw
     if params[:secret] == ENV['WHEDON_SECRET']
-      model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
+      model = Model.where('review_issue_id = ? OR meta_review_issue_id = ?', params[:id], params[:id]).first
       return head :unprocessable_entity unless model
       if model.withdraw!
         head :no_content
@@ -89,7 +89,7 @@ class DispatchController < ApplicationController
 
   def api_start_review
     if params[:secret] == ENV['WHEDON_SECRET']
-      @model = Paper.find_by_meta_review_issue_id(params[:id])
+      @model = Model.find_by_meta_review_issue_id(params[:id])
       if @model.start_review!(params[:editor], params[:reviewers])
         render json: @model.to_json, status: '201'
       else
@@ -102,7 +102,7 @@ class DispatchController < ApplicationController
 
   def api_deposit
     if params[:secret] == ENV['WHEDON_SECRET']
-      @model = Paper.find_by_review_issue_id(params[:id])
+      @model = Model.find_by_review_issue_id(params[:id])
 
       if params[:metadata]
         metadata = JSON.parse(Base64.decode64(params[:metadata]))

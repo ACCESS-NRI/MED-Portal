@@ -18,7 +18,7 @@ module DispatchHelper
     return if payload.context.raw_payload.dig('issue').nil?
 
     @context = payload.context
-    @model = Paper.where('review_issue_id = ? OR meta_review_issue_id = ?', @context.issue_id, @context.issue_id).first
+    @model = Model.where('review_issue_id = ? OR meta_review_issue_id = ?', @context.issue_id, @context.issue_id).first
     return false unless @model
     @model.activities = initial_activities if @model.activities.empty?
 

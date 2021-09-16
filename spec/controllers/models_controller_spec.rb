@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PapersController, type: :controller do
+describe ModelsController, type: :controller do
   render_views
 
   before(:each) do
@@ -43,7 +43,7 @@ describe PapersController, type: :controller do
     end
   end
 
-  describe "Paper rejection" do
+  describe "Model rejection" do
     it "should work for an administrator" do
       user = create(:admin_user)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
@@ -51,7 +51,7 @@ describe PapersController, type: :controller do
 
       post :reject, params: {id: submitted_model.sha}
       expect(response).to be_redirect # as it's rejected the model
-      expect(Paper.rejected.count).to eq(1)
+      expect(Model.rejected.count).to eq(1)
     end
 
     it "should fail for a standard user" do
@@ -61,11 +61,11 @@ describe PapersController, type: :controller do
 
       post :reject, params: {id: submitted_model.sha}
       expect(response).to be_redirect # as it's rejected the model
-      expect(Paper.rejected.count).to eq(0)
+      expect(Model.rejected.count).to eq(0)
     end
   end
 
-  describe "Paper withdrawing" do
+  describe "Model withdrawing" do
     it "should work for an administrator" do
       user = create(:admin_user)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
@@ -73,7 +73,7 @@ describe PapersController, type: :controller do
 
       post :withdraw, params: {id: submitted_model.sha}
       expect(response).to be_redirect # as it's rejected the model
-      expect(Paper.withdrawn.count).to eq(1)
+      expect(Model.withdrawn.count).to eq(1)
     end
 
     it "should fail for a user who doesn't own the model" do
@@ -83,7 +83,7 @@ describe PapersController, type: :controller do
 
       post :withdraw, params: {id: submitted_model.sha}
       expect(response).to be_redirect
-      expect(Paper.withdrawn.count).to eq(0)
+      expect(Model.withdrawn.count).to eq(0)
     end
 
     it "should work for a user who owns the model" do
@@ -93,7 +93,7 @@ describe PapersController, type: :controller do
 
       post :withdraw, params: {id: submitted_model.sha}
       expect(response).to be_redirect
-      expect(Paper.withdrawn.count).to eq(1)
+      expect(Model.withdrawn.count).to eq(1)
     end
   end
 
@@ -102,36 +102,36 @@ describe PapersController, type: :controller do
     it "LOGGED IN responds with success" do
       user = create(:user)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
-      model_count = Paper.count
+      model_count = Model.count
 
       model_params = {title: "Yeah whateva", body: "something", repository_url: "https://github.com/openjournals/joss", archive_doi: "https://doi.org/10.6084/m9.figshare.828487", software_version: "v1.0.1", submission_kind: "new", suggested_editor: "@editor"}
       post :create, params: {model: model_params}
       expect(response).to be_redirect # as it's created the thing
-      expect(Paper.count).to eq(model_count + 1)
+      expect(Model.count).to eq(model_count + 1)
     end
 
     it "LOGGED IN without complete params responds with errors" do
       user = create(:user)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
-      model_count = Paper.count
+      model_count = Model.count
 
       model_params = {title: "Yeah whateva", body: "something", repository_url: "", archive_doi: "https://doi.org/10.6084/m9.figshare.828487"}
       post :create, params: {model: model_params}
 
       expect(response.body).to match /Your model could not be saved/
-      expect(Paper.count).to eq(model_count)
+      expect(Model.count).to eq(model_count)
     end
 
     it "LOGGED IN without a email on the submitting author account" do
       user = create(:user, email: nil)
       allow(controller).to receive_message_chain(:current_user).and_return(user)
-      model_count = Paper.count
+      model_count = Model.count
       request.env["HTTP_REFERER"] = new_model_path
 
       model_params = {title: "Yeah whateva", body: "something", repository_url: "https://github.com/foo/bar", archive_doi: "https://doi.org/10.6084/m9.figshare.828487", software_version: "v1.0.1"}
       post :create, params: {model: model_params}
       expect(response).to be_redirect # as it's redirected us
-      expect(Paper.count).to eq(model_count)
+      expect(Model.count).to eq(model_count)
     end
 
     it "NOT LOGGED IN responds with redirect" do
@@ -254,7 +254,7 @@ describe PapersController, type: :controller do
     end
   end
 
-  describe "GET Paper JSON" do
+  describe "GET Model JSON" do
     it "returns valid json" do
       model = create(:retracted_model)
       get :show, params: {doi: model.doi}, format: "json"

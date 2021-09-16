@@ -11,12 +11,12 @@ describe 'models/submitted.html.erb' do
 
       create(:model, state: "submitted", submitting_author: user)
 
-      assign(:models, Paper.submitted.paginate(page: 1, per_page: 10))
+      assign(:models, Model.submitted.paginate(page: 1, per_page: 10))
 
       render template: "models/index", formats: :html
 
       expect(rendered).to have_selector('.model-title', count: 0)
-      expect(rendered).to have_content(:visible, "Active Papers 1", normalize_ws: true)
+      expect(rendered).to have_content(:visible, "Active Models 1", normalize_ws: true)
     end
   end
 end

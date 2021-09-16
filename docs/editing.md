@@ -22,7 +22,7 @@ Editors can flag submissions of questionable scope using the command `@whedon qu
 The EiC assigns an editor (or a volunteering editor self-assigns) with the command `@whedon assign @username as editor` in a comment.
 
 ```eval_rst
-.. note:: If a model is submitted without a recommended editor, it will show up in the weekly digest email under the category ‘Papers currently without an editor.’ Please review this weekly email and volunteer to edit models that look to be in your domain. If you choose to be an editor in the issue thread type the command ``@whedon assign @yourhandle as editor`` or simply ``@whedon assign me as editor``
+.. note:: If a model is submitted without a recommended editor, it will show up in the weekly digest email under the category ‘Models currently without an editor.’ Please review this weekly email and volunteer to edit models that look to be in your domain. If you choose to be an editor in the issue thread type the command ``@whedon assign @yourhandle as editor`` or simply ``@whedon assign me as editor``
 ```
 
 ### How models are assigned to editors

@@ -28,7 +28,7 @@ describe 'models/show.html.erb' do
 
       render template: "models/show", formats: :html
 
-      # Paper metadata
+      # Model metadata
       # FIXME - these tests seem to be timezone sensitive??? i.e. can fail depending
       # upon the time of day when running the tests...
       expect(rendered).to have_content "Submitted #{Time.now.strftime('%d %B %Y')}"
@@ -48,7 +48,7 @@ describe 'models/show.html.erb' do
 
       render template: "models/show", formats: :html
 
-      # Paper metadata
+      # Model metadata
       expect(rendered).to have_title("The Journal of Open Source Software: #{model.scholar_title}")
 
       expect(rendered).to have_css("meta[name='citation_title']", visible: false)
@@ -130,7 +130,7 @@ describe 'models/show.html.erb' do
 
       render template: "models/show", formats: :html
 
-      expect(rendered).to have_content "Paper review"
+      expect(rendered).to have_content "Model review"
       expect(rendered).to have_content "Resubmission"
     end
 

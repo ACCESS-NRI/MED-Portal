@@ -8,12 +8,12 @@ describe 'models/recent.html.erb' do
         create(:accepted_model, submitting_author: user)
       end
 
-      assign(:models, Paper.all.paginate(page: 1, per_page: 10))
+      assign(:models, Model.all.paginate(page: 1, per_page: 10))
 
       render template: "models/index", formats: :html
 
       expect(rendered).to have_selector('.model-title', count: 3)
-      expect(rendered).to have_content(:visible, "Published Papers 3", normalize_ws: true)
+      expect(rendered).to have_content(:visible, "Published Models 3", normalize_ws: true)
     end
   end
 end

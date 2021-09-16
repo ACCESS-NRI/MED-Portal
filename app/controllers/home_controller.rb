@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   # layout "dashboard", only:  %w(dashboard reviews incoming stats all in_progress)
 
   def index
-    @models = Paper.unscoped.visible.order(accepted_at: :desc).limit(10)
+    @models = Model.unscoped.visible.order(accepted_at: :desc).limit(10)
   end
 
   def about
@@ -18,19 +18,19 @@ class HomeController < ApplicationController
     end
 
     @reviewer = params[:reviewer].nil? ? "@arfon" : params[:reviewer]
-    @reviewer_models = Paper.unscoped.where(":reviewer = ANY(reviewers)", reviewer: @reviewer).group_by_month(:accepted_at).count
+    @reviewer_models = Model.unscoped.where(":reviewer = ANY(reviewers)", reviewer: @reviewer).group_by_month(:accepted_at).count
 
-    @accepted_models = Paper.unscoped.visible.group_by_month(:accepted_at).count
-    @editor_models = Paper.unscoped.where(editor: @editor).visible.group_by_month(:accepted_at).count
+    @accepted_models = Model.unscoped.visible.group_by_month(:accepted_at).count
+    @editor_models = Model.unscoped.where(editor: @editor).visible.group_by_month(:accepted_at).count
 
-    @assignment_by_editor = Paper.unscoped.in_progress.group(:editor_id).count
-    @paused_by_editor = Paper.unscoped.in_progress.where("labels->>'paused' ILIKE '%'").group(:editor_id).count
+    @assignment_by_editor = Model.unscoped.in_progress.group(:editor_id).count
+    @paused_by_editor = Model.unscoped.in_progress.where("labels->>'paused' ILIKE '%'").group(:editor_id).count
 
-    @models_last_week = Paper.unscoped.visible.since(1.week.ago).group(:editor_id).count
-    @models_last_month = Paper.unscoped.visible.since(1.month.ago).group(:editor_id).count
-    @models_last_3_months = Paper.unscoped.visible.since(3.months.ago).group(:editor_id).count
-    @models_last_year = Paper.unscoped.visible.since(1.year.ago).group(:editor_id).count
-    @models_all_time = Paper.unscoped.visible.since(100.year.ago).group(:editor_id).count
+    @models_last_week = Model.unscoped.visible.since(1.week.ago).group(:editor_id).count
+    @models_last_month = Model.unscoped.visible.since(1.month.ago).group(:editor_id).count
+    @models_last_3_months = Model.unscoped.visible.since(3.months.ago).group(:editor_id).count
+    @models_last_year = Model.unscoped.visible.since(1.year.ago).group(:editor_id).count
+    @models_all_time = Model.unscoped.visible.since(100.year.ago).group(:editor_id).count
   end
 
   def incoming
@@ -53,12 +53,12 @@ class HomeController < ApplicationController
     end
 
     if sort == "active"
-      @models = Paper.unscoped.in_progress.where(editor: nil).order(last_activity: @order).paginate(
+      @models = Model.unscoped.in_progress.where(editor: nil).order(last_activity: @order).paginate(
                   page: params[:page],
                   per_page: 20
                 )
     else
-      @models = Paper.in_progress.where(editor: nil).paginate(
+      @models = Model.in_progress.where(editor: nil).paginate(
         page: params[:page],
         per_page: 20
       )
@@ -94,18 +94,18 @@ class HomeController < ApplicationController
       @editor = Editor.find_by_login(params[:editor])
 
       if sort == "active"
-        @models = Paper.unscoped.in_progress.where(editor: @editor).order(last_activity: @order).paginate(
+        @models = Model.unscoped.in_progress.where(editor: @editor).order(last_activity: @order).paginate(
           page: params[:page],
           per_page: 20
         )
       else
-        @models = Paper.unscoped.in_progress.where(editor: @editor).order(percent_complete: @order).paginate(
+        @models = Model.unscoped.in_progress.where(editor: @editor).order(percent_complete: @order).paginate(
           page: params[:page],
           per_page: 20
         )
       end
     else
-      @models = Paper.everything.paginate(
+      @models = Model.everything.paginate(
                   page: params[:page],
                   per_page: 20
                 )
@@ -134,12 +134,12 @@ class HomeController < ApplicationController
     @editor = current_user.editor
 
     if sort == "active"
-      @models = Paper.unscoped.in_progress.order(last_activity: @order).paginate(
+      @models = Model.unscoped.in_progress.order(last_activity: @order).paginate(
         page: params[:page],
         per_page: 20
       )
     else
-      @models = Paper.unscoped.in_progress.order(percent_complete: @order).paginate(
+      @models = Model.unscoped.in_progress.order(percent_complete: @order).paginate(
         page: params[:page],
         per_page: 20
       )
@@ -172,12 +172,12 @@ class HomeController < ApplicationController
     @editor = current_user.editor
 
     if sort == "active"
-      @models = Paper.unscoped.all.order(last_activity: @order).paginate(
+      @models = Model.unscoped.all.order(last_activity: @order).paginate(
         page: params[:page],
         per_page: 20
       )
     else
-      @models = Paper.unscoped.all.order(percent_complete: @order).paginate(
+      @models = Model.unscoped.all.order(percent_complete: @order).paginate(
         page: params[:page],
         per_page: 20
       )
