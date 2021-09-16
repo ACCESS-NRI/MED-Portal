@@ -6,11 +6,11 @@ default: &default
 
 development:
   <<: *default
-  database: joss_development
+  database: uwc_development
 
 test:
   <<: *default
-  database: joss_test
+  database: uwc_test
 
 production:
   adapter: postgresql

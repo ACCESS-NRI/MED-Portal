@@ -1,22 +1,22 @@
 # Changing this file necessitates a server restart
-name: "Journal of Open Source Software"
-abbreviation: "JOSS"
-issn: "2475-9066"
-tagline: "a <strong>developer friendly</strong>, open access journal for research software packages."
-logo_url: "http://joss.theoj.org/logo_large.jpg"
-url: "https://joss.theoj.org"
-editor_email: "admin@theoj.org"
-noreply_email: "noreply@joss.theoj.org"
-twitter: "@JOSS_TheOJ"
-google_analytics: "UA-47852178-4"
-github: "openjournals/joss"
-reviews: "openjournals/joss-reviews"
-papers_html_url: "https://www.theoj.org/joss-papers"
-papers_repo: "openjournals/joss-papers"
-product: "software" # the *thing* being submitted for review
-reviewers: "https://bit.ly/joss-reviewers"
+name: "Underworld Community"
+abbreviation: "UWC"
+issn: "0000-0000"
+tagline: "a <strong>user friendly</strong> community for numerical models."
+logo_url: "http://underworldcode/logo_large.png"
+url: "http://underworldcode.org"
+editor_email: "underworld.community@gmail.com"
+noreply_email: "noreply@underworldcode.org"
+twitter: "@underworldcode"
+google_analytics: "00-0000-00"
+github: "underworld-community/uwc"
+reviews: "underworld-community/uwc-reviews"
+papers_repo: "underworld-community/uwc-models"
+papers_html_url: "https://www.underworld-community.org/uwc-models"
+product: "model" # the *thing* being submitted for review
+reviewers: "https://bit.ly/uwc-reviewers"
 submission_enquiry: |-
   **Project repository URL:** INSERT YOUR REPOSITORY LINK HERE
 
-  Briefly describe your software, its research application and any questions you have about the JOSS submission criteria.
+  Briefly describe your model, its research application and any questions you have about the UWC submission criteria.
 paper_types: []

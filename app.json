@@ -1,12 +1,12 @@
 {
-  "name": "JOSS",
-  "description": "The JOSS application",
+  "name": "UWC",
+  "description": "The Underworld Community application",
   "keywords": [
-    "JOSS",
-    "Open Journals"
+    "UWC",
+    "Research Software"
   ],
-  "website": "http://joss.theoj.org",
-  "repository": "https://github.com/openjournals/joss/tree/generalize",
+  "website": "http://underworldcode.org",
+  "repository": "https://github.com/underworld-community/uwc",
   "success_url": "/",
   "scripts": {
   },
@@ -17,20 +17,12 @@
     "ORCID_SECRET": {
       "description": "The OAuth secret key for ORCID logins"
     },
-    "WHEDON_SECRET": {
+    "UW-BOT_SECRET": {
       "description": "The key that Whedon uses to authenticate"
     },
     "GH_TOKEN": {
-      "description": "The GitHub token for Whedon"
+      "description": "The GitHub token for UW-bot"
     },
-    "PORTICO_HOST": {
-      "description": "The FTP host for Portico"
-    },
-    "PORTICO_USERNAME": {
-      "description": "The FTP username for Portico"
-    },
-    "PORTICO_PASSWORD": {
-      "description": "The FTP password for Portico"
     },
   },
   "addons": [
