@@ -4,7 +4,7 @@ Editor.create(
   first_name: "Romain",
   last_name: "Beucher",
   login: "rbeucher",
-  email: "romain@rbeucher.com",
+  email: "romain.beucher@anu.edu.au",
   avatar_url: "",
   categories: [],
   url: "",
