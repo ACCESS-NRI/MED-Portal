@@ -47,31 +47,6 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
     t.index ["state"], name: "index_invitations_on_state"
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.integer "editor_id"
-    t.integer "model_id"
-    t.text "comment"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["editor_id"], name: "index_notes_on_editor_id"
-    t.index ["model_id"], name: "index_notes_on_model_id"
-  end
-
-  create_table "onboarding_invitations", force: :cascade do |t|
-    t.string "email"
-    t.string "token"
-    t.string "name"
-    t.datetime "last_sent_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.datetime "accepted_at"
-    t.datetime "invited_to_team_at"
-    t.bigint "editor_id"
-    t.index ["editor_id"], name: "index_onboarding_invitations_on_editor_id"
-    t.index ["token", "email"], name: "index_onboarding_invitations_on_token_and_email"
-    t.index ["token"], name: "index_onboarding_invitations_on_token"
-  end
-
   create_table "models", force: :cascade do |t|
     t.string "title"
     t.string "state"
@@ -111,6 +86,31 @@ ActiveRecord::Schema.define(version: 2021_07_06_101511) do
     t.index ["reviewers"], name: "index_models_on_reviewers", using: :gin
     t.index ["sha"], name: "index_models_on_sha"
     t.index ["user_id"], name: "index_models_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.integer "editor_id"
+    t.integer "model_id"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["editor_id"], name: "index_notes_on_editor_id"
+    t.index ["model_id"], name: "index_notes_on_model_id"
+  end
+
+  create_table "onboarding_invitations", force: :cascade do |t|
+    t.string "email"
+    t.string "token"
+    t.string "name"
+    t.datetime "last_sent_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "accepted_at"
+    t.datetime "invited_to_team_at"
+    t.bigint "editor_id"
+    t.index ["editor_id"], name: "index_onboarding_invitations_on_editor_id"
+    t.index ["token", "email"], name: "index_onboarding_invitations_on_token_and_email"
+    t.index ["token"], name: "index_onboarding_invitations_on_token"
   end
 
   create_table "users", force: :cascade do |t|
