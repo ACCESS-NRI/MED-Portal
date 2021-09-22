@@ -49,7 +49,7 @@ describe 'models/show.html.erb' do
       render template: "models/show", formats: :html
 
       # Model metadata
-      expect(rendered).to have_title("The Journal of Open Source Software: #{model.scholar_title}")
+      expect(rendered).to have_title("The Underworld Community: #{model.scholar_title}")
 
       expect(rendered).to have_css("meta[name='citation_title']", visible: false)
       expect(rendered).to have_css("meta[content='#{model.scholar_title}']", visible: false)
