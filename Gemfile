@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.0.0'
+ruby '3.1.0'
 
 gem 'aasm', '~> 5.0.5'
 gem 'chartkick'
@@ -17,7 +17,7 @@ gem 'octokit', '~> 4.21'
 gem 'pdf-reader', '~> 2.4.2'
 gem 'pg', '~> 1.2.3'
 gem 'will_paginate', '~> 3.3.0'
-gem 'rails', '6.1.4.1'
+gem 'rails', '7.0.4'
 gem 'responders'
 gem 'newrelic_rpm'
 gem 'sanitize', '~> 5.2.3'
@@ -27,6 +27,8 @@ gem 'uglifier', '4.2.0'
 gem 'coffee-rails', '~> 5.0.0'
 gem 'jbuilder', '~> 2.7'
 gem 'issue'
+gem 'matrix'
+gem 'net-ftp', require: false
 
 gem 'active_link_to'
 
