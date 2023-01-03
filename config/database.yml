@@ -1,8 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  port: <%= ENV['BOXEN_POSTGRESQL_PORT'] || 5432 %>
-  host: localhost
+  host: db
+  username: postgres
+  password: passwd
+  pool: 5
 
 development:
   <<: *default
