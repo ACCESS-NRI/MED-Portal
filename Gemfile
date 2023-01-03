@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'issue'
 gem 'matrix'
 gem 'net-ftp', require: false
+gem 'puma'
 
 gem 'active_link_to'
 
