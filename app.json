@@ -1,12 +1,12 @@
 {
   "name": "UWC",
-  "description": "The Underworld Community application",
+  "description": "The ACCESS-MED Portal",
   "keywords": [
     "UWC",
     "Research Software"
   ],
-  "website": "http://underworldcode.org",
-  "repository": "https://github.com/underworld-community/uwc",
+  "website": "",
+  "repository": "https://github.com/ACCESS-MED/MED-Portal",
   "success_url": "/",
   "scripts": {
   },

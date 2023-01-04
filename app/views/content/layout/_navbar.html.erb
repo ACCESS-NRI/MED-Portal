@@ -25,17 +25,15 @@
       <%- end %>
 
       <%= active_link_to "About", about_path, class: "nav-item nav-link" %>
-      <%= active_link_to "Models", published_models_path, class: "nav-item nav-link" %>
-      <%= active_link_to "Docs", "https://www.underworldcode.org", target: '_blank', class: "nav-item nav-link" %>
-      <%= link_to "Blog", "https://www.underworldcode.org", class: "nav-item nav-link" %>
-      <%= active_link_to "Submit", new_model_path, class: "nav-item nav-link" %>
+      <%= active_link_to "Recipes", published_models_path, class: "nav-item nav-link" %>
+      <%= active_link_to "Submit Recipe", new_model_path, class: "nav-item nav-link" %>
       <% if current_user %>
       <%= link_to "My Profile", profile_path, class: "nav-item nav-link" %>
       <%= link_to "Log out", signout_path, class: "nav-item nav-link" %>
       <% else %>
       <%= link_to "Log in with ORCID", "/auth/orcid", method: :post, class: "nav-item nav-link btn orcid" %>
       <% end %>
-      <%= link_to image_tag("github.svg"), "https://github.com/underworld-community/uwc", target: '_blank', class: "nav-item nav-link" %>
+      <%= link_to image_tag("github.svg"), "https://github.com/ACCESS-MED/MED-Portal", target: '_blank', class: "nav-item nav-link" %>
     </div>
 
     <div class="rss-dropdown dropdown">

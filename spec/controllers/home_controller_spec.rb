@@ -7,7 +7,7 @@ describe HomeController, type: :controller do
     it "should render home page" do
       get :index, format: :html
       expect(response).to be_successful
-      expect(response.body).to match /Underworld Community/
+      expect(response.body).to match /MED Portal/
     end
   end
 

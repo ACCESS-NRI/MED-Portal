@@ -1,22 +1,18 @@
 <div class="container">
   <div class="hero">
     <div class="hero-content col-lg-7">
-      <h1>The <%= Rails.application.settings['name'] %> is <%= setting(:tagline).html_safe %></h1>
-      <p class="lead">A Catalog of Numerical Models for Research in Earth Sciences.</p>
+      <h1>The <%= Rails.application.settings['name'] %></h1>
+      <p class="lead">A Catalog of Model Evaluation Recipes for ACCESS Models.</p>
       <div class="hero-ctas">
-        <%= link_to "Submit a model to #{Rails.application.settings['abbreviation']}".html_safe, new_model_path, class: "btn" %>
-        <%= link_to "🎉 Volunteer to review".html_safe, "/reviewer-signup.html", class: "btn" %>
+        <%= link_to "Submit a recipe to #{Rails.application.settings['abbreviation']}".html_safe, new_model_path, class: "btn" %>
+        <%= link_to "Volunteer to review".html_safe, "/reviewer-signup.html", class: "btn" %>
       </div>
     </div>
 
     <div class="hero-nav col-lg-4 offset-lg-1 align-self-end">
       <%= link_to models_path do %>
       <%= image_tag 'icon_models.svg' %>
-      Explore Models
-      <% end %>
-      <%= link_to "https://uwc.readthedocs.io/en/latest/" do %>
-      <%= image_tag 'icon_docs.svg' %>
-      Documentation
+      Explore Catalog
       <% end %>
       <%= link_to about_path do %>
       <%= image_tag 'icon_info.svg' %>
@@ -27,7 +23,7 @@
 </div>
 
 <div class="container">
-  <h4>Recently Added Models <span class="badge-count"><%= Model.visible.count %></span></h4>
+  <h4>Recently Added Recipes <span class="badge-count"><%= Model.visible.count %></span></h4>
 
   <div class="model-list" id="all-models">
     <%= render partial: "models/list", locals: { models: @models } %>

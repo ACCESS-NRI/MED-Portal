@@ -15,15 +15,15 @@
     <div class="btn-group" role="group" aria-label="Model Status">
 
       <%= link_to models_path, class: "tabnav-tab #{selected_class('index')}" do %>
-      All Models
+      All Recipes
       <div class="count-badge"><%= raw Model.everything.count %></div>
       <% end %>
       <%= link_to published_models_path, class: "tabnav-tab #{selected_class('popular')}" do %>
-      Published Models
+      Published Recipes
       <div class="count-badge"><%= raw Model.visible.count %></div>
       <% end %>
       <%= link_to active_models_path, class: "tabnav-tab #{selected_class('active')}" do %>
-      Active Models
+      Active Recipes
       <div class="count-badge"><%= raw Model.in_progress.count %></div>
       <% end %>
     </div>

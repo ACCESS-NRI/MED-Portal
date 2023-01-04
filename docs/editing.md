@@ -195,7 +195,7 @@ The review process at JOSS is unique: it takes place in a GitHub issue, is open,
 and author-reviewer-editor conversations are encouraged.
 
 JOSS reviews involve downloading and installing the software, and inspecting the repository
-and submitted model for key elements. See https://uwc.readthedocs.io/en/latest/review_criteria.html
+and submitted model for key elements. See https:///en/latest/review_criteria.html
 
 Editors and reviewers post comments on the Review issue, and authors respond to the comments
 and improve their submission until acceptance (or withdrawal, if they feel unable to
@@ -212,11 +212,11 @@ JOSS Editor.
 ### Query scope of submission
 
 ```
-:wave: thanks for your submission to JOSS. From a quick inspection of this submission it's not entirely obvious that it meets our [submission criteria](https://uwc.readthedocs.io/en/latest/submitting.html#submission-requirements). In particular, this item:
+:wave: thanks for your submission to JOSS. From a quick inspection of this submission it's not entirely obvious that it meets our [submission criteria](https:///en/latest/submitting.html#submission-requirements). In particular, this item:
 
 > - Your software should have an obvious research application
 
-Could you confirm here that there _is_ a research application for this software (and explain what that application is)? The section [_'what should my model contain'_](https://uwc.readthedocs.io/en/latest/submitting.html#what-should-my-model-contain) has some guidance for the sort of content we're looking to be present in the `model.md`.
+Could you confirm here that there _is_ a research application for this software (and explain what that application is)? The section [_'what should my model contain'_](https:///en/latest/submitting.html#what-should-my-model-contain) has some guidance for the sort of content we're looking to be present in the `model.md`.
 
 Many thanks!
 ```
@@ -224,7 +224,7 @@ Many thanks!
 ### GitHub invite to potential reviewers
 
 ```
-:wave: @reviewer1 & @reviewer2, would any of you be willing to review this submission for JOSS? We carry out our checklist-driven reviews here in GitHub issues and follow these guidelines: https://uwc.readthedocs.io/en/latest/review_criteria.html
+:wave: @reviewer1 & @reviewer2, would any of you be willing to review this submission for JOSS? We carry out our checklist-driven reviews here in GitHub issues and follow these guidelines: https:///en/latest/review_criteria.html
 ```
 
 ### Message to reviewers at the start of a review
@@ -329,7 +329,7 @@ As an editor, part of your role is to ensure that submissions you're responsible
 
 Sometimes reviews go quiet, either because a reviewer has failed to complete their review or an author has been slow to respond to a reviewer's feedback. **As the editor, we need you to prompt the author/or reviewer(s) to revisit the submission if there has been no response within 7-10 days unless there's a clear statement in the review thread that says an action is coming at a slightly later time, perhaps because a reviewer committed to a review by a certain date, or an author is making changes and says they will be done by a certain date.**
 
-[Whedon has functionality](https://uwc.readthedocs.io/en/latest/whedon.html#reminding-reviewers-and-authors) to remind an author or review to return to a review at a certain point in the future. For example:
+[Whedon has functionality](https:///en/latest/whedon.html#reminding-reviewers-and-authors) to remind an author or review to return to a review at a certain point in the future. For example:
 
 ```
 @whedon remind @reviewer in five days

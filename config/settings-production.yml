@@ -1,22 +1,22 @@
 # Changing this file necessitates a server restart
-name: "Underworld Community"
-abbreviation: "UWC"
+name: "ACCESS-MED Portal"
+abbreviation: "MED Portal"
 issn: "0000-0000"
-tagline: "a <strong>user friendly</strong> community for numerical models."
-logo_url: "https://underworld-community.herokuapp.com/logo_large.png"
-url: "https://underworld-community.herokuapp.com"
-editor_email: "romain@rbeucher.com"
-noreply_email: "romain@rbeucher.com"
-twitter: "@underworldcode"
+tagline: "a <strong>catalog</strong> of model evaluation recipes."
+logo_url: ""
+url: ""
+editor_email: "romain.beucher@anu.edu.au"
+noreply_email: "romain.beucher@anu.edu.au"
+twitter: "@access-nri"
 google_analytics: "00-0000-00"
-github: "underworld-community/uwc"
-reviews: "underworld-community/uwc-reviews"
-models_repo: "underworld-community/uwc-models"
-models_html_url: "https://underworld-community.herokuapp.com/uwc-models"
-product: "model" # the *thing* being submitted for review
-reviewers: "https://bit.ly/2XC2Z9e"
+github: "ACCESS-MED/MED-Portal"
+reviews: "ACCESS-MED/med-reviews"
+models_repo: "ACCESS-MED/med-recipes"
+models_html_url: ""
+product: "recipe" # the *thing* being submitted for review
+reviewers: ""
 submission_enquiry: |-
   **Project repository URL:** INSERT YOUR REPOSITORY LINK HERE
 
-  Briefly describe your model, its research application and any questions you have about the UWC submission criteria.
+  Briefly describe your recipe, its research application and any questions you have about the MED-Portal submission criteria.
 model_types: []

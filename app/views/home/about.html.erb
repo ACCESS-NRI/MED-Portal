@@ -19,19 +19,17 @@
         <%= render partial: "content/about/general" %>
 
         <div class="alert alert-primary" role="alert">
-          <%= link_to "🎉 Volunteer to review for #{setting(:abbreviation)} &xrarr;".html_safe, "/reviewer-signup.html" %>
+          <%= link_to "Volunteer to review for #{setting(:abbreviation)}".html_safe, "/reviewer-signup.html" %>
         </div>
       </div>
 
       <div id="submitting" class="generic-content-item">
 
-        <h1>Scope & submission requirements</h1>
-
-        <p>Not all Model is eligible to be added to the catalog in UWC.</p>
+        <h1>Submission Scope</h1>
 
         <p>Authors wishing to make a pre-submission enquiry should <%= link_to "open an issue", "https://github.com/#{Rails.application.settings["github"]}/issues/new?title=Pre-submission%20enquiry"%> on the <%= setting(:abbreviation) %> repository.</p>
         <div class="alert alert-primary" role="alert">
-          <%= link_to "👀Full details about the #{setting(:abbreviation)} submission requirements and submission process&xrarr;".html_safe, "https://uwc.readthedocs.io/en/latest/submitting.html" %>
+          <%= link_to "Full details about the #{setting(:abbreviation)} submission requirements and submission process".html_safe, "https:///en/latest/submitting.html" %>
         </div>
       </div>
 
@@ -45,12 +43,6 @@
         <h2 id="topic_editors">Topic Editors</h2>
 
         <%- Editor.topic.order('last_name ASC').each do |editor| %>
-        <%= render partial: "shared/editor", locals: { editor: editor } %>
-        <%- end %>
-
-        <h2 id="editors_emeritus">Editors Emeritus</h2>
-
-        <%- Editor.emeritus.order('last_name ASC').each do |editor| %>
         <%= render partial: "shared/editor", locals: { editor: editor } %>
         <%- end %>
       </div>
@@ -77,36 +69,6 @@
           and are expected to adhere to it in all <%= setting(:abbreviation) %> spaces and associated interactions.</p>
       </div>
 
-      <div class="generic-content-item" id="ethics">
-        <h1>Ethics Guidelines</h1>
-
-        <h2 id="ethics-and-malpractice"><%= setting(:abbreviation) %> Publication Ethics and Malpractice Statement</h2>
-        <b>Editorial Board</b>
-        <ul>
-          <li>The <%= setting(:abbreviation) %> editorial board's members are recognized experts in the field. The full names and affiliations of the members are provided on the journal’s website (see <a href="<%= setting(:url) %>/about#editorial_board">editorial board</a>). The individual editors' contact information are provided on that site, via their GitHub pages, and general contact information for the editorial office also on the <a href="<%= setting(:url) %>/about#contact">journal’s website</a>.</li>
-        </ul>
-
-        <b>Authors and Authors responsibilities</b>
-        <ul>
-          <li><%= setting(:abbreviation) %> does not charge any fees for manuscript processing and/or publishing materials, as is stated on the <a href="<%= setting(:url) %>/about#costs">journal's website</a>.</li>
-
-          <li>Authors are obliged to participate in peer review process, as described in <a href="https://uwc.readthedocs.io/en/latest/submitting.html#the-review-process">submission guidelines</a>.</li>
-
-          <li>All authors have significantly contributed to the research. The submitting author is required to be a <a href="https://uwc.readthedocs.io/en/latest/submitting.html#submission-requirements">major contributor to the software</a> they are submitting and the review process includes a check that <em><a href="https://uwc.readthedocs.io/en/latest/review_criteria.html#authorship">‘the full list of model authors seems appropriate and complete?’</a></em>.</li>
-
-          <li>All authors are obliged to provide retractions or corrections of mistakes (see <a href="<%= setting(:url) %>/about#ethics">ethics</a> and <a href="https://uwc.readthedocs.io/en/latest/submitting.html#what-should-my-model-contain">what should my model contain?</a>).</li>
-
-          <li><%= setting(:abbreviation) %> models are required to have a <a href="https://uwc.readthedocs.io/en/latest/submitting.html#what-should-my-model-contain">list of references</a>, and <a href="https://uwc.readthedocs.io/en/latest/submitting.html#what-should-my-model-contain">financial support</a>.</li>
-
-          <li>Forbidden to publish same research in more than one journal (see <a href="<%= setting(:url) %>/about#ethics">ethics</a>).</li>
-        </ul>
-
-        <b>Review process</b>
-        <ul>
-        </ul>
-
-      </div>
-
       <div class="generic-content-item" id="content_license">
         <h1>Content Licensing & Open Access</h1>
       </div>
@@ -118,16 +80,14 @@
         <a class="menu-item" href="#submitting">Submission scope</a>
         <a class="menu-item" href="#editorial_board">Editorial Board</a>
         <a class="menu-item" href="#topic_editors">Topic Editors</a>
-        <a class="menu-item" href="#editors_emeritus">Editors Emeritus</a>
         <a class="menu-item" href="#contact">Contact <%= setting(:abbreviation) %></a>
         <a class="menu-item" href="#code_of_conduct">Code of Conduct</a>
-        <a class="menu-item" href="#ethics">Ethics Guidelines</a>
         <a class="menu-item" href="#content_license">Content Licensing &amp; Open Access</a>
       </nav>
 
-      <a class="menu-btn" href="https://uwc.readthedocs.io/en/latest/submitting.html">Author information</a>
-      <%= link_to "🎉 Volunteer to review".html_safe, "/reviewer-signup.html", class: "menu-btn" %>
-      <a class="menu-btn" href="https://uwc.readthedocs.io/en/latest/reviewer_guidelines.html">Reviewer guidelines</a>
+      <a class="menu-btn" href="https:///en/latest/submitting.html">Author information</a>
+      <%= link_to "Volunteer to review".html_safe, "/reviewer-signup.html", class: "menu-btn" %>
+      <a class="menu-btn" href="https:///en/latest/reviewer_guidelines.html">Reviewer guidelines</a>
       </div>
     </div>
   </div>

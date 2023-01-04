@@ -1,4 +1,4 @@
-# The Underworld Community
+# The ACCESS-MED Portal
 
 
 ## Contributing
