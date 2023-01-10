@@ -17,7 +17,7 @@
     "ORCID_SECRET": {
       "description": "The OAuth secret key for ORCID logins"
     },
-    "UW-BOT_SECRET": {
+    "WHEDON_SECRET": {
       "description": "The key that Whedon uses to authenticate"
     },
     "GH_TOKEN": {
