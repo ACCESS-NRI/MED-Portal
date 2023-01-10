@@ -117,7 +117,7 @@ class Model < ApplicationRecord
   scope :not_archived, -> { where('archived = ?', false) }
 
   before_create :set_sha, :set_last_activity
-  after_create :notify_editors, :notify_author
+  # after_create :notify_editors, :notify_author
 
   validates_presence_of :title
   validates_presence_of :suggested_editor, on: :create, message: "You must suggest an editor to handle your submission"
