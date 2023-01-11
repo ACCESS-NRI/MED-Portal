@@ -209,10 +209,10 @@ class ModelsController < ApplicationController
     end
 
     if @model.withdraw!
-      flash[:notice] = "Model withdrawn"
+      flash[:notice] = "Recipe withdrawn"
       redirect_to model_path(@model)
     else
-      flash[:error] = "Model could not be withdrawn"
+      flash[:error] = "Recipe could not be withdrawn"
       redirect_to model_path(@model)
     end
   end

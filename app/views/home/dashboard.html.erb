@@ -69,13 +69,13 @@
     <h3>Published recipes per month</h3>
 
     <%= column_chart [
-      { name: "Accepted models by month", data: @accepted_models }
+      { name: "Accepted recipes by month", data: @accepted_models }
     ], height: "500px", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 60, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 60, stepSize: 5}}]}} %>
 
   </div>
 
   <div class="generic-content-item" style="padding-bottom: 80px;">
-    <h3 class="float-left">Accepted models per month by editor</h3>
+    <h3 class="float-left">Accepted recipes per month by editor</h3>
     <p class="float-right" style="font-weight: bolder; padding-left: 40px;">Select editor: <%= select_tag 'editors', options_from_collection_for_select(Editor.all, "login", "login", params[:editor].blank? ? current_user.editor.login : params[:editor]),
       onchange: "top.location.href='/dashboard?editor=' + this.options[this.selectedIndex].value + '#editor';" %></p>
 
@@ -85,7 +85,7 @@
   </div>
 
   <div class="generic-content-item" style="padding-bottom: 120px;">
-    <h3 class="float-left">Models reviewed per month by <%= @reviewer %></h3>
+    <h3 class="float-left">Recipes reviewed per month by <%= @reviewer %></h3>
 
     <div class="float-right" style="font-weight: bolder; padding-left: 40px;">Search for reviewer (hit enter to search): <%= form_for("/dashboard", html: { method: 'GET', style: "display: inline !important;" }) do |f| %><%= text_field_tag 'reviewer', @reviewer  %><% end %> </div>
 

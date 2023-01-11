@@ -1,25 +1,25 @@
 <div class="alert alert-warning">
   <% case model.state %>
   <% when "review_pending" %>
-  This model is <strong><%= model.pretty_state %></strong> but the
+  This recipe is <strong><%= model.pretty_state %></strong> but the
     review hasn't started. Editor and reviewer assignments are happening over <%= link_to "on
     GitHub &raquo;".html_safe, model.meta_review_url %>
   <% when "submitted" %>
-  This model is <strong><%= model.pretty_state %></strong> but the
+  This recipe is <strong><%= model.pretty_state %></strong> but the
     review hasn't started.
   <% when "under_review" %>
-  This model is <strong><%= model.pretty_state %></strong> which means
+  This recipe is <strong><%= model.pretty_state %></strong> which means
     review has begun. You can track the progress of this review <%= link_to "on GitHub &raquo;".html_safe, model.review_url %>
   <% when "review_completed" %>
-  This model is <strong><%= model.pretty_state %></strong> which means
+  This recipe is <strong><%= model.pretty_state %></strong> which means
     the review is completed and is awaiting review by the editor.
     You can track the progress of this model <%= link_to "on GitHub &raquo;".html_safe, model.review_url %>
   <% when "accepted" %>
-  This model is <strong><%= model.pretty_state %></strong> which means
+  This recipe is <strong><%= model.pretty_state %></strong> which means
     the review is completed and it has been accepted.
     You can view the review of this model <%= link_to "on GitHub &raquo;".html_safe, model.review_url %>
   <% when "rejected" %>
-  This model is <strong><%= model.pretty_state %></strong> which means
+  This recipe is <strong><%= model.pretty_state %></strong> which means
     is has not been accepted.
   <% end %>
 </div>

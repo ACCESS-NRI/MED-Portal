@@ -1,19 +1,19 @@
 <div class="container">
   <div class="btn-group" role="group" aria-label="Model Status">
     <%= link_to "/dashboard/#{current_user.editor.login}", class: current_class?("/dashboard/#{current_user.editor.login}") do %>
-    Your models
+    Your recipes
     <div class="count-badge"><%= raw current_user.editor.models.in_progress.count %></div>
     <% end %>
     <%= link_to "/dashboard/incoming", class: current_class?("/dashboard/incoming") do %>
-    Models with no editor
+    Recipes with no editor
     <div class="count-badge"><%= raw Model.unscoped.in_progress.where(editor: nil).count %></div>
     <% end %>
     <%= link_to "/dashboard/in_progress", class: current_class?("/dashboard/in_progress") do %>
-    In progress models
+    In progress recipes
     <div class="count-badge"><%= raw Model.unscoped.in_progress.count %></div>
     <% end %>
     <%= link_to "/dashboard/all", class: current_class?("/dashboard/all") do %>
-    All models
+    All recipe
     <div class="count-badge"><%= raw Model.unscoped.all.count %></div>
     <% end %>
     <%= link_to "/dashboard", class: current_class?("/dashboard") do %>
