@@ -21,7 +21,7 @@
       "description": "The key that Whedon uses to authenticate"
     },
     "GH_TOKEN": {
-      "description": "The GitHub token for UW-bot"
+      "description": "The GitHub token for Medoc"
     },
     },
   },
