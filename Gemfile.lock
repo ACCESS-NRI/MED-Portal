@@ -113,13 +113,13 @@ GEM
     declarative (0.0.20)
     diff-lcs (1.5.0)
     dotenv (2.7.6)
-    elastic-transport (8.1.0)
-      faraday (< 3)
+    elasticsearch (7.13.0)
+      elasticsearch-api (= 7.13.0)
+      elasticsearch-transport (= 7.13.0)
+    elasticsearch-api (7.13.0)
       multi_json
-    elasticsearch (8.6.0)
-      elastic-transport (~> 8)
-      elasticsearch-api (= 8.6.0)
-    elasticsearch-api (8.6.0)
+    elasticsearch-transport (7.13.0)
+      faraday (~> 1)
       multi_json
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
@@ -483,7 +483,7 @@ DEPENDENCIES
   coffee-rails (~> 5.0.0)
   commonmarker (~> 0.21.1)
   dotenv (~> 2.7.6)
-  elasticsearch
+  elasticsearch (= 7.13)
   factory_bot_rails (~> 6.1.0)
   google_drive
   groupdate
