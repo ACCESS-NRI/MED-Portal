@@ -9,7 +9,7 @@ class Notifications < ApplicationMailer
 
   def editor_invite_email(model, editor)
     @model = model
-    mail(to: editor.email, subject: "JOSS editorial invite: #{model.title}")
+    mail(to: editor.email, subject: "MED-Portal editorial invite: #{model.title}")
   end
 
   def author_submission_email(model)

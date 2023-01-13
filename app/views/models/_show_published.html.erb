@@ -32,12 +32,12 @@
 
         <%= link_to @model.review_url, class: 'btn model-btn' do %>
           <%= image_tag "icon_docs.svg" %>
-          Model review
+          Recipe review
         <% end %>
 
         <%= link_to @model.pdf_url, class: 'btn model-btn' do %>
           <%= image_tag "dl-icon.svg" %>
-          Download model
+          Download recipe
         <% end %>
 
         <%= link_to @model.clean_archive_doi, class: 'btn model-btn' do %>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="label">Review</div>
-      <p>Editor: <%= github_link @model.metadata_editor %> (<%= link_to "all models", models_by_editor_path(@model.metadata_editor) %>)<br>Reviewers: <%= pretty_reviewers(@model.metadata_reviewers) %></p>
+      <p>Editor: <%= github_link @model.metadata_editor %> (<%= link_to "all recipes", models_by_editor_path(@model.metadata_editor) %>)<br>Reviewers: <%= pretty_reviewers(@model.metadata_reviewers) %></p>
 
       <div class="label">Authors</div>
       <p><%= pretty_authors(@model.metadata_authors) %></p>

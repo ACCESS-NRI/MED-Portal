@@ -1,10 +1,10 @@
 <% if current_user.admin? || (current_user == model.submitting_author) %>
   <div class="card">
     <div class="card-header">
-      Model actions
+      Recipe actions
     </div>
     <div class="card-body">
-      <p class="card-text">Available actions for you on this model</p>
+      <p class="card-text">Available actions for you on this recipe</p>
 
       <div class="row">
         <% if current_user.admin? %>
@@ -19,14 +19,14 @@
 
           <% unless model.review_issue_id %>
           <div class="col-md-3">
-            <%= button_to "Reject model", reject_model_path(model), data: { confirm: "Are you sure?" }, form_class: "left", class: "btn btn-danger" %>
+            <%= button_to "Reject recipe", reject_model_path(model), data: { confirm: "Are you sure?" }, form_class: "left", class: "btn btn-danger" %>
           </div>
           <% end %>
         <% end %>
 
         <% if (current_user == model.submitting_author) || current_user.admin? %>
           <div class="col-md-3">
-            <%= button_to "Withdraw model", withdraw_model_path(model), data: { confirm: "Are you sure?" }, form_class: "left", class: "btn btn-danger" %>
+            <%= button_to "Withdraw recipe", withdraw_model_path(model), data: { confirm: "Are you sure?" }, form_class: "left", class: "btn btn-danger" %>
           </div>
         <% end %>
       </div>

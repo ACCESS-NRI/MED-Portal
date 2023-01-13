@@ -2,7 +2,7 @@
 <p>http://joss.theoj.org/dashboard/<%= @editor %></p>
 
 <% if @assigned_issues.any? %>
-<h4>Here are the models you are currently editing:</h4>
+<h4>Here are the recipes you are currently editing:</h4>
 
   <% @assigned_issues.each do |issue| %>
 <ul>
@@ -14,7 +14,7 @@
 </ul>
   <% end %>
 <% else %>
-<p>You don't seem to be editing any models. Please consider volunteering to edit one of the pending models above.</p>
+<p>You don't seem to be editing any recs. Please consider volunteering to edit one of the pending recipes above.</p>
 <% end %>
 
 <% if @closed_issues.any? %>
@@ -31,8 +31,8 @@
 <% end %>
 
 <% if @pending_issues.any? %>
-<h4>Here are the models currently without an editor</h4>
-<p><em>Please consider volunteering to edit one (or more) of these models</em></p>
+<h4>Here are the recipes currently without an editor</h4>
+<p><em>Please consider volunteering to edit one (or more) of these recipes</em></p>
 
   <% @pending_issues.each do |issue| %>
 <ul>

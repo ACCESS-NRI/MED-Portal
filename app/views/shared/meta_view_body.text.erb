@@ -21,9 +21,9 @@ Markdown: [![status](<%= url %>/models/<%= model.sha %>/status.svg)](<%= url %>/
 
 <%- abbreviation, reviewers = Rails.application.settings.values_at("abbreviation", "reviewers") %>
 <% if suggested_editor == "Pending" %>
-Thanks for submitting your model to <%= abbreviation %> <%= model.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your model.
+Thanks for submitting your model to <%= abbreviation %> <%= model.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your recipe.
 <% else %>
-Thanks for submitting your model to <%= abbreviation %> <%= model.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your model.
+Thanks for submitting your model to <%= abbreviation %> <%= model.submitting_author.github_username %>. **Currently, there isn't an <%= abbreviation %> editor assigned** to your recipe.
 
 The author's suggestion for the handling editor is <%= suggested_editor %>.
 <% end %>

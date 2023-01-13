@@ -7,7 +7,7 @@
       <%= render partial: "profiles_menu" %>
 
       <div class="generic-content-item">
-        <p>Please make sure you've added an <strong>email address and GitHub username</strong> to your profile before submitting. We'll use this to communicate the status of your model and you won't be able to submit a model without giving us this information. We promise not to spam you. </p>
+        <p>Please make sure you've added an <strong>email address and GitHub username</strong> to your profile before submitting. We'll use this to communicate the status of your recipe and you won't be able to submit a recipe without giving us this information. We promise not to spam you. </p>
         <%= form_tag("/update_profile", id: "profile-form") do %>
         <div class="form-group">
           <label for="email">Email address</label>
@@ -28,7 +28,7 @@
 
   <div id ="row" class="model-list">
     <% if current_user.models.any? %>
-      <h2>Your models</h2>
+      <h2>Your recipes</h2>
       <% current_user.models.each do |model| %>
       <div class="model-card">
         <div class="row">

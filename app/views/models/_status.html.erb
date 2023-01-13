@@ -13,7 +13,7 @@
   <% when "review_completed" %>
   This recipe is <strong><%= model.pretty_state %></strong> which means
     the review is completed and is awaiting review by the editor.
-    You can track the progress of this model <%= link_to "on GitHub &raquo;".html_safe, model.review_url %>
+    You can track the progress of this recipe <%= link_to "on GitHub &raquo;".html_safe, model.review_url %>
   <% when "accepted" %>
   This recipe is <strong><%= model.pretty_state %></strong> which means
     the review is completed and it has been accepted.

@@ -80,7 +80,7 @@
       onchange: "top.location.href='/dashboard?editor=' + this.options[this.selectedIndex].value + '#editor';" %></p>
 
       <%= column_chart [
-      { name: "Models edited by #{@editor.login} by month", data: @editor_models }
+      { name: "Recipes edited by #{@editor.login} by month", data: @editor_models }
     ], height: "500px", colors: ["#8FBC8F"], id: "editor", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}]}} %>
   </div>
 
@@ -90,7 +90,7 @@
     <div class="float-right" style="font-weight: bolder; padding-left: 40px;">Search for reviewer (hit enter to search): <%= form_for("/dashboard", html: { method: 'GET', style: "display: inline !important;" }) do |f| %><%= text_field_tag 'reviewer', @reviewer  %><% end %> </div>
 
     <%= column_chart [
-      { name: "Models reviewed by #{@reviewer} by month", data: @reviewer_models }
+      { name: "Recipes reviewed by #{@reviewer} by month", data: @reviewer_models }
     ], height: "500px", colors: ["#FFA500"], id: "reviewers", legend: false, library: { scales: { xAxes: [{ position: 'bottom' }], yAxes: [{ position: 'left', gridLines: { display: true, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}, { position: 'right', gridLines: { display: false, drawBorder: true }, ticks: { min: 0, max: 20, stepSize: 5}}]}} %>
   </div>
 </div>
