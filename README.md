@@ -1,4 +1,4 @@
-# The Journal of Open Source Software
+# The  Journal of Open Source Software
 
 [![Build Status](https://github.com/openjournals/joss/actions/workflows/tests.yml/badge.svg)](https://github.com/openjournals/joss/actions/workflows/tests.yml)
 [![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
