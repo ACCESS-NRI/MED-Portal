@@ -229,7 +229,7 @@ feature "Onboarding" do
         fill_in :editor_last_name, with: "Tor"
         fill_in :editor_email, with: "edi@tor.com"
         fill_in :editor_login, with: "@test_editor"
-        fill_in :editor_url, with: "https://joss.theoj.org"
+        fill_in :editor_url, with: "https://medportal-dev-6a745f452687.herokuapp.com"
         fill_in :editor_category_list, with: "bioinformatics, open science"
         fill_in :editor_description, with: "I'm a great person"
         check track.name
@@ -249,7 +249,7 @@ feature "Onboarding" do
         fill_in :editor_last_name, with: "Tor"
         fill_in :editor_email, with: "edi@tor.com"
         fill_in :editor_login, with: "@test_editor"
-        fill_in :editor_url, with: "https://joss.theoj.org"
+        fill_in :editor_url, with: "https://medportal-dev-6a745f452687.herokuapp.com"
         fill_in :editor_category_list, with: "bioinformatics, open science"
         fill_in :editor_description, with: "I'm a great person"
         click_on "Save editor data"

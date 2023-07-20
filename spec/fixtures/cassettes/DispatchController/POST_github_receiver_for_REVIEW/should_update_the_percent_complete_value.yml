@@ -77,10 +77,10 @@ http_interactions:
         target =\"_blank\">https://github.com/paulcon/active_subspaces</a>\n**Version:**
         v 0.1\n**Editor:** @kyleniemeyer\n**Reviewer:** @mtezzele\n**Archive:** <a
         href=\"http://doi.org/10.5281/zenodo.158941\" target=\"_blank\">10.5281/zenodo.158941</a>\n##
-        Status\n\n[![status](http://joss.theoj.org/papers/a598bac0d7456ff4f94967c25ada0c0a/status.svg)](http://joss.theoj.org/papers/a598bac0d7456ff4f94967c25ada0c0a)\n\nStatus
-        badge code:\n\n```\nHTML: <a href=\"http://joss.theoj.org/papers/a598bac0d7456ff4f94967c25ada0c0a\"><img
-        src=\"http://joss.theoj.org/papers/a598bac0d7456ff4f94967c25ada0c0a/status.svg\"></a>\nMarkdown:
-        [![status](http://joss.theoj.org/papers/a598bac0d7456ff4f94967c25ada0c0a/status.svg)](http://joss.theoj.org/papers/a598bac0d7456ff4f94967c25ada0c0a)\n```\n\n**Reviewers
+        Status\n\n[![status](http://medportal-dev-6a745f452687.herokuapp.com/papers/a598bac0d7456ff4f94967c25ada0c0a/status.svg)](http://medportal-dev-6a745f452687.herokuapp.com/papers/a598bac0d7456ff4f94967c25ada0c0a)\n\nStatus
+        badge code:\n\n```\nHTML: <a href=\"http://medportal-dev-6a745f452687.herokuapp.com/papers/a598bac0d7456ff4f94967c25ada0c0a\"><img
+        src=\"http://medportal-dev-6a745f452687.herokuapp.com/papers/a598bac0d7456ff4f94967c25ada0c0a/status.svg\"></a>\nMarkdown:
+        [![status](http://medportal-dev-6a745f452687.herokuapp.com/papers/a598bac0d7456ff4f94967c25ada0c0a/status.svg)](http://medportal-dev-6a745f452687.herokuapp.com/papers/a598bac0d7456ff4f94967c25ada0c0a)\n```\n\n**Reviewers
         and authors**:\n\nPlease avoid lengthy details of difficulties in the review
         thread. Instead, please create a new issue in the <a href=\"https://github.com/paulcon/active_subspaces\"
         target=\"_blank\">target repository</a> and link to those issues (especially

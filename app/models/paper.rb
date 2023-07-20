@@ -291,8 +291,8 @@ class Paper < ApplicationRecord
   end
 
   # This URL returns the 'DOI optimized' representation of a URL for a paper
-  # e.g. https://joss.theoj.org/papers/10.21105/joss.01632 rather than something
-  # with the SHA e.g. https://joss.theoj.org/papers/5e290cb57b61f83de4460fd0eca22726
+  # e.g. https://medportal-dev-6a745f452687.herokuapp.com/papers/10.21105/joss.01632 rather than something
+  # with the SHA e.g. https://medportal-dev-6a745f452687.herokuapp.com/papers/5e290cb57b61f83de4460fd0eca22726
   # This URL format only works for accepted papers so falls back to the SHA
   # version if no DOI is set.
   def seo_url

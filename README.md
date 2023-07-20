@@ -1,3 +1,7 @@
+This is deployed on medportal-dev on heroku at:
+-https://medportal-dev-6a745f452687.herokuapp.com/
+
+
 # The  Journal of Open Source Software
 
 [![Build Status](https://github.com/openjournals/joss/actions/workflows/tests.yml/badge.svg)](https://github.com/openjournals/joss/actions/workflows/tests.yml)

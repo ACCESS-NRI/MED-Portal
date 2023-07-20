@@ -205,8 +205,8 @@ describe Paper do
     it "should know how to generate a PDF URL for Google Scholar" do
       paper = create(:accepted_paper)
 
-      expect(paper.seo_url).to eq('http://joss.theoj.org/papers/10.21105/joss.00000')
-      expect(paper.seo_pdf_url).to eq('http://joss.theoj.org/papers/10.21105/joss.00000.pdf')
+      expect(paper.seo_url).to eq('http://medportal-dev-6a745f452687.herokuapp.com/papers/10.21105/joss.00000')
+      expect(paper.seo_pdf_url).to eq('http://medportal-dev-6a745f452687.herokuapp.com/papers/10.21105/joss.00000.pdf')
     end
   end
 
@@ -214,8 +214,8 @@ describe Paper do
     it "should know how to generate a PDF URL for Google Scholar" do
       paper = create(:under_review_paper)
 
-      expect(paper.seo_url).to eq('http://joss.theoj.org/papers/48d24b0158528e85ac7706aecd8cddc4')
-      expect(paper.seo_pdf_url).to eq('http://joss.theoj.org/papers/48d24b0158528e85ac7706aecd8cddc4.pdf')
+      expect(paper.seo_url).to eq('http://medportal-dev-6a745f452687.herokuapp.com/papers/48d24b0158528e85ac7706aecd8cddc4')
+      expect(paper.seo_pdf_url).to eq('http://medportal-dev-6a745f452687.herokuapp.com/papers/48d24b0158528e85ac7706aecd8cddc4.pdf')
     end
   end
 
