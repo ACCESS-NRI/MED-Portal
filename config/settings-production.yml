@@ -1,7 +1,7 @@
 # Changing this file necessitates a server restart
-name: "Journal of Open Source Software"
-abbreviation: "JOSS"
-issn: "2475-9066"
+name: "ACCESS-NRI MED Portal"
+abbreviation: "ACCESS"
+issn: "0000-0000"
 tagline: "a <strong>developer friendly</strong>, open access journal for research software packages."
 logo_url: "https://medportal-dev-6a745f452687.herokuapp.com/logo_large.jpg"
 url: "https://medportal-dev-6a745f452687.herokuapp.com"
@@ -11,9 +11,9 @@ launch_date: "2016-05-05"
 twitter: "@JOSS_TheOJ"
 mastodon_url: "https://fosstodon.org/@JOSS"
 google_analytics: "UA-47852178-4"
-github: "openjournals/joss"
-reviews: "openjournals/joss-reviews"
-papers_repo: "openjournals/joss-papers"
+github: "ACCESS-NRI/MED-Portal"
+reviews: "ACCESS-NRI/med-reviews"
+papers_repo: "ACCESS-NRI/med-recipes"
 papers_html_url: "https://www.theoj.org/joss-papers"
 reviewers_url: "https://reviewers.medportal-dev-6a745f452687.herokuapp.com"
 reviewers_signup_url: "https://reviewers.medportal-dev-6a745f452687.herokuapp.com/join"
@@ -24,6 +24,6 @@ submission_enquiry: |-
 
   Briefly describe your software, its research application and any questions you have about the JOSS submission criteria.
 paper_types: []
-bot_username: editorialbot
+bot_username: max-anu
 features:
   tracks: true
