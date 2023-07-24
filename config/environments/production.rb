@@ -92,15 +92,26 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { :host => "https://medportal-dev-6a745f452687.herokuapp.com" }
 
-  config.action_mailer.smtp_settings = {
-    user_name: 'apikey',
-    password: ENV["SENDGRID_API"],
-    address: 'smtp.sendgrid.net',
-    domain: 'briefideas.org',
-    port: 587,
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  # TODO: CHANGE THE FOLLOWING LINES TO ALLOW EMAILS TO BE SENT.
+  #config.action_mailer.default_url_options = { :host => "https://medportal-dev-6a745f452687.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "test" }
+
+
+  # config.action_mailer.smtp_settings = {
+  #   user_name: 'apikey',
+  #   password: ENV["SENDGRID_API"],
+  #   address: 'smtp.sendgrid.net',
+  #   domain: 'briefideas.org', # TODO
+  #   port: 587,
+  #   authentication: :plain,
+  #   enable_starttls_auto: true
+  # }
+
+  # TODO: REMOVE THE FOLLOWING LINES TO ALLOW EMAILS TO BE SENT.
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.raise_delivery_errors = false
+
+
 end
