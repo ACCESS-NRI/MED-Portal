@@ -127,14 +127,14 @@ table.dashboard-table{
         }
 
         .availability-status-yellow {
-          background-color: #ffc107;
+          background-color: #faa61a;
           color: black;
           padding: 0.2em 0.5em;
           border-radius: 2px;
         }
 
         .availability-status-green {
-          background-color: #28a745;
+          background-color: #006031;
           color: white;
           padding: 0.2em 0.5em;
           border-radius: 2px;
@@ -161,11 +161,11 @@ table.dashboard-table{
             padding-bottom: 0em;
             display: flex;
             align-items: center;
-            color: #2E294E;
+            color: #005B94;
             transition: color .3s;
 
             &:hover {
-              color: #007BFF;
+              color: #00adee;
               text-decoration: none;
             }
         }
