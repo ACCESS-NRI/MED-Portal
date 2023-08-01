@@ -20,7 +20,7 @@
   <div class="row">
     <div class="col">
       <%= f.label :title %>
-      <%= f.text_field :title, placeholder: "What's the title of this paper?", class: "form-control" %>
+      <%= f.text_field :title, placeholder: "What's the title of this recipe?", class: "form-control" %>
     </div>
 
     <div class="col">
@@ -33,7 +33,7 @@
 <div class="form-group">
   <div class="row">
     <div class="col">
-      <%= f.label "Name of git branch containing the paper, not the path" %>
+      <%= f.label "Name of git branch containing the recipe, not the path" %>
       <%= f.text_field :git_branch, placeholder: "Leave blank if paper.md is in the default branch", class: "form-control" %>
     </div>
     <div class="col">
@@ -50,8 +50,8 @@
       <%= f.select(:submission_kind, {'New submission' => 'new', 'Resubmission' => 'resubmission', 'Major new version' => 'new version'}, {include_blank: false, prompt: "Select one and explain choice below"}, class: "form-control", style: "margin-right: 12px;") %>
     </div>
     <div class="col" data-controller="autocomplete" data-autocomplete-url-value="<%= search_subjects_path %>">
-      <%= f.label "Main subject of the paper" %>
-      <%= f.text_field :suggested_subject, placeholder: "Start typing and select the subject that best applies to your paper", class: "form-control", style: "margin-right: 12px;", data: {"autocomplete-target" => "input"} %>
+      <%= f.label "Main subject of the recipe" %>
+      <%= f.text_field :suggested_subject, placeholder: "Start typing and select the subject that best applies to your recipe", class: "form-control", style: "margin-right: 12px;", data: {"autocomplete-target" => "input"} %>
       <%= f.hidden_field :track_id, data: {"autocomplete-target" => "hidden"} %>
       <ul class="list-group subjects-options" data-autocomplete-target="results"></ul>
     </div>
@@ -61,7 +61,7 @@
 <div class="form-group">
   <%= f.label "Message to editors" %>
   <%= f.text_area :body, rows: "7",
-    placeholder: "Has any portion of the submitted work (which includes code and documentation) been published or submitted, or is planned for submission, to another peer-reviewed publication venue? If yes, please describe. Please also give short (1-2 line) description of your #{setting(:product)} including specific notes to the editor if this is a resubmission or a second paper in #{setting(:abbreviation)} about this #{setting(:product)}. Please disclose any potential conflicts of interest, including financial ones.", class: 'form-control' %>
+    placeholder: "Has any portion of the submitted work (which includes code and documentation) been published or submitted, or is planned for submission, to another peer-reviewed publication venue? If yes, please describe. Please also give short (1-2 line) description of your #{setting(:product)} including specific notes to the editor if this is a resubmission or a second recipe in #{setting(:abbreviation)} about this #{setting(:product)}. Please disclose any potential conflicts of interest, including financial ones.", class: 'form-control' %>
 </div>
 
 <div class="form-group">
@@ -72,7 +72,7 @@
     </div>
     <div class="col form-check" style="margin-left: 15px;">
       <input type="checkbox" id="paper-check" class="pre-check form-check-input">
-      <label class="form-check-label" for="paper-check">I have verified that my paper compiles using one of <a href="https://joss.readthedocs.io/en/latest/submitting.html#checking-that-your-paper-compiles" target="_blank">these tools</a>.</label>
+      <label class="form-check-label" for="paper-check">I have verified that my recipe compiles using one of <a href="https://joss.readthedocs.io/en/latest/submitting.html#checking-that-your-paper-compiles" target="_blank">these tools</a>.</label>
     </div>
     <div class="col form-check">
       <input type="checkbox" id="coc-check" class="pre-check form-check-input">
@@ -81,6 +81,6 @@
   </div>
 </div>
 <div class="form-actions">
-  <%= submit_tag("Submit paper", class: "btn paper-submit disabled", disabled: "disabled", id: "author-submit") %>
+  <%= submit_tag("Submit recipe", class: "btn paper-submit disabled", disabled: "disabled", id: "author-submit") %>
 </div>
 <% end %>

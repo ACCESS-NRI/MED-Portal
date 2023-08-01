@@ -2,7 +2,7 @@
 View here: http://medportal-dev-6a745f452687.herokuapp.com/dashboard/<%= @editor %>
 
 <% if @assigned_issues.any? %>
-Here are the papers you are currently editing:
+Here are the recipes you are currently editing:
 
   <% @assigned_issues.each do |issue| %>
 - <%= issue.title %>
@@ -13,11 +13,11 @@ Here are the papers you are currently editing:
   <% end %>
 
 <% else %>
-You don't seem to be editing any papers. Please consider volunteering to edit one of the pending papers above.
+You don't seem to be editing any recipes. Please consider volunteering to edit one of the pending recipes above.
 <% end %>
 
 <% if @closed_issues.any? %>
-Published papers this week
+Published recipes this week
 
   <% @closed_issues.each do |issue| %>
 - <%= issue.title %>
@@ -28,9 +28,9 @@ Published papers this week
 <% end %>
 
 <% if @pending_issues.any? %>
-Here are the papers currently without an editor
+Here are the recipes currently without an editor
 
-** Please consider volunteering to edit one (or more) of these papers **
+** Please consider volunteering to edit one (or more) of these recipes **
 
   <% @pending_issues.each do |issue| %>
 - <%= issue.title %>

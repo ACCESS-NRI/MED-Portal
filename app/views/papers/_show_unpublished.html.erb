@@ -29,14 +29,14 @@
         <% if @paper.meta_review_issue_id %>
           <%= link_to @paper.meta_review_url, class: 'btn paper-btn' do %>
             <%= image_tag "icon_docs.svg" %>
-            Paper pre review
+            Recipe pre review
           <% end %>
         <% end %>
 
         <% if @paper.review_issue_id %>
           <%= link_to @paper.review_url, class: 'btn paper-btn' do %>
             <%= image_tag "icon_docs.svg" %>
-            Paper review
+            Recipe review
           <% end %>
         <% end %>
       </div>

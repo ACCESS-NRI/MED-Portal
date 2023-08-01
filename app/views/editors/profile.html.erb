@@ -7,7 +7,7 @@
 
       <div class="generic-content-item">
 
-        <%= link_to "View papers you have edited &rarr;".html_safe, papers_by_editor_url(@editor.login)%>
+        <%= link_to "View recipes you have edited &rarr;".html_safe, papers_by_editor_url(@editor.login)%>
 
         <%= form_for(@editor, url: update_editor_profile_path) do |f| %>
 

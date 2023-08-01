@@ -23,7 +23,7 @@
     </p>
 
     <p>
-      <%= link_to "In-progress papers currently assigned to this track", dashboard_in_progress_path(track_id: @track) %>:
+      <%= link_to "In-progress recipes currently assigned to this track", dashboard_in_progress_path(track_id: @track) %>:
       <strong><%= Paper.in_progress.by_track(@track.id).count %></strong>
     </p>
 

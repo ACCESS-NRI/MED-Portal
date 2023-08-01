@@ -27,7 +27,7 @@
     <h2>Accepted and ready to publish </h2>
 
     <% if @recommend_accept.any? %>
-      <p>Papers labeled as <strong>recommend-accept</strong> but still open:</p>
+      <p>Recipes labeled as <strong>recommend-accept</strong> but still open:</p>
       <ul>
       <% @recommend_accept.each do |accepted_issue| %>
         <li><%= paper_track_label(accepted_issue) %> • <%= link_to "##{accepted_issue.number}", accepted_issue.html_url, :target => "_blank" %> <%= accepted_issue.title %> </li>

@@ -1,19 +1,19 @@
 <div class="container">
-  <div class="btn-group" role="group" aria-label="Paper Status">
+  <div class="btn-group" role="group" aria-label="Recipe Status">
     <%= link_to "/dashboard/#{current_user.editor.login}", class: current_class?("/dashboard/#{current_user.editor.login}") do %>
-    Your papers
+    Your recipes
     <div class="count-badge"><%= raw current_user.editor.papers.in_progress.count %></div>
     <% end %>
     <%= link_to dashboard_incoming_path(track_id: @track), class: current_class?(dashboard_incoming_path) do %>
-    Papers with no editor
+    Recipes with no editor
     <div class="count-badge"><%= raw Paper.unscoped.in_progress.where(editor: nil).count %></div>
     <% end %>
     <%= link_to dashboard_in_progress_path(track_id: @track), class: current_class?(dashboard_in_progress_path) do %>
-    In progress papers
+    In progress recipes
     <div class="count-badge"><%= raw Paper.unscoped.in_progress.count %></div>
     <% end %>
     <%= link_to dashboard_all_path(track_id: @track), class: current_class?(dashboard_all_path) do %>
-    All papers
+    All recipes
     <div class="count-badge"><%= raw Paper.unscoped.all.count %></div>
     <% end %>
     <%= link_to "/dashboard", class: current_class?("/dashboard") do %>
