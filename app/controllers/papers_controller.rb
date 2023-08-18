@@ -214,6 +214,8 @@ class PapersController < ApplicationController
     logger.warn('pc:in show')
     if params[:doi] && valid_doi?
       logger.warn('pc:216')
+      logger.warn(params[:doi].to_s)
+      logger.warn(params.to_s)
       @paper = Paper.find_by_doi!(params[:doi])
     else
       logger.warn('pc:219')
