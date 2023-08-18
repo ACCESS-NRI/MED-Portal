@@ -1,6 +1,6 @@
 # Changing this file necessitates a server restart
 name: "ACCESS-NRI MED Portal"
-abbreviation: "ACCESS"
+abbreviation: "medportal"
 issn: "0000-0000"
 tagline: "a cookbook of code examples to be used for model evaluation and diagnostics for ACCESS-NRI."
 logo_url: "https://medportal-dev-6a745f452687.herokuapp.com/logo_large.jpg"
