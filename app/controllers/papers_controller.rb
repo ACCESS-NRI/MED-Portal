@@ -1,4 +1,8 @@
 require 'open-uri'
+require 'logger'
+
+logger = Logger.new($stdout) # create a new logger that writes to the console
+
 
 class PapersController < ApplicationController
   include SettingsHelper
@@ -207,22 +211,29 @@ class PapersController < ApplicationController
   end
 
   def show
+    logger.info('pc:in show')
     if params[:doi] && valid_doi?
+      logger.info('pc:216')
       @paper = Paper.find_by_doi!(params[:doi])
     else
+      logger.info('pc:219')
       @paper = Paper.includes(:votes, :editor, notes: :editor, track: :aeics).find_by_sha!(params[:id])
       # By default we want people to use the URLs with the DOI in the path if
       # the paper is accepted.
       if @paper.accepted?
+        logger.info('pc:224')
         redirect_to @paper.seo_url, status: 301, allow_other_host: true and return
       end
     end
+    logger.info('pc:228')
 
     # Don't show the paper to anyone other than the submitting author or an
     # admin.
     if @paper.invisible?
+      logger.info('pc:233')
       # Redirect to login if not logged in
       if !current_user
+        logger.info('pc:236')
         flash[:notice] = "You need to log in before viewing this paper."
         redirect_to root_path and return
       end
@@ -230,11 +241,12 @@ class PapersController < ApplicationController
       # Redirect to root if not an admin or the submitting author
       # With notice that the paper is not visible
       unless can_see_hidden_paper?(@paper)
+        logger.info('pc:244')
         flash[:notice] = "You don't have the permissions to view this paper."
         redirect_to root_path and return
       end
     end
-
+    logger.info('pc:249')
     # The behaviour here for PDFs is to make it possible for the PDF to appear
     # to be on the current domain even when it might not be. This is essential
     # for Google Scholar and helpful for browser security warnings.
@@ -246,6 +258,7 @@ class PapersController < ApplicationController
           :type => data.content_type,
           :disposition => 'inline'
       }
+      logger.info('pc:262')
       format.json
     end
   end
