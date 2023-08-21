@@ -18,11 +18,15 @@
 <div class="container">
   <div class="row">
 
-    
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-    <div id="joss-paper-pdf-container" class="col-md-9"></div>
-
-    
+    <style>
+    /* Adjust styles as needed */
+    #pdf-container {
+      overflow-y: scroll;
+      max-height: 800px; /* Set the maximum height of the scrollable area */
+    }
+  </style>
+    <div id="pdf-container"></div>
     <script>
       // URL of the PDF file
       const pdfUrl = 'https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main/medportal.00018/10.21105.medportal.00018.pdf';
@@ -57,8 +61,6 @@
         }
       });
     </script>
-
-
 
 
     <div class="col-md-3 paper-sidebar">
