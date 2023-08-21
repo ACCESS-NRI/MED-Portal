@@ -31,7 +31,9 @@
   <div id="pdf-container"></div>
     <script>
       // URL of the PDF file
-      pdfUrl = 'https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main/medportal.00018/10.21105.medportal.00018.pdf';
+      pdfUrl = '<%= @paper.pdf_url %>';
+
+      alert('pdfUrl: <%= @paper.pdf_url %>');
 
       // Initialize PDF.js
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
