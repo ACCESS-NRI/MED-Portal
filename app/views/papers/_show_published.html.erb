@@ -17,26 +17,43 @@
 
 <div class="container">
   <div class="row">
-    <div id="pdf-container">
-      <canvas id="pdf-viewer"></canvas>
-    </div>
-
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <div id="pdf-container"></div>
     <script>
+      // URL of the PDF file
       const pdfUrl = 'https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main/medportal.00018/10.21105.medportal.00018.pdf';
+
+      // Initialize PDF.js
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+      // Fetch the PDF and display it
       const pdfContainer = document.getElementById('pdf-container');
-      const pdfViewer = document.getElementById('pdf-viewer');
 
-      pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-        pdf.getPage(1).then(page => {
-          const viewport = page.getViewport({ scale: 1.5 });
-          pdfViewer.width = viewport.width;
-          pdfViewer.height = viewport.height;
+      pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
+        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+          pdfDoc.getPage(pageNum).then(page => {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.style.display = 'block';
+            canvas.style.margin = '10px auto';
+            
+            const viewport = page.getViewport({ scale: 1.5 });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
 
-          const canvasContext = pdfViewer.getContext('2d');
-          page.render({ canvasContext, viewport });
-        });
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport,
+            };
+
+            pdfContainer.appendChild(canvas);
+
+            page.render(renderContext);
+          });
+        }
       });
     </script>
+
 
     <div class="col-md-3 paper-sidebar">
       <div class="btn-group-vertical" role="group" aria-label="...">
