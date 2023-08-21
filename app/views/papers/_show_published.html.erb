@@ -25,15 +25,13 @@
       flex:1;
       overflow-y: scroll;
       max-height: 800px;
-      border: 1px solid black; 
+      border: 2px solid black; 
     }
   </style>
   <div id="pdf-container"></div>
     <script>
       // URL of the PDF file
       pdfUrl = '<%= @paper.pdf_url %>';
-
-      alert('pdfUrl: <%= @paper.pdf_url %>');
 
       // Initialize PDF.js
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
