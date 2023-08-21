@@ -1,5 +1,5 @@
 <div class="container paper-show">
-  <%= render partial: "shared/retraction_notice" if @paper.retracted? %>
+  <%= render partial: "shared/retraction_info" %>
 
   <div class="paper-title">
     <span class="__dimensions_badge_embed__" data-doi="<%= @paper.doi %>" data-hide-zero-citations="true"></span>
@@ -17,7 +17,7 @@
 
 <div class="container">
   <div class="row">
-
+  
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <style>
     /* Adjust styles as needed */
