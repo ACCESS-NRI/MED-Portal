@@ -44,7 +44,8 @@ gem 'puma'
 
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"
-gem 'pdfjs_viewer-rails'
+
+gem 'pdfjs_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
