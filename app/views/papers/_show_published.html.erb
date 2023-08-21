@@ -17,7 +17,26 @@
 
 <div class="container">
   <div class="row">
-    <embed src="https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main/medportal.00018/10.21105.medportal.00018.pdf?raw=true" width="800" height="600" type="application/pdf">
+    <div id="pdf-container">
+      <canvas id="pdf-viewer"></canvas>
+    </div>
+
+    <script>
+      const pdfUrl = 'https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main/medportal.00018/10.21105.medportal.00018.pdf';
+      const pdfContainer = document.getElementById('pdf-container');
+      const pdfViewer = document.getElementById('pdf-viewer');
+
+      pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+        pdf.getPage(1).then(page => {
+          const viewport = page.getViewport({ scale: 1.5 });
+          pdfViewer.width = viewport.width;
+          pdfViewer.height = viewport.height;
+
+          const canvasContext = pdfViewer.getContext('2d');
+          page.render({ canvasContext, viewport });
+        });
+      });
+    </script>
 
     <div class="col-md-3 paper-sidebar">
       <div class="btn-group-vertical" role="group" aria-label="...">

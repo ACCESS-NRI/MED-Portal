@@ -60,6 +60,10 @@
   <meta name="twitter:url" value="<%= setting(:url) %>" />
   <meta name="twitter:label1" value="ISSN" />
   <meta name="twitter:data1" value="<%= setting(:issn) %>" />
+
+  <%= stylesheet_link_tag "https://mozilla.github.io/pdf.js/web/pdf_viewer.css" %>
+  <%= javascript_include_tag "https://mozilla.github.io/pdf.js/build/pdf.js" %>
+
 </head>
 
 <body>
