@@ -20,7 +20,7 @@
 
     
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-    <div id="joss-paper-pdf-container" class="col-md-9">
+    <div id="joss-paper-pdf-container" class="col-md-9"></div>
 
     
     <script>
@@ -31,7 +31,7 @@
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
 
       // Fetch the PDF and display it
-      const pdfContainer = document.getElementById('joss-paper-pdf-container');
+      const pdfContainer = document.getElementById('pdf-container');
 
       pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
         for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
