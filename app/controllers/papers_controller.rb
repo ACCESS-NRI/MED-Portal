@@ -260,10 +260,11 @@ class PapersController < ApplicationController
           :type => data.content_type,
           :disposition => 'inline'
       }
-      logger.warn(@paper.pdf_url)
+      
       logger.warn('pc:262')
       format.json
     end
+    logger.warn('pc:267')
   end
 
   def lookup
