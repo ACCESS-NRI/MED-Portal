@@ -1,4 +1,9 @@
 require 'open3'
+require 'net/http'
+require 'json'
+require 'uri'
+
+BASE_URL = "https://api.github.com/repos/access-nri/med-recipes/contents"
 
 class Paper < ApplicationRecord
   searchkick index_name: "joss-production"
@@ -306,6 +311,8 @@ class Paper < ApplicationRecord
   def joss_id
     if self.is_a_retraction_notice?
       return retracted_paper.joss_id + "R"
+    elsif review_issue_id.nil?
+      return nil
     else
       id = "%05d" % review_issue_id
       return "#{setting(:abbreviation).downcase}.#{id}"
@@ -505,6 +512,44 @@ class Paper < ApplicationRecord
 
   def markdown_code
     "[![DOI](#{status_badge_url})](https://doi.org/#{doi})"
+  end
+
+  def img_url
+    @img_url ||= File.join("https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main", get_images.sort.first)
+  end
+
+  def get_images(folder = '')
+    default_image = ".github/workflows/background.png"
+    if joss_id.nil?
+      return [default_image]
+    end
+
+    if folder == ''
+      folder = File.join(BASE_URL, joss_id)
+    end
+
+    uri = URI.parse(folder.to_s) # Ensure folder is a string
+    response = Net::HTTP.get_response(uri)
+
+    image_paths = []
+
+    if response.code == "200"
+      data = JSON.parse(response.body)
+
+      data.each do |file|
+        if file['path'].end_with?('.png')
+          image_paths << file['path']
+        elsif file['type'] == 'dir'
+          image_paths += get_images(File.join(BASE_URL, file['path']).to_s) # Ensure folder is a string
+        end
+      end
+    end
+    
+    if image_paths.empty?
+      image_paths << default_image
+    end
+
+    image_paths
   end
 
 private

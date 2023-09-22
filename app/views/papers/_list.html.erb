@@ -1,31 +1,42 @@
 <% papers.each do |paper| %>
 <% unless paper.submitted? %>
-<div class="paper-card">
-  <div class="row">
-    <div class="col-lg-9">
+<div class="blog-card alt">
+    <div class="meta">
+      <div class="photo" style="background-image: url(<%= paper.img_url %>)"></div>
+      <ul class="details center">
+        <li class="submitted_by">
+        <%= image_tag("github.svg", size: "24x24") %>
+        <%= link_to paper.repository_url, target: "_blank" do %>
+        <%= paper.pretty_repository_name %>
+        <% end %>
+        </li>
+        <li class="submitted_by">
+        <% if paper.doi.blank? %>
+        <%= image_tag 'doi.svg', size: "24x24" %><%= link_to "Pending", paper_path(paper) %>
+        <% else %>
+        <%= image_tag 'doi.svg', size: "24x24" %><%= link_to paper.doi, paper.seo_url %>
+        <% end %>
+        </li>
+        <li class="submitted_by">
+        <%= image_tag 'icon_arrowright.svg', size: "24x24" %><%= link_to "Go To Paper", paper.seo_url %>
+        </li>
+      </ul>
+    </div>
+    <div class="description">
       <%= pretty_status_badge(paper) %> <%= time_words(paper) %>
       <h2 class="paper-title"><%= link_to paper.title, paper.seo_url %>
       </h2>
-      <% paper.language_tags.each do |tag| %>
-      <span class="badge-lang"><%= link_to tag, papers_by_language_path(language: tag) %></span>
-      <% end %>
-    </div>
-    <div class="col-lg-3 paper-meta">
-      <div class="submitted_by">
-        <%= link_to submittor_github(paper), target: "_blank" do %>
-        <%= image_tag submittor_avatar(paper), size: "24x24" %>
-        <%= paper.submitting_author.pretty_github_username %>
+      <p>
+        <% paper.language_tags.each do |tag| %>
+          <span class="badge-lang"><%= link_to tag, papers_by_language_path(language: tag) %></span>
         <% end %>
-      </div>
-      <div class="doi">
-        <% if paper.doi.blank? %>
-        <%= image_tag 'doi.svg' %><%= link_to "Pending", paper_path(paper) %>
-        <% else %>
-        <%= image_tag 'doi.svg' %><%= link_to paper.doi, paper.seo_url %>
+        <% paper.author_tags.compact.each do |tag| %>
+          <span class="badge-lang"><%= link_to tag, papers_by_tag_path(tag: tag) %></span>
         <% end %>
-      </div>
+        </p>
+
+      <p> <%= paper.scholar_authors %> </p>
     </div>
   </div>
-</div>
 <% end %>
 <% end %>
