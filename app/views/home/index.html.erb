@@ -2,10 +2,9 @@
   <div class="hero">
     <div class="hero-content col-lg-7">
       <h1>The <%= Rails.application.settings['name'] %> is <%= setting(:tagline).html_safe %></h1>
-      <p class="lead">Committed to the sharing and publishing of high quality code recipes.</p>
+      <p class="lead">Committed to the sharing and publishing of high quality climate and earth system recipes.</p>
       <div class="hero-ctas">
         <%= link_to "Submit a recipe to MED Portal".html_safe, new_paper_path, class: "btn" %>
-        <%= link_to "🎉 Volunteer to review".html_safe, setting(:reviewers_signup_url), class: "btn" %>
       </div>
     </div>
 
