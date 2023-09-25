@@ -3,7 +3,6 @@ require 'net/http'
 require 'json'
 require 'uri'
 
-BASE_URL = "https://api.github.com/repos/access-nri/med-recipes/contents"
 
 class Paper < ApplicationRecord
   searchkick index_name: "joss-production"
@@ -515,42 +514,66 @@ class Paper < ApplicationRecord
   end
 
   def img_url
-    @img_url ||= File.join("https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main", get_images.sort.first)
-  end
+    default_image = "https://raw.githubusercontent.com/ACCESS-NRI/med-recipes/main/.github/workflows/background.png"
 
-  def get_images(folder = '')
-    default_image = ".github/workflows/background.png"
     if joss_id.nil?
-      return [default_image]
-    end
-
-    if folder == ''
-      folder = File.join(BASE_URL, joss_id)
-    end
-
-    uri = URI.parse(folder.to_s) # Ensure folder is a string
-    response = Net::HTTP.get_response(uri)
-
-    image_paths = []
-
-    if response.code == "200"
-      data = JSON.parse(response.body)
-
-      data.each do |file|
-        if file['path'].end_with?('.png')
-          image_paths << file['path']
-        elsif file['type'] == 'dir'
-          image_paths += get_images(File.join(BASE_URL, file['path']).to_s) # Ensure folder is a string
-        end
+      path = default_image
+    else
+      image_uris = get_images(joss_id)
+      if image_uris.empty?
+        path = default_image
+      else
+        path = image_uris.sort.first
       end
     end
-    
-    if image_paths.empty?
-      image_paths << default_image
+    path
+  end
+
+  def github_get_contents_request(path)
+  
+    cached_data = Rails.cache.read(path)
+  
+    if cached_data.present?
+      return cached_data
+    else
+      # preventing err 404/etc.
+      begin
+        data = GITHUB.contents('access-nri/med-recipes', path: path)
+      rescue Octokit::ClientError => e
+        puts "Client Error: #{e.message}"
+        return nil
+      end
+  
+      image_and_folders = { image_uris: [], folder_paths: [] }
+  
+      data.each do |file|
+        if file[:type]=="file" && file[:download_url].end_with?('.png')
+          image_and_folders[:image_uris] << file[:download_url]
+        elsif file[:type] == 'dir'
+          image_and_folders[:folder_paths] << file[:path]
+        end
+      end
+  
+      Rails.cache.write(path, image_and_folders, expires_in: 1.hour)
+      return image_and_folders
+    end
+  end
+
+  def get_images(path)
+    contents = github_get_contents_request(path)
+    if contents.nil?
+      return []
     end
 
-    image_paths
+    image_uris = []
+    image_uris += contents[:image_uris]
+
+    contents[:folder_paths].each do |new_path|
+      image_uris += get_images(new_path)
+    end
+    image_uris
   end
+
 
 private
 
