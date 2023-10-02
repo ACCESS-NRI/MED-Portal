@@ -90,75 +90,6 @@ UNDO THIS COMMENT WHEN WE HAVE EDITORS EMERITUS
           and are expected to adhere to it in all ACCESS-NRI spaces and associated interactions.</p>
       </div>
 
-      <div class="generic-content-item" id="ethics">
-        <h1>Ethics Guidelines</h1>
-        <p>We also want to remind authors and reviewers (and anyone else) that we expect and require ethical behavior. Some examples are:
-          <ul>
-            <li>All authors are obliged to provide retractions or corrections of any mistakes of which they become aware.</li>
-            <li>Plagiarism (e.g., violation of another author's copyright), for both software and papers, is not allowed.</li>
-            <li>Self-plagiarism (repeated publication of the same work) is not allowed.</li>
-            <li>Author lists must be correct and complete. All listed authors must have made a contribution to the work, and all significant contributors should be included in the author list.</li>
-            <li>Reviews should be accurate and non-fraudulent. Examples of concerns are: Authors should not suggest reviewers who are not real people or have conflicts (see <a href="https://joss.readthedocs.io/en/latest/reviewer_guidelines.html#joss-conflict-of-interest-policy" target="_blank">conflict of interest policy</a> for details). Reviewers and editors must disclose conflicts. Bribes for authors, reviewers, editors are not permitted.</li>
-          </ul>
-        </p>
-
-        <b>Allegations of misconduct</b>
-        <p>Allegations of research misconduct associated with a MED Portal submission (either during review, or post-publication) are handled internally. Reports should be sent privately to <%= mail_to "access.nri@anu.edu.au", "our editorial team" %> at which point the report will be triaged to determine the nature and severity of the case. Options available range from recommending no action to instigating a full investigation which may result in researchers' institutions and funders being notified and the recipe being retracted.</p>
-
-        <p>Although MED Portal is not a member of <%= link_to "COPE", "https://publicationethics.org" %>, our processes are modeled on the <%= link_to "COPE guideline procedures for ethics complaints", "https://publicationethics.org/files/publication-ethics-editorial-office-cope-flowchart.pdf" %>.</p>
-
-        <b>Complaints process</b>
-        <p>Complaints about the conduct or decision making of the MED Portal editorial team can be sent to the <%= mail_to "access.nri@anu.edu.au", "ACCESS-NRI" %>.</p>
-
-        <h2 id="ethics-and-malpractice"> Publication Ethics and Malpractice Statement</h2>
-
-        <b>Authors and Authors responsibilities</b>
-        <ul>
-          <li>MED Portal does not charge any fees for manuscript processing and/or publishing materials.</li>
-
-          <li>Authors are obliged to participate in peer review process, as described in <a href="https://joss.readthedocs.io/en/latest/submitting.html#the-review-process">submission guidelines</a>.</li>
-
-          <li>All authors have significantly contributed to the research. The submitting author is required to be a <a href="https://joss.readthedocs.io/en/latest/submitting.html#submission-requirements">major contributor to the software</a> they are submitting and the review process includes a check that <em><a href="https://joss.readthedocs.io/en/latest/review_criteria.html#authorship">‘the full list of paper authors seems appropriate and complete?’</a></em>.</li>
-
-          <li>All authors are obliged to provide retractions or corrections of mistakes (see <a href="<%= setting(:url) %>/about#ethics">ethics</a> and <a href="https://joss.readthedocs.io/en/latest/submitting.html#what-should-my-paper-contain">what should my paper contain?</a>).</li>
-
-          <li>MED Portal papers are required to have a <a href="https://joss.readthedocs.io/en/latest/submitting.html#what-should-my-paper-contain">list of references</a>, and <a href="https://joss.readthedocs.io/en/latest/submitting.html#what-should-my-paper-contain">financial support</a>.</li>
-
-          <li>Forbidden to publish same research in more than one journal.</li>
-        </ul>
-
-        <b>Peer-review process</b>
-        <ul>
-          <li>All of MED Portal's content is subjected to peer-review (see <a href="http://medportal-dev-6a745f452687.herokuapp.com/about">about</a> and <a href="https://joss.readthedocs.io/en/latest/index.html">docs</a>).</li>
-
-          <li>MED Portal peer-review is defined as obtaining advice on individual manuscripts from reviewers <a href="https://joss.readthedocs.io/en/latest/editing.html#finding-reviewers">expert in the field</a>. This advice is public, and is given to both the editor(s) and the author(s), with the aim of pointing out issues the reviewers believe are <a href="https://joss.readthedocs.io/en/latest/reviewer_guidelines.html#guiding-principles">insufficiently addressed for publication</a>.</li>
-
-          <li>The MED Portal review process is clearly described on the <a href="https://joss.readthedocs.io/en/latest/reviewer_guidelines.html">journal’s website</a>.</li>
-
-          <li>Judgments should be <a href="https://joss.readthedocs.io/en/latest/reviewer_guidelines.html#guiding-principles">objective</a>.</li>
-
-          <li>MED Portal reviewers should ideally have no conflict of interest. In practice, this is not always possible. If a reviewer has a conflict of interest, it must be declared and recorded, and the editors may <a href="https://joss.readthedocs.io/en/latest/reviewer_guidelines.html#joss-conflict-of-interest-policy">choose to waive</a> it if this is in the best interest of the review process.</li>
-
-          <li>Reviewers should point out <a href="https://joss.readthedocs.io/en/latest/review_criteria.html#an-important-note-about-novel-software-and-citations-of-relevant-work">relevant published work</a> which is not yet cited.</li>
-
-          <li>MED Portal reviews are public and non-anonymous while in progress and post-review, as they take place via GitHub issues in a public repository.</li>
-        </ul>
-
-        <b>Publication Ethics</b>
-        <ul>
-          <li>All authors are obliged to provide retractions or corrections of any mistakes of which they become aware.</li>
-          <li>Plagiarism (e.g., violation of another author's copyright), for both software and papers, is not allowed.</li>
-          <li>Self-plagiarism (repeated publication of the same work) is not allowed.</li>
-          <li>Author lists must be correct and complete. All listed authors must have made a contribution to the work, and all significant contributors should be included in the author list.</li>
-          <li>Reviews should be accurate and non-fraudulent. Examples of concerns are: Authors should not suggest reviewers who are not real people or have conflicts. Reviewers and editors must disclose conflicts. Bribes for authors, reviewers, editors are not permitted.</li>
-          <li>Minor fixes are processed by the Editors in Chief (EiCs), and are publicly handled based on requests from the original authors (managed in the GitHub review linked from the paper).</li>
-          <li>Major corrections will be reviewed by the EiC and ethics team. If accepted, the paper will be re-published with an editorial note on the GitHub review (linked from the paper page).</li>
-          <li>Retractions: EiC team and the ethics team review. If we deem that a retraction is warranted, we will update the paper and leave a retraction notice.</li>
-          </ul>
-
-
-      </div>
-
       <div class="generic-content-item" id="content_license">
         <h1>Content Licensing & Open Access</h1>
         <p>
@@ -179,7 +110,6 @@ UNDO THIS COMMENT WHEN WE HAVE EDITORS EMERITUS
         <a class="menu-item" href="#editorial_board">Editors</a>
         <a class="menu-item" href="#contact">Contact ACCESS-NRI</a>
         <a class="menu-item" href="#code_of_conduct">Code of Conduct</a>
-        <a class="menu-item" href="#ethics">Ethics Guidelines</a>
         <a class="menu-item" href="#content_license">Content Licensing &amp; Open Access</a>
       </nav>
     </div>
