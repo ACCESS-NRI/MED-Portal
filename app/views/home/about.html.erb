@@ -36,8 +36,6 @@
           <li>Be feature-complete (no half-baked solutions) and be designed for maintainable extension (not one-off modifications).</li>
           <li>Minor 'utility' packages, including 'thin' API clients, and single-function packages are not acceptable.</li>
         </ul>
-
-        <p>Authors wishing to make a pre-submission enquiry should <%= link_to "open an issue", "https://github.com/#{Rails.application.settings["github"]}/issues/new?title=Pre-submission%20enquiry"%>.</p>
         <div class="alert alert-primary" role="alert">
           Look at the JOSS documentation for more information on <%=link_to "submitting information", "https://joss.readthedocs.io/en/latest/submitting.html" %>, <%=link_to "reviewer guidelines", "https://joss.readthedocs.io/en/latest/reviewer_guidelines.html" %>
         </div>
@@ -67,10 +65,6 @@ UNDO THIS COMMENT WHEN WE HAVE EDITORS EMERITUS
 
       <div class="generic-content-item" id="contact">
         <h1>Contact ACCESS-NRI</h1>
-
-        <p>
-          To suggest a feature, report a bug, or enquire about a possible submission in MED Portal, please <a href="https://github.com/<%= setting(:github) %>/issues/new">open a GitHub Issue</a>.
-        </p>
         <p>
           If you need to contact ACCESS-NRI privately then you can <%= mail_to "access.nri@anu.edu.au", "email us" %>.
         </p>
