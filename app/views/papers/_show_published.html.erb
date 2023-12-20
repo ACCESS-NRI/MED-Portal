@@ -15,68 +15,71 @@
   </div>
 </div>
 
+
+<script src="https://mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", function () {
+    // If absolute URL from the remote server is provided, configure the CORS
+    // header on that server.
+    var url = '<%= @paper.pdf_url %>'; // Use the PDF URL from your Rails model
+
+    // Loaded via <script> tag, create a shortcut to access PDF.js exports.
+    var { pdfjsLib } = globalThis;
+
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+
+    // Asynchronous download of PDF
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function (pdf) {
+      console.log('PDF loaded');
+
+      // Fetch the first page
+      var pageNumber = 1;
+      pdf.getPage(pageNumber).then(function (page) {
+        console.log('Page loaded');
+
+        var scale = 1.5;
+        var viewport = page.getViewport({ scale: scale });
+
+        // Prepare canvas using PDF page dimensions
+        var canvas = document.getElementById('the-canvas');
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Render PDF page into canvas context
+        var renderContext = {
+          canvasContext: context,
+          viewport: viewport,
+        };
+        var renderTask = page.render(renderContext);
+        renderTask.promise.then(function () {
+          console.log('Page rendered');
+        });
+      });
+    }, function (reason) {
+      // PDF loading error
+      console.error(reason);
+    });
+  });
+</script>
+
 <div class="container">
   <div class="row">
-  
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <style>
-    /* Adjust styles as needed */
-    #pdf-container {
-      flex:1;
-      overflow-y: scroll;
-      max-height: 800px;
-      border: 1px solid black;
-    }
-  </style>
-  <div id="pdf-container"></div>
-    <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-
-    <script type="module"> 
-      // taken from https://mozilla.github.io/pdf.js/examples/
-      // If absolute URL from the remote server is provided, configure the CORS
-      // header on that server.
-      var url = '<%= @paper.pdf_url %>';
-      
-      // Loaded via <script> tag, create shortcut to access PDF.js exports.
-      var { pdfjsLib } = globalThis;
-
-      // The workerSrc property shall be specified.
-      pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
-
-      // Asynchronous download of PDF
-      var loadingTask = pdfjsLib.getDocument(url);
-      loadingTask.promise.then(function(pdf) {
-        console.log('PDF loaded');
-
-        // Fetch the first page
-        var pageNumber = 1;
-        pdf.getPage(pageNumber).then(function(page) {
-          console.log('Page loaded');
-
-          var scale = 1.5;
-          var viewport = page.getViewport({scale: scale});
-
-          // Prepare canvas using PDF page dimensions
-          var canvas = document.getElementById('the-canvas');
-          var context = canvas.getContext('2d');
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-
-          // Render PDF page into canvas context
-          var renderContext = {
-            canvasContext: context,
-            viewport: viewport
-          };
-          var renderTask = page.render(renderContext);
-          renderTask.promise.then(function () {
-            console.log('Page rendered');
-          });
-        });
-      }, function (reason) {
-        // PDF loading error
-        console.error(reason);
-      });
-    </script>
+      /* Adjust styles as needed */
+      #pdf-container {
+        flex: 1;
+        overflow-y: scroll;
+        max-height: 800px;
+        border: 1px solid black;
+      }
+    </style>
+    <div id="pdf-container">
+      <canvas id="the-canvas"></canvas>
+    </div>
 
     <div class="col-md-3 paper-sidebar">
       <div class="btn-group-vertical" role="group" aria-label="...">
