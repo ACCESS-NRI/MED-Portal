@@ -71,16 +71,12 @@
     <style>
       /* Adjust styles as needed */
       #pdf-container {
-        position: relative;
-        overflow: hidden;
-        max-height: 800px;
-        border: 1px solid black;
-      }
+      flex:1;
+      overflow-y: scroll;
+      max-height: 800px;
+      border: 1px solid black;
+    }
 
-      #the-canvas {
-        display: block;
-        margin: auto;
-      }
     </style>
     <div id="pdf-container">
       <canvas id="the-canvas"></canvas>
