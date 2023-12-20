@@ -29,41 +29,54 @@
     }
   </style>
   <div id="pdf-container"></div>
-    <script>
-      // URL of the PDF file
-      pdfUrl = '<%= @paper.pdf_url %>';
+    <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 
-      // Initialize PDF.js
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+    <script type="module"> 
+      // taken from https://mozilla.github.io/pdf.js/examples/
+      // If absolute URL from the remote server is provided, configure the CORS
+      // header on that server.
+      var url = '<%= @paper.pdf_url %>';
+      
+      // Loaded via <script> tag, create shortcut to access PDF.js exports.
+      var { pdfjsLib } = globalThis;
 
-      // Fetch the PDF and display it
-      pdfContainer = document.getElementById('pdf-container');
+      // The workerSrc property shall be specified.
+      pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
 
-      pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-          pdfDoc.getPage(pageNum).then(page => {
-            canvas = document.createElement('canvas');
-            context = canvas.getContext('2d');
-            canvas.style.display = 'block';
-            canvas.style.margin = '10px auto';
+      // Asynchronous download of PDF
+      var loadingTask = pdfjsLib.getDocument(url);
+      loadingTask.promise.then(function(pdf) {
+        console.log('PDF loaded');
 
-            viewport = page.getViewport({ scale: 1.5 });
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+        // Fetch the first page
+        var pageNumber = 1;
+        pdf.getPage(pageNumber).then(function(page) {
+          console.log('Page loaded');
 
-            renderContext = {
-              canvasContext: context,
-              viewport: viewport,
-            };
+          var scale = 1.5;
+          var viewport = page.getViewport({scale: scale});
 
-            pdfContainer.appendChild(canvas);
+          // Prepare canvas using PDF page dimensions
+          var canvas = document.getElementById('the-canvas');
+          var context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
 
-            page.render(renderContext);
+          // Render PDF page into canvas context
+          var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+          var renderTask = page.render(renderContext);
+          renderTask.promise.then(function () {
+            console.log('Page rendered');
           });
-        }
+        });
+      }, function (reason) {
+        // PDF loading error
+        console.error(reason);
       });
     </script>
-
 
     <div class="col-md-3 paper-sidebar">
       <div class="btn-group-vertical" role="group" aria-label="...">
